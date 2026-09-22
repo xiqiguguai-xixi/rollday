@@ -6,7 +6,6 @@
 <meta name="theme-color" content="#ffffff">
 <title>RollDay · 骰子日程</title>
 
-<!-- PWA -->
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <meta name="mobile-web-app-capable" content="yes">
@@ -28,7 +27,7 @@ body{
   -webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e8eaee;
 }
 .logo{font-weight:800;letter-spacing:.5px;font-size:15px;color:#1a1d23}
-.score{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1;transition:color .2s;color:#1a1d23}
+.score{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1;color:#1a1d23}
 .score.pos{color:#10b981}
 .score.neg{color:#ef4444}
 .score-sub{font-size:11px;color:#9ca3af;text-align:right;margin-top:4px}
@@ -45,7 +44,6 @@ body{
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   transition:.15s;background:#fff;padding:0;margin:0;-webkit-appearance:none;appearance:none;
 }
-.check:active{transform:scale(.92)}
 .check.checked{background:linear-gradient(135deg,#5b7cfa,#7c5bfa);border-color:transparent}
 .check.checked::after{content:'';width:10px;height:6px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-2px)}
 .drag-handle{
@@ -53,34 +51,35 @@ body{
   color:#cbd0d8;cursor:grab;padding:0;display:flex;align-items:center;justify-content:center;
   touch-action:none;transition:color .15s;-webkit-appearance:none;appearance:none;
 }
-.drag-handle:hover{color:#9ca3af}
-.drag-handle:active{cursor:grabbing;color:#5b7cfa}
+.drag-handle:active{color:#5b7cfa}
 .cd{font-weight:700;font-variant-numeric:tabular-nums;font-size:11px;display:inline-flex;align-items:center;gap:3px}
-.cd.fresh{color:#10b981}
-.cd.soon{color:#f59e0b}
-.cd.urgent{color:#ef4444}
+.cd.fresh{color:#10b981}.cd.soon{color:#f59e0b}.cd.urgent{color:#ef4444}
 .cd.expired{color:#b91c1c;background:#fef2f2;padding:1px 6px;border-radius:99px}
 .cd::before{content:'⏱';font-size:10px;opacity:.8}
 .current{text-align:center;padding:22px 16px}
 .current-tag{font-size:11px;color:#5b7cfa;letter-spacing:3px;font-weight:800}
 .current-tag.grey{color:#9ca3af}
-.current-title{font-size:20px;font-weight:800;margin:10px 0 4px;word-break:break-word;line-height:1.3;color:#1a1d23}
-.timer{font-size:46px;font-weight:900;font-variant-numeric:tabular-nums;margin:10px 0;letter-spacing:1px;line-height:1;color:#1a1d23}
+.current-tag.paused{color:#f59e0b}
+.current-title{font-size:20px;font-weight:800;margin:10px 0 4px;word-break:break-word;line-height:1.3}
+.timer{font-size:46px;font-weight:900;font-variant-numeric:tabular-nums;margin:10px 0;letter-spacing:1px;line-height:1}
 .timer.overtime{color:#f59e0b}
+.timer.paused{color:#9ca3af}
 .bar{height:6px;background:#eef0f4;border-radius:99px;overflow:hidden;margin:14px 0 8px}
 .bar-fill{height:100%;background:linear-gradient(90deg,#5b7cfa,#7c5bfa);border-radius:99px;transition:width .4s linear}
+.bar-fill.paused{background:linear-gradient(90deg,#cbd0d8,#9ca3af)}
 .empty{padding:36px 16px;text-align:center}
 .big-emoji{font-size:48px;margin-bottom:10px}
-.empty-title{font-size:17px;font-weight:700;margin-bottom:6px;color:#1a1d23}
+.empty-title{font-size:17px;font-weight:700;margin-bottom:6px}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:12px;
   padding:12px 16px;font-size:15px;font-weight:700;cursor:pointer;background:#f3f4f6;color:#374151;
-  transition:transform .08s,opacity .15s,background .15s;font-family:inherit;
+  transition:transform .08s,opacity .15s;font-family:inherit;
 }
 .btn:active{transform:scale(.97)}
 .btn:disabled{opacity:.4;cursor:default}
 .btn.primary{background:linear-gradient(135deg,#5b7cfa,#7c5bfa);color:#fff;box-shadow:0 6px 20px -6px rgba(92,124,250,.5)}
 .btn.ghost{background:#f3f4f6;border:1px solid #e5e7eb;color:#374151}
+.btn.warn{background:#fff7ed;border:1px solid #fed7aa;color:#c2410c}
 .btn.danger{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
 .btn.big{width:100%;padding:16px;font-size:16px;margin-top:14px}
 .btn.text{background:transparent;color:#9ca3af;font-size:13px;width:100%;margin-top:8px}
@@ -90,15 +89,14 @@ body{
 .row>.btn{flex:1}
 .icon-btn{
   background:none;border:none;color:#b0b5bd;font-size:18px;cursor:pointer;
-  padding:4px 8px;line-height:1;font-family:inherit;border-radius:8px;
-  transition:.15s;flex:none;-webkit-appearance:none;appearance:none;
+  padding:4px 8px;line-height:1;font-family:inherit;border-radius:8px;flex:none;
+  -webkit-appearance:none;appearance:none;
 }
-.icon-btn:hover{background:#f3f4f6;color:#5b7cfa}
 .icon-btn:active{color:#5b7cfa;background:#f3f4f6}
-.icon-btn.del:hover,.icon-btn.del:active{color:#ef4444;background:#fef2f2}
+.icon-btn.del:active{color:#ef4444;background:#fef2f2}
 .task-item{
   display:flex;align-items:center;gap:8px;padding:10px 0 10px 8px;
-  border-bottom:1px solid #f3f4f6;border-left:3px solid transparent;position:relative;transition:opacity .15s;
+  border-bottom:1px solid #f3f4f6;border-left:3px solid transparent;position:relative;
 }
 .task-item:last-child{border-bottom:none}
 .task-item.pri-3{border-left-color:#e5484d}
@@ -108,7 +106,7 @@ body{
 .task-item.done{opacity:.55}
 .task-item.dragging{opacity:.95;background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.12),0 0 0 1px #e8eaee;border-radius:12px;cursor:grabbing}
 .task-main{flex:1;min-width:0}
-.task-title{font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1a1d23}
+.task-title{font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .task-meta{font-size:11px;margin-top:3px;color:#9ca3af;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .task-actions{display:flex;gap:2px;flex:none}
 .drag-indicator{position:absolute;left:8px;right:0;height:2px;background:#5b7cfa;border-radius:2px;pointer-events:none;z-index:60;box-shadow:0 0 0 3px rgba(91,124,250,.12)}
@@ -123,7 +121,7 @@ body{
 .queue-item.pri-1{border-left-color:#3b82f6}
 .queue-item.done{opacity:.45}
 .queue-item.done .q-title{text-decoration:line-through}
-.q-title{flex:1;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1a1d23}
+.q-title{flex:1;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .q-meta{font-size:12px;color:#5b7cfa;font-variant-numeric:tabular-nums;white-space:nowrap;flex:none}
 .input{
   width:100%;background:#f9fafb;border:1px solid #e5e7eb;color:#1a1d23;border-radius:10px;
@@ -144,8 +142,7 @@ select.input:focus{background-color:#fff}
 .roll-time{font-size:11px;width:38px;flex:none;font-variant-numeric:tabular-nums;color:#9ca3af}
 .roll-label{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#374151}
 .roll-val{font-weight:800;font-variant-numeric:tabular-nums}
-.pos{color:#10b981}
-.neg{color:#ef4444}
+.pos{color:#10b981}.neg{color:#ef4444}
 .chart{display:flex;align-items:flex-end;justify-content:space-between;height:120px;gap:6px}
 .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%}
 .bar-val{font-size:10px;height:14px;color:#9ca3af;font-variant-numeric:tabular-nums}
@@ -170,7 +167,7 @@ select.input:focus{background-color:#fff}
 }
 .tabbar button{
   flex:1;background:none;border:none;color:#9ca3af;font-size:11px;padding:8px 0;cursor:pointer;
-  font-family:inherit;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .15s;
+  font-family:inherit;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;
 }
 .tabbar button .tb-ico{font-size:18px;line-height:1}
 .tabbar button.active{color:#5b7cfa}
@@ -385,7 +382,7 @@ a:hover{text-decoration:underline}
 
 <script>
 /* =========================================================
-   RollDay · 骰子日程（含云同步）
+   RollDay · 骰子日程（云同步版 + 暂停功能）
    ========================================================= */
 
 /* ---------- 工具 ---------- */
@@ -439,13 +436,13 @@ const DEFAULT_SETTINGS = {
   sleepTarget: '23:00',
 };
 
-/* ---------- 本地状态 ---------- */
+/* ---------- 状态 ---------- */
 let state = loadState();
 
 function normalizeState(s) {
   s.settings = { ...DEFAULT_SETTINGS, ...(s.settings || {}) };
   s.tasks = Array.isArray(s.tasks) ? s.tasks : [];
-  s.days = s.days && typeof s.days === 'object' ? s.days : {};
+  s.days = (s.days && typeof s.days === 'object') ? s.days : {};
   const now = Date.now();
   s.tasks.forEach(t => {
     if (typeof t.done !== 'boolean') t.done = false;
@@ -455,6 +452,15 @@ function normalizeState(s) {
     if (!t.category) t.category = '脑力';
     if (!t.createdAt) t.createdAt = now;
   });
+  // 给 block 补暂停字段
+  Object.values(s.days).forEach(day => {
+    if (Array.isArray(day.blocks)) {
+      day.blocks.forEach(b => {
+        if (b.pausedAt === undefined) b.pausedAt = null;
+        if (b.totalPaused === undefined) b.totalPaused = 0;
+      });
+    }
+  });
   return s;
 }
 
@@ -462,21 +468,16 @@ function loadState() {
   try {
     let raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {
-      const oldRaw = localStorage.getItem(OLD_STORAGE_KEY);
-      if (oldRaw) {
-        raw = oldRaw;
-        localStorage.removeItem(OLD_STORAGE_KEY);
-      }
+      const old = localStorage.getItem(OLD_STORAGE_KEY);
+      if (old) { raw = old; localStorage.removeItem(OLD_STORAGE_KEY); }
     }
     if (raw) return normalizeState(JSON.parse(raw));
   } catch (e) { console.warn('[RollDay] load failed', e); }
   return { settings: { ...DEFAULT_SETTINGS }, tasks: [], days: {} };
 }
 
-/* ---------- 云同步状态 ---------- */
-let syncState = loadSyncState();
-
-function loadSyncState() {
+let syncState = loadSync();
+function loadSync() {
   try {
     const raw = localStorage.getItem(SYNC_KEY);
     if (raw) {
@@ -491,30 +492,25 @@ function loadSyncState() {
   } catch (e) {}
   return { token: '', gistId: '', enabled: false, lastSyncAt: 0 };
 }
-
-function persistSyncState() {
+function persistSync() {
   try { localStorage.setItem(SYNC_KEY, JSON.stringify(syncState)); } catch (e) {}
 }
 
-/* ---------- 保存（本地 + 云端） ---------- */
-let saveTimer = null;
-let pushTimer = null;
-
+/* ---------- 保存 ---------- */
+let saveTimer = null, pushTimer = null;
 function save(opts = {}) {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
     catch (e) { console.warn('[RollDay] save failed', e); }
-
-    // 触发云同步（debounce，避免频繁请求）
     if (syncState.enabled && syncState.token && !opts.skipCloud) {
       clearTimeout(pushTimer);
-      pushTimer = setTimeout(() => { syncPush().catch(() => {}); }, 2500);
+      pushTimer = setTimeout(() => syncPush().catch(() => {}), 2500);
     }
   }, 60);
 }
 
-/* ---------- 天数据 ---------- */
+/* ---------- 天 ---------- */
 function getDay(key = todayKey()) {
   let d = state.days[key];
   if (!d) d = state.days[key] = { blocks: [], rolls: [], rerolls: 0, sleep: { wake: null, sleep: null } };
@@ -530,8 +526,7 @@ function calcScore(day) {
   const st = state.settings;
   let pos = 0, neg = 0;
   for (const r of day.rolls) {
-    if (r.value >= 0) pos += r.value;
-    else neg += -r.value;
+    if (r.value >= 0) pos += r.value; else neg += -r.value;
   }
   if (!st.enableNegative) neg = 0;
   else neg = Math.min(neg, st.negativeDailyCap);
@@ -545,10 +540,9 @@ function pushRoll(type, value, label) {
 }
 
 function streak() {
-  const today = getDay();
   let n = 0;
   const d = new Date();
-  if (!today.blocks.some(b => b.status === 'done')) d.setDate(d.getDate() - 1);
+  if (!getDay().blocks.some(b => b.status === 'done')) d.setDate(d.getDate() - 1);
   for (let i = 0; i < 3650; i++) {
     const day = state.days[dateKey(d)];
     if (day && day.blocks.some(b => b.status === 'done')) { n++; d.setDate(d.getDate() - 1); }
@@ -560,27 +554,34 @@ function streak() {
 /* ---------- 72h 倒计时 ---------- */
 function formatCountdown(task) {
   if (!task.createdAt) return null;
-  const deadline = task.createdAt + COUNTDOWN_MS;
-  const left = deadline - Date.now();
-  const absLeft = Math.abs(left);
-  const totalMin = Math.floor(absLeft / 60000);
-  const totalHour = Math.floor(absLeft / 3600000);
-
+  const left = (task.createdAt + COUNTDOWN_MS) - Date.now();
+  const abs = Math.abs(left);
+  const m = Math.floor(abs / 60000), h = Math.floor(abs / 3600000);
   let text, cls;
   if (left < 0) {
     cls = 'expired';
-    if (totalHour >= 24) text = `超时 ${Math.floor(totalHour / 24)}天${totalHour % 24}时`;
-    else if (totalHour >= 1) text = `超时 ${totalHour}时${totalMin % 60}分`;
-    else text = `超时 ${totalMin}分`;
+    if (h >= 24) text = `超时 ${Math.floor(h / 24)}天${h % 24}时`;
+    else if (h >= 1) text = `超时 ${h}时${m % 60}分`;
+    else text = `超时 ${m}分`;
   } else {
-    if (totalHour >= 24) text = `剩 ${Math.floor(totalHour / 24)}天${totalHour % 24}时`;
-    else if (totalHour >= 1) text = `剩 ${totalHour}时${totalMin % 60}分`;
-    else text = `剩 ${totalMin}分`;
-    if (left < 24 * 3600 * 1000) cls = 'urgent';
-    else if (left < 48 * 3600 * 1000) cls = 'soon';
+    if (h >= 24) text = `剩 ${Math.floor(h / 24)}天${h % 24}时`;
+    else if (h >= 1) text = `剩 ${h}时${m % 60}分`;
+    else text = `剩 ${m}分`;
+    if (left < 24 * 3600000) cls = 'urgent';
+    else if (left < 48 * 3600000) cls = 'soon';
     else cls = 'fresh';
   }
   return { text, cls };
+}
+
+/* ---------- 工作时长（扣除暂停） ---------- */
+function getElapsedMs(block) {
+  if (!block.actualStart) return 0;
+  const end = block.actualEnd || Date.now();
+  let total = end - block.actualStart;
+  total -= (block.totalPaused || 0);
+  if (block.pausedAt) total -= (Date.now() - block.pausedAt);
+  return Math.max(0, total);
 }
 
 /* =========================================================
@@ -595,8 +596,7 @@ function render() {
 }
 
 function renderHeader() {
-  const day = getDay();
-  const score = calcScore(day);
+  const score = calcScore(getDay());
   const el = $('#scoreVal');
   el.textContent = (score > 0 ? '+' : '') + score;
   el.className = 'score ' + (score > 0 ? 'pos' : score < 0 ? 'neg' : '');
@@ -608,62 +608,61 @@ function renderToday() {
   const day = getDay();
   const active  = day.blocks.find(b => b.status === 'active');
   const pending = day.blocks.filter(b => b.status === 'pending');
-
   let html = '';
 
   if (active) {
-    const sec  = Math.floor((Date.now() - active.actualStart) / 1000);
-    const pct  = Math.min(100, (sec / 60) / active.plannedMin * 100);
-    const over = sec / 60 >= active.plannedMin;
-    const pri  = active.priority || 2;
-    html += `
-      <div class="card current">
-        <div class="current-tag">进 行 中</div>
-        <div class="current-title">${esc(active.title)}</div>
-        <div class="sub dim">
-          <span class="pri-${pri}">${PRIORITY_NAME[pri]}优先</span>
-          · 计划 ${active.plannedMin} 分钟 · 启动分 ${signed(active.startRoll || 0)}
-        </div>
-        <div class="timer ${over ? 'overtime' : ''}" id="liveTimer">${fmtTimer(sec)}</div>
-        <div class="bar"><div class="bar-fill" id="liveBar" style="width:${pct}%"></div></div>
-        <div class="row gap">
-          <button class="btn primary" data-act="end" data-id="${active.id}">结束 · Roll 完成分</button>
-          <button class="btn ghost small" style="flex:0 0 auto" data-act="abort" data-id="${active.id}">放弃</button>
-        </div>
-      </div>`;
+    const ms = getElapsedMs(active);
+    const sec = Math.floor(ms / 1000);
+    const pct = Math.min(100, (ms / 60000) / active.plannedMin * 100);
+    const over = ms / 60000 >= active.plannedMin;
+    const pri = active.priority || 2;
+    const paused = !!active.pausedAt;
+
+    html += `<div class="card current">
+      <div class="current-tag ${paused ? 'paused' : ''}">${paused ? '已 暂 停' : '进 行 中'}</div>
+      <div class="current-title">${esc(active.title)}</div>
+      <div class="sub dim">
+        <span class="pri-${pri}">${PRIORITY_NAME[pri]}优先</span>
+        · 计划 ${active.plannedMin} 分钟 · 启动分 ${signed(active.startRoll || 0)}
+        ${paused ? ' · <span style="color:#f59e0b">计时已冻结</span>' : ''}
+      </div>
+      <div class="timer ${over && !paused ? 'overtime' : ''} ${paused ? 'paused' : ''}" id="liveTimer">${fmtTimer(sec)}</div>
+      <div class="bar"><div class="bar-fill ${paused ? 'paused' : ''}" id="liveBar" style="width:${pct}%"></div></div>
+
+      <div class="row gap">
+        <button class="btn ${paused ? 'primary' : 'warn'}" style="flex:0 0 auto" data-act="${paused ? 'resume' : 'pause'}" data-id="${active.id}">
+          ${paused ? '▶ 继续' : '⏸ 暂停'}
+        </button>
+        <button class="btn primary" data-act="end" data-id="${active.id}">结束 · Roll 完成分</button>
+      </div>
+      <button class="btn text" data-act="abort" data-id="${active.id}">放弃这个工作块</button>
+    </div>`;
   } else if (pending.length) {
     const next = pending[0];
     const pri = next.priority || 2;
-    html += `
-      <div class="card current">
-        <div class="current-tag grey">下 一 个</div>
-        <div class="current-title">${esc(next.title)}</div>
-        <div class="sub dim">
-          <span class="pri-${pri}">${PRIORITY_NAME[pri]}优先</span>
-          · ${esc(next.category)} · 预计 ${next.plannedMin} 分钟
-        </div>
-        <button class="btn primary big" data-act="start" data-id="${next.id}">▶ 开始（立即 Roll 启动分）</button>
-      </div>`;
+    html += `<div class="card current">
+      <div class="current-tag grey">下 一 个</div>
+      <div class="current-title">${esc(next.title)}</div>
+      <div class="sub dim"><span class="pri-${pri}">${PRIORITY_NAME[pri]}优先</span> · ${esc(next.category)} · 预计 ${next.plannedMin} 分钟</div>
+      <button class="btn primary big" data-act="start" data-id="${next.id}">▶ 开始（立即 Roll 启动分）</button>
+    </div>`;
   } else {
-    html += `
-      <div class="card empty">
-        <div class="big-emoji">🎲</div>
-        <div class="empty-title">今天还没有日程</div>
-        <div class="sub dim" style="margin-top:6px">生成一串随机任务块，或者随时 Roll 一个时长</div>
-      </div>`;
+    html += `<div class="card empty">
+      <div class="big-emoji">🎲</div>
+      <div class="empty-title">今天还没有日程</div>
+      <div class="sub dim" style="margin-top:6px">生成一串随机任务块，或者随时 Roll 一个时长</div>
+    </div>`;
   }
 
   const rest = day.blocks.filter(b => b.status !== 'active');
   if (rest.length) {
-    const doneCount = rest.filter(b => b.status === 'done').length;
-    html += `<div class="card">
-      <div class="card-title">任务队列 · ${doneCount}/${rest.length} 完成</div>
-      <div class="queue">`;
+    const dc = rest.filter(b => b.status === 'done').length;
+    html += `<div class="card"><div class="card-title">任务队列 · ${dc}/${rest.length} 完成</div><div class="queue">`;
     for (const b of rest) {
       const isDone = b.status === 'done';
       const pri = b.priority || 2;
       html += `<div class="queue-item pri-${pri} ${isDone ? 'done' : ''}">
-        <button class="check ${isDone ? 'checked' : ''}" data-toggle-block="${b.id}" aria-label="完成"></button>
+        <button class="check ${isDone ? 'checked' : ''}" data-toggle-block="${b.id}"></button>
         <span class="q-title">${esc(b.title)}</span>
         <span class="q-meta">${b.plannedMin}min</span>
         <button class="icon-btn del" data-act="del" data-id="${b.id}">×</button>
@@ -672,101 +671,73 @@ function renderToday() {
     html += `</div></div>`;
   }
 
-  html += `
-    <div class="card actions-card">
-      <button class="btn ghost" style="width:100%" data-act="generate">🎲 生成今日日程（6 个随机块）</button>
-      <button class="btn ghost" style="width:100%;margin-top:8px" data-act="rollDur">⏱ 随时 Roll 工作时长</button>
-    </div>`;
+  html += `<div class="card actions-card">
+    <button class="btn ghost" style="width:100%" data-act="generate">🎲 生成今日日程（6 个随机块）</button>
+    <button class="btn ghost" style="width:100%;margin-top:8px" data-act="rollDur">⏱ 随时 Roll 工作时长</button>
+  </div>`;
 
-  html += renderHabitCard(day);
-  $('#todayContent').innerHTML = html;
-}
-
-function renderHabitCard(day) {
   const st = state.settings;
   const w = day.sleep.wake, s = day.sleep.sleep;
-  return `
-    <div class="card">
-      <div class="card-title">作息打卡</div>
-      <div class="row gap" style="margin-top:0">
-        <button class="btn ${w ? 'ghost' : 'primary'}" data-act="habitWake" ${w ? 'disabled' : ''}>
-          ${w ? `☀ ${fmtClock(w.at)} · ${signed(w.value)}` : '☀ 起床打卡'}
-        </button>
-        <button class="btn ${s ? 'ghost' : 'primary'}" data-act="habitSleep" ${s ? 'disabled' : ''}>
-          ${s ? `🌙 ${fmtClock(s.at)} · ${signed(s.value)}` : '🌙 入睡打卡'}
-        </button>
-      </div>
-      <div class="sub dim" style="margin-top:10px;text-align:center">
-        目标 ${st.wakeTarget} 起 · ${st.sleepTarget} 睡
-      </div>
-    </div>`;
+  html += `<div class="card">
+    <div class="card-title">作息打卡</div>
+    <div class="row gap" style="margin-top:0">
+      <button class="btn ${w ? 'ghost' : 'primary'}" data-act="habitWake" ${w ? 'disabled' : ''}>
+        ${w ? `☀ ${fmtClock(w.at)} · ${signed(w.value)}` : '☀ 起床打卡'}
+      </button>
+      <button class="btn ${s ? 'ghost' : 'primary'}" data-act="habitSleep" ${s ? 'disabled' : ''}>
+        ${s ? `🌙 ${fmtClock(s.at)} · ${signed(s.value)}` : '🌙 入睡打卡'}
+      </button>
+    </div>
+    <div class="sub dim" style="margin-top:10px;text-align:center">目标 ${st.wakeTarget} 起 · ${st.sleepTarget} 睡</div>
+  </div>`;
+
+  $('#todayContent').innerHTML = html;
 }
 
 function renderTasks() {
   const active = state.tasks.filter(t => !t.done);
-  const done   = state.tasks.filter(t => t.done);
-
+  const done = state.tasks.filter(t => t.done);
   $('#taskActiveCount').textContent = active.length ? `(${active.length})` : '';
-  $('#taskDoneCount').textContent   = done.length   ? `(${done.length})`   : '';
-
-  const activeEl = $('#taskListActive');
-  activeEl.innerHTML = active.length
+  $('#taskDoneCount').textContent = done.length ? `(${done.length})` : '';
+  $('#taskListActive').innerHTML = active.length
     ? active.map(t => taskItemHTML(t, true)).join('')
     : `<div class="dim center" style="padding:20px 0;font-size:13px">还没有进行中的任务，在上面加一个吧 👆</div>`;
-
   const doneCard = $('#taskDoneCard');
   if (done.length) {
     doneCard.style.display = '';
     $('#taskListDone').innerHTML = done.map(t => taskItemHTML(t, false)).join('');
-  } else {
-    doneCard.style.display = 'none';
-  }
+  } else doneCard.style.display = 'none';
 }
 
 function taskItemHTML(t, showDrag) {
   const pri = t.priority || 2;
   const cd = formatCountdown(t);
   const cdHTML = cd ? `<span class="cd ${cd.cls}" data-countdown="${t.id}">${cd.text}</span>` : '';
-
-  const dragHandle = (!t.done && showDrag)
-    ? `<button class="drag-handle" data-drag-handle aria-label="拖动排序">
-         <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
-           <circle cx="4" cy="3" r="1.1"/><circle cx="10" cy="3" r="1.1"/>
-           <circle cx="4" cy="7" r="1.1"/><circle cx="10" cy="7" r="1.1"/>
-           <circle cx="4" cy="11" r="1.1"/><circle cx="10" cy="11" r="1.1"/>
-         </svg>
-       </button>`
-    : '';
-
-  return `
-    <div class="task-item pri-${pri} ${t.done ? 'done' : ''}" data-task-id="${t.id}">
-      <button class="check ${t.done ? 'checked' : ''}" data-toggle-task="${t.id}" aria-label="完成"></button>
-      ${dragHandle}
-      <div class="task-main">
-        <div class="task-title">${esc(t.title)}</div>
-        <div class="task-meta">
-          <span class="pri-${pri}">${PRIORITY_NAME[pri]}优先</span>
-          · ${esc(t.category)} · ${t.minDur}~${t.maxDur} 分
-          ${cdHTML ? ' · ' + cdHTML : ''}
-        </div>
-      </div>
-      <div class="task-actions">
-        <button class="icon-btn" data-edit="${t.id}" title="编辑">✎</button>
-        <button class="icon-btn del" data-del-task="${t.id}" title="删除">×</button>
-      </div>
-    </div>`;
+  const drag = (!t.done && showDrag)
+    ? `<button class="drag-handle" data-drag-handle><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><circle cx="4" cy="3" r="1.1"/><circle cx="10" cy="3" r="1.1"/><circle cx="4" cy="7" r="1.1"/><circle cx="10" cy="7" r="1.1"/><circle cx="4" cy="11" r="1.1"/><circle cx="10" cy="11" r="1.1"/></svg></button>` : '';
+  return `<div class="task-item pri-${pri} ${t.done ? 'done' : ''}" data-task-id="${t.id}">
+    <button class="check ${t.done ? 'checked' : ''}" data-toggle-task="${t.id}"></button>
+    ${drag}
+    <div class="task-main">
+      <div class="task-title">${esc(t.title)}</div>
+      <div class="task-meta"><span class="pri-${pri}">${PRIORITY_NAME[pri]}优先</span> · ${esc(t.category)} · ${t.minDur}~${t.maxDur} 分${cdHTML ? ' · ' + cdHTML : ''}</div>
+    </div>
+    <div class="task-actions">
+      <button class="icon-btn" data-edit="${t.id}">✎</button>
+      <button class="icon-btn del" data-del-task="${t.id}">×</button>
+    </div>
+  </div>`;
 }
 
 function renderLog() {
   const day = getDay();
   const rolls = [...day.rolls].reverse();
   $('#rollList').innerHTML = rolls.length
-    ? rolls.map(r => `
-        <div class="roll-item">
-          <span class="roll-time dim">${fmtClock(r.at)}</span>
-          <span class="roll-label">${esc(r.label)}</span>
-          <span class="roll-val ${r.value >= 0 ? 'pos' : 'neg'}">${signed(r.value)}</span>
-        </div>`).join('')
+    ? rolls.map(r => `<div class="roll-item">
+        <span class="roll-time dim">${fmtClock(r.at)}</span>
+        <span class="roll-label">${esc(r.label)}</span>
+        <span class="roll-val ${r.value >= 0 ? 'pos' : 'neg'}">${signed(r.value)}</span>
+      </div>`).join('')
     : `<div class="dim center" style="padding:20px 0;font-size:13px">今天还没有记录</div>`;
 
   const days = [];
@@ -778,11 +749,9 @@ function renderLog() {
   const maxAbs = Math.max(10, ...days.map(d => Math.abs(d.score)));
   $('#weekChart').innerHTML = days.map(d => {
     const h = Math.max(3, Math.round(Math.abs(d.score) / maxAbs * 62));
-    return `<div class="bar-col">
-      <div class="bar-val">${d.score ? d.score : ''}</div>
+    return `<div class="bar-col"><div class="bar-val">${d.score || ''}</div>
       <div class="bar-track"><div class="bar-fill-v ${d.score >= 0 ? 'pos' : 'neg'}" style="height:${h}px"></div></div>
-      <div class="bar-label dim">${d.label}</div>
-    </div>`;
+      <div class="bar-label dim">${d.label}</div></div>`;
   }).join('');
 }
 
@@ -792,24 +761,17 @@ function renderLog() {
 function addTask() {
   const title = $('#taskTitle').value.trim();
   if (!title) { toast('请输入任务名称'); $('#taskTitle').focus(); return; }
-
   let minDur = Number($('#taskMin').value) || 5;
   let maxDur = Number($('#taskMax').value) || 60;
   if (minDur < 1) minDur = 1;
   if (maxDur < minDur) maxDur = minDur;
-
   state.tasks.push({
-    id: uid(), title,
-    category: $('#taskCat').value,
-    priority: Number($('#taskPri').value) || 2,
-    minDur, maxDur,
+    id: uid(), title, category: $('#taskCat').value,
+    priority: Number($('#taskPri').value) || 2, minDur, maxDur,
     done: false, doneAt: null, createdAt: Date.now(),
   });
   save();
-
-  $('#taskTitle').value = '';
-  $('#taskMin').value = 5;
-  $('#taskMax').value = 60;
+  $('#taskTitle').value = ''; $('#taskMin').value = 5; $('#taskMax').value = 60;
   renderTasks();
   toast('任务已添加 · 72h 倒计时开始');
 }
@@ -819,8 +781,7 @@ function deleteTask(id) {
   if (!t) return;
   if (!confirm(`删除任务「${t.title}」？`)) return;
   state.tasks = state.tasks.filter(x => x.id !== id);
-  save();
-  render();
+  save(); render();
 }
 
 function toggleTaskDone(id) {
@@ -828,8 +789,7 @@ function toggleTaskDone(id) {
   if (!t) return;
   t.done = !t.done;
   t.doneAt = t.done ? Date.now() : null;
-  save();
-  render();
+  save(); render();
   toast(t.done ? '任务已完成 ✓' : '已恢复为进行中');
 }
 
@@ -837,71 +797,59 @@ function openEditTask(id) {
   const task = state.tasks.find(t => t.id === id);
   if (!task) return;
   const pri = task.priority || 2;
-
   const modal = document.createElement('div');
   modal.className = 'modal-mask';
-  modal.innerHTML = `
-    <div class="modal" style="text-align:left">
-      <div class="modal-tag" style="text-align:center;display:block;margin-bottom:16px">编 辑 任 务</div>
-      <div class="modal-label">标题</div>
-      <input id="editTitle" class="input" value="${esc(task.title)}" maxlength="30">
-      <div class="row" style="gap:8px">
-        <div style="flex:1">
-          <div class="modal-label">类别</div>
-          <select id="editCat" class="input" style="margin:0">
-            ${CATEGORIES.map(c => `<option ${c === task.category ? 'selected' : ''}>${c}</option>`).join('')}
-          </select>
-        </div>
-        <div style="flex:1">
-          <div class="modal-label">优先级</div>
-          <select id="editPri" class="input" style="margin:0">
-            <option value="3" ${pri === 3 ? 'selected' : ''}>高优先</option>
-            <option value="2" ${pri === 2 ? 'selected' : ''}>中优先</option>
-            <option value="1" ${pri === 1 ? 'selected' : ''}>低优先</option>
-          </select>
-        </div>
+  modal.innerHTML = `<div class="modal" style="text-align:left">
+    <div class="modal-tag" style="text-align:center;display:block;margin-bottom:16px">编 辑 任 务</div>
+    <div class="modal-label">标题</div>
+    <input id="editTitle" class="input" value="${esc(task.title)}" maxlength="30">
+    <div class="row" style="gap:8px">
+      <div style="flex:1"><div class="modal-label">类别</div>
+        <select id="editCat" class="input" style="margin:0">
+          ${CATEGORIES.map(c => `<option ${c === task.category ? 'selected' : ''}>${c}</option>`).join('')}
+        </select>
       </div>
-      <div class="modal-label" style="margin-top:12px">时长范围（分钟）</div>
-      <div class="row" style="gap:6px">
-        <input id="editMin" type="number" class="input" value="${task.minDur}" min="1" style="flex:1;margin:0">
-        <span class="dim">~</span>
-        <input id="editMax" type="number" class="input" value="${task.maxDur}" min="1" style="flex:1;margin:0">
+      <div style="flex:1"><div class="modal-label">优先级</div>
+        <select id="editPri" class="input" style="margin:0">
+          <option value="3" ${pri === 3 ? 'selected' : ''}>高优先</option>
+          <option value="2" ${pri === 2 ? 'selected' : ''}>中优先</option>
+          <option value="1" ${pri === 1 ? 'selected' : ''}>低优先</option>
+        </select>
       </div>
-      <div class="row gap" style="margin-top:18px">
-        <button class="btn ghost" data-m="cancel">取消</button>
-        <button class="btn primary" data-m="save">保存</button>
-      </div>
-    </div>`;
+    </div>
+    <div class="modal-label" style="margin-top:12px">时长范围（分钟）</div>
+    <div class="row" style="gap:6px">
+      <input id="editMin" type="number" class="input" value="${task.minDur}" min="1" style="flex:1;margin:0">
+      <span class="dim">~</span>
+      <input id="editMax" type="number" class="input" value="${task.maxDur}" min="1" style="flex:1;margin:0">
+    </div>
+    <div class="row gap" style="margin-top:18px">
+      <button class="btn ghost" data-m="cancel">取消</button>
+      <button class="btn primary" data-m="save">保存</button>
+    </div>
+  </div>`;
   document.body.appendChild(modal);
-
-  setTimeout(() => {
-    const el = modal.querySelector('#editTitle');
-    if (el) { el.focus(); el.select(); }
-  }, 50);
-
+  setTimeout(() => { const el = modal.querySelector('#editTitle'); if (el) { el.focus(); el.select(); } }, 50);
   modal.addEventListener('click', e => {
     if (e.target === modal) { modal.remove(); return; }
     const btn = e.target.closest('[data-m]');
     if (!btn) return;
-    const m = btn.dataset.m;
-    if (m === 'cancel') { modal.remove(); return; }
-    if (m === 'save') {
+    if (btn.dataset.m === 'cancel') { modal.remove(); return; }
+    if (btn.dataset.m === 'save') {
       const title = modal.querySelector('#editTitle').value.trim();
       if (!title) { toast('标题不能为空'); return; }
       let minDur = Number(modal.querySelector('#editMin').value) || 5;
       let maxDur = Number(modal.querySelector('#editMax').value) || 60;
       if (minDur < 1) minDur = 1;
       if (maxDur < minDur) maxDur = minDur;
-      const newCat = modal.querySelector('#editCat').value;
-      const newPri = Number(modal.querySelector('#editPri').value) || 2;
-
-      task.title = title; task.category = newCat; task.priority = newPri;
+      task.title = title;
+      task.category = modal.querySelector('#editCat').value;
+      task.priority = Number(modal.querySelector('#editPri').value) || 2;
       task.minDur = minDur; task.maxDur = maxDur;
-
       const day = getDay();
       day.blocks.forEach(b => {
         if (b.taskId === id && b.status === 'pending') {
-          b.title = title; b.category = newCat; b.priority = newPri;
+          b.title = title; b.category = task.category; b.priority = task.priority;
         }
       });
       save(); modal.remove(); render(); toast('已保存');
@@ -917,7 +865,6 @@ let dragState = null;
 function initDragSort() {
   const list = $('#taskListActive');
   if (!list) return;
-
   list.addEventListener('pointerdown', e => {
     const handle = e.target.closest('[data-drag-handle]');
     if (!handle) return;
@@ -925,26 +872,15 @@ function initDragSort() {
     if (!item) return;
     const id = item.dataset.taskId;
     if (!id) return;
-
     e.preventDefault();
-
     const items = [...list.querySelectorAll('.task-item')];
     const rects = items.map(el => el.getBoundingClientRect());
     const currentIndex = items.indexOf(item);
-
     list.style.position = 'relative';
-    const indicator = document.createElement('div');
-    indicator.className = 'drag-indicator';
-    list.appendChild(indicator);
-
-    dragState = {
-      id, item, list, items, rects,
-      pointerId: e.pointerId,
-      startY: e.clientY,
-      currentIndex, targetIndex: currentIndex,
-      indicator,
-    };
-
+    const ind = document.createElement('div');
+    ind.className = 'drag-indicator';
+    list.appendChild(ind);
+    dragState = { id, item, list, items, rects, pointerId: e.pointerId, startY: e.clientY, currentIndex, targetIndex: currentIndex, indicator: ind };
     item.classList.add('dragging');
     item.style.zIndex = '50';
     handle.style.color = '#5b7cfa';
@@ -957,12 +893,8 @@ function updateIndicator() {
   const { list, items, targetIndex, indicator } = dragState;
   const listTop = list.getBoundingClientRect().top;
   let top;
-  if (targetIndex >= items.length) {
-    const last = items[items.length - 1];
-    top = last.getBoundingClientRect().bottom - listTop;
-  } else {
-    top = items[targetIndex].getBoundingClientRect().top - listTop;
-  }
+  if (targetIndex >= items.length) top = items[items.length - 1].getBoundingClientRect().bottom - listTop;
+  else top = items[targetIndex].getBoundingClientRect().top - listTop;
   indicator.style.top = top + 'px';
 }
 
@@ -971,53 +903,41 @@ function onDragMove(e) {
   e.preventDefault();
   const dy = e.clientY - dragState.startY;
   dragState.item.style.transform = `translateY(${dy}px)`;
-
   const y = e.clientY;
-  const { rects } = dragState;
-  let target = rects.length;
-  for (let i = 0; i < rects.length; i++) {
-    const r = rects[i];
+  let target = dragState.rects.length;
+  for (let i = 0; i < dragState.rects.length; i++) {
+    const r = dragState.rects[i];
     if (y < r.top + r.height / 2) { target = i; break; }
   }
-  if (target !== dragState.targetIndex) {
-    dragState.targetIndex = target;
-    updateIndicator();
-  }
+  if (target !== dragState.targetIndex) { dragState.targetIndex = target; updateIndicator(); }
 }
 
 function onDragEnd(e) {
   if (!dragState || e.pointerId !== dragState.pointerId) return;
-  const { item, items, targetIndex, currentIndex, indicator, id } = dragState;
-
+  const { item, targetIndex, currentIndex, indicator, id } = dragState;
   item.classList.remove('dragging');
   item.style.transform = '';
   item.style.zIndex = '';
   if (indicator) indicator.remove();
   const handle = item.querySelector('[data-drag-handle]');
   if (handle) handle.style.color = '';
-
   dragState = null;
-
   let destIndex = targetIndex;
   if (currentIndex < targetIndex) destIndex = targetIndex - 1;
-  if (destIndex !== currentIndex) reorderActiveTasks(id, destIndex);
-}
-
-function reorderActiveTasks(id, destIndex) {
-  const activeTasks = state.tasks.filter(t => !t.done);
-  const fromIdx = activeTasks.findIndex(t => t.id === id);
-  if (fromIdx === -1) return;
-  const [moved] = activeTasks.splice(fromIdx, 1);
-  activeTasks.splice(destIndex, 0, moved);
-  const doneTasks = state.tasks.filter(t => t.done);
-  state.tasks = [...activeTasks, ...doneTasks];
-  save();
-  renderTasks();
-  toast('顺序已保存');
+  if (destIndex !== currentIndex) {
+    const activeTasks = state.tasks.filter(t => !t.done);
+    const fromIdx = activeTasks.findIndex(t => t.id === id);
+    if (fromIdx === -1) return;
+    const [moved] = activeTasks.splice(fromIdx, 1);
+    activeTasks.splice(destIndex, 0, moved);
+    const doneTasks = state.tasks.filter(t => t.done);
+    state.tasks = [...activeTasks, ...doneTasks];
+    save(); renderTasks(); toast('顺序已保存');
+  }
 }
 
 /* =========================================================
-   日程生成
+   日程生成 / 工作块
    ========================================================= */
 function pickTask(tasks, lastCat, lastTaskId) {
   const pool = tasks.filter(t => !t.done);
@@ -1030,23 +950,15 @@ function pickTask(tasks, lastCat, lastTaskId) {
   });
   const total = weights.reduce((a, b) => a + b, 0);
   let r = Math.random() * total;
-  for (let i = 0; i < pool.length; i++) {
-    r -= weights[i];
-    if (r <= 0) return pool[i];
-  }
+  for (let i = 0; i < pool.length; i++) { r -= weights[i]; if (r <= 0) return pool[i]; }
   return pool[pool.length - 1];
 }
 
 function generateSchedule(count = 6) {
-  if (!state.tasks.filter(t => !t.done).length) {
-    toast('先去「任务池」添加至少一个进行中的任务'); return;
-  }
+  if (!state.tasks.filter(t => !t.done).length) { toast('先去「任务池」添加至少一个进行中的任务'); return; }
   const day = getDay();
-  const pendingCount = day.blocks.filter(b => b.status === 'pending').length;
-  if (pendingCount > 0 && !confirm('还有未完成的任务块，重新生成会清空它们。继续？')) return;
-
+  if (day.blocks.filter(b => b.status === 'pending').length > 0 && !confirm('还有未完成的任务块，重新生成会清空它们。继续？')) return;
   day.blocks = day.blocks.filter(b => b.status === 'done');
-
   const blocks = [];
   let lastCat = null, lastTaskId = null;
   for (let i = 0; i < count; i++) {
@@ -1055,46 +967,74 @@ function generateSchedule(count = 6) {
     const dur = randInt(pick.minDur, pick.maxDur);
     blocks.push({
       id: uid(), taskId: pick.id, title: pick.title, category: pick.category,
-      priority: pick.priority || 2,
-      plannedMin: dur, status: 'pending',
+      priority: pick.priority || 2, plannedMin: dur, status: 'pending',
       actualStart: null, actualEnd: null, startRoll: null, endRoll: null,
+      pausedAt: null, totalPaused: 0,
     });
-    lastCat = pick.category;
-    lastTaskId = pick.id;
+    lastCat = pick.category; lastTaskId = pick.id;
   }
   day.blocks.push(...blocks);
   save(); render();
   toast(`生成了 ${blocks.length} 个随机任务块`);
 }
 
-/* =========================================================
-   工作块操作
-   ========================================================= */
 function startBlock(id) {
   const day = getDay();
   if (day.blocks.some(b => b.status === 'active')) { toast('先结束当前工作块'); return; }
   const b = day.blocks.find(x => x.id === id);
   if (!b || b.status !== 'pending') return;
-  b.status = 'active'; b.actualStart = Date.now(); b._notified = false;
+  b.status = 'active';
+  b.actualStart = Date.now();
+  b._notified = false;
+  b.pausedAt = null;
+  b.totalPaused = 0;
   const st = state.settings;
-  const s = randInt(st.startRollMin, st.startRollMax);
-  b.startRoll = s;
-  pushRoll('start', s, `开始「${b.title}」`);
+  b.startRoll = randInt(st.startRollMin, st.startRollMax);
+  pushRoll('start', b.startRoll, `开始「${b.title}」`);
   save(); render();
-  showRollFlash(s, '启动分');
+  showRollFlash(b.startRoll, '启动分');
+}
+
+function pauseBlock(id) {
+  const day = getDay();
+  const b = day.blocks.find(x => x.id === id);
+  if (!b || b.status !== 'active' || b.pausedAt) return;
+  b.pausedAt = Date.now();
+  save(); render();
+  toast('已暂停 · 计时冻结');
+}
+
+function resumeBlock(id) {
+  const day = getDay();
+  const b = day.blocks.find(x => x.id === id);
+  if (!b || b.status !== 'active' || !b.pausedAt) return;
+  b.totalPaused = (b.totalPaused || 0) + (Date.now() - b.pausedAt);
+  b.pausedAt = null;
+  save(); render();
+  toast('已继续');
 }
 
 function endBlock(id) {
   const day = getDay();
   const b = day.blocks.find(x => x.id === id);
   if (!b || b.status !== 'active') return;
-  b.status = 'done'; b.actualEnd = Date.now(); b._notified = true;
+
+  // 如果暂停中，先结算暂停时长
+  if (b.pausedAt) {
+    b.totalPaused = (b.totalPaused || 0) + (Date.now() - b.pausedAt);
+    b.pausedAt = null;
+  }
+
+  b.status = 'done';
+  b.actualEnd = Date.now();
+  b._notified = true;
+
   const st = state.settings;
-  const s = randInt(st.endRollMin, st.endRollMax);
-  b.endRoll = s;
-  pushRoll('end', s, `完成「${b.title}」`);
+  b.endRoll = randInt(st.endRollMin, st.endRollMax);
+  pushRoll('end', b.endRoll, `完成「${b.title}」`);
+
   save(); render();
-  showRollFlash(s, '完成分');
+  showRollFlash(b.endRoll, '完成分');
 }
 
 function abortBlock(id) {
@@ -1102,13 +1042,17 @@ function abortBlock(id) {
   const b = day.blocks.find(x => x.id === id);
   if (!b) return;
   if (!confirm('放弃这个工作块？启动分不会收回，但也不会有完成分。')) return;
-  b.status = 'pending'; b.actualStart = null; b._notified = false;
+  b.status = 'pending';
+  b.actualStart = null;
+  b.actualEnd = null;
+  b.pausedAt = null;
+  b.totalPaused = 0;
+  b._notified = false;
   save(); render();
 }
 
 function deleteBlock(id) {
-  const day = getDay();
-  day.blocks = day.blocks.filter(b => b.id !== id);
+  getDay().blocks = getDay().blocks.filter(b => b.id !== id);
   save(); render();
 }
 
@@ -1119,6 +1063,7 @@ function toggleBlockDone(id) {
   if (b.status === 'active') { toast('先结束当前工作块'); return; }
   if (b.status === 'done') {
     b.status = 'pending'; b.actualStart = null; b.actualEnd = null;
+    b.pausedAt = null; b.totalPaused = 0;
   } else {
     b.status = 'done';
     b.actualStart = b.actualStart || Date.now();
@@ -1127,9 +1072,6 @@ function toggleBlockDone(id) {
   save(); render();
 }
 
-/* =========================================================
-   随时 Roll 工作时长
-   ========================================================= */
 function rollWorkDuration() {
   const st = state.settings;
   openDurationModal(randInt(st.workMin, st.workMax));
@@ -1140,25 +1082,21 @@ function openDurationModal(initial) {
   let current = initial;
   const modal = document.createElement('div');
   modal.className = 'modal-mask';
-
   const paint = () => {
-    const d = getDay();
-    const left = Math.max(0, st.rerollLimit - d.rerolls);
-    modal.innerHTML = `
-      <div class="modal">
-        <div class="modal-tag">随 机 工 作 时 长</div>
-        <div class="modal-big">${current}<span class="unit">分钟</span></div>
-        <div class="sub dim">今日剩余重摇 ${left} 次</div>
-        <div class="row gap" style="margin-top:18px">
-          <button class="btn ghost" data-m="reroll" ${left <= 0 ? 'disabled' : ''}>🎲 重摇</button>
-          <button class="btn primary" data-m="accept">就它了</button>
-        </div>
-        <button class="btn text" data-m="cancel">取消</button>
-      </div>`;
+    const left = Math.max(0, st.rerollLimit - getDay().rerolls);
+    modal.innerHTML = `<div class="modal">
+      <div class="modal-tag">随 机 工 作 时 长</div>
+      <div class="modal-big">${current}<span class="unit">分钟</span></div>
+      <div class="sub dim">今日剩余重摇 ${left} 次</div>
+      <div class="row gap" style="margin-top:18px">
+        <button class="btn ghost" data-m="reroll" ${left <= 0 ? 'disabled' : ''}>🎲 重摇</button>
+        <button class="btn primary" data-m="accept">就它了</button>
+      </div>
+      <button class="btn text" data-m="cancel">取消</button>
+    </div>`;
   };
   paint();
   document.body.appendChild(modal);
-
   modal.addEventListener('click', e => {
     if (e.target === modal) { modal.remove(); return; }
     const btn = e.target.closest('[data-m]');
@@ -1170,44 +1108,35 @@ function openDurationModal(initial) {
       d.rerolls++; save();
       current = randInt(st.workMin, st.workMax);
       paint();
-    } else if (m === 'accept') {
-      modal.remove();
-      acceptRandomBlock(current);
-    } else {
-      modal.remove();
-    }
+    } else if (m === 'accept') { modal.remove(); acceptRandomBlock(current); }
+    else modal.remove();
   });
 }
 
 function acceptRandomBlock(minutes) {
   const day = getDay();
   const block = {
-    id: uid(), taskId: null, title: '随机工作块', category: '随机',
-    priority: 2, plannedMin: minutes, status: 'pending',
-    actualStart: null, actualEnd: null, startRoll: null, endRoll: null, _notified: false,
+    id: uid(), taskId: null, title: '随机工作块', category: '随机', priority: 2,
+    plannedMin: minutes, status: 'pending',
+    actualStart: null, actualEnd: null, startRoll: null, endRoll: null,
+    pausedAt: null, totalPaused: 0, _notified: false,
   };
   const idx = day.blocks.findIndex(b => b.status === 'pending');
-  if (idx === -1) day.blocks.push(block);
-  else day.blocks.splice(idx, 0, block);
+  if (idx === -1) day.blocks.push(block); else day.blocks.splice(idx, 0, block);
   save(); render();
   toast(`已加入 ${minutes} 分钟工作块`);
 }
 
-/* =========================================================
-   作息打卡
-   ========================================================= */
 function habitCheck(kind) {
-  const day = getDay();
-  const st = state.settings;
+  const day = getDay(), st = state.settings;
   if (day.sleep[kind]) { toast('今天已经打过卡了'); return; }
   const now = new Date();
   const nowMin = now.getHours() * 60 + now.getMinutes();
   const target = kind === 'wake' ? st.wakeTarget : st.sleepTarget;
   const [th, tm] = target.split(':').map(Number);
   const targetMin = th * 60 + tm;
-  let diff;
-  if (kind === 'wake') diff = nowMin - targetMin;
-  else diff = nowMin < 12 * 60 ? (nowMin + 1440 - targetMin) : (nowMin - targetMin);
+  let diff = kind === 'wake' ? nowMin - targetMin
+    : (nowMin < 12 * 60 ? nowMin + 1440 - targetMin : nowMin - targetMin);
   let value;
   if (diff <= 30) value = randInt(st.goodSleepMin, st.goodSleepMax);
   else if (diff <= 120) value = randInt(Math.round(st.goodSleepMin / 2), Math.round(st.goodSleepMax / 2));
@@ -1216,7 +1145,7 @@ function habitCheck(kind) {
   day.sleep[kind] = { at: Date.now(), value, diff };
   const label = kind === 'wake' ? '起床打卡' : '入睡打卡';
   if (value !== 0) {
-    const dTxt = diff > 0 ? `晚 ${diff} 分` : `准时`;
+    const dTxt = diff > 0 ? `晚 ${diff} 分` : '准时';
     pushRoll(kind, value, `${label}（${dTxt}）`);
   }
   save(); render();
@@ -1224,7 +1153,7 @@ function habitCheck(kind) {
 }
 
 /* =========================================================
-   计时器
+   计时器 / 反馈
    ========================================================= */
 let tickHandle = null;
 function startTick() {
@@ -1233,20 +1162,26 @@ function startTick() {
   tick();
 }
 function tick() {
-  const day = getDay();
-  const active = day.blocks.find(b => b.status === 'active');
+  const active = getDay().blocks.find(b => b.status === 'active');
   if (!active) { clearInterval(tickHandle); tickHandle = null; return; }
   const el = document.getElementById('liveTimer');
   if (!el) return;
-  const sec = Math.floor((Date.now() - active.actualStart) / 1000);
+
+  const ms = getElapsedMs(active);
+  const sec = Math.floor(ms / 1000);
   el.textContent = fmtTimer(sec);
+
   const bar = document.getElementById('liveBar');
-  if (bar) bar.style.width = Math.min(100, (sec / 60) / active.plannedMin * 100) + '%';
-  const over = sec / 60 >= active.plannedMin;
+  if (bar) bar.style.width = Math.min(100, (ms / 60000) / active.plannedMin * 100) + '%';
+
+  // 暂停中不触发超时提醒
+  if (active.pausedAt) return;
+
+  const over = ms / 60000 >= active.plannedMin;
   el.classList.toggle('overtime', over);
   if (over && !active._notified) {
     active._notified = true;
-    toast('⏰ 计划时间到了，可以结束或继续');
+    toast('⏰ 计划时间到了');
     try { beep(); } catch (e) {}
   }
 }
@@ -1266,9 +1201,6 @@ function beep() {
   setTimeout(() => ctx.close(), 900);
 }
 
-/* =========================================================
-   视觉反馈
-   ========================================================= */
 function showRollFlash(value, text) {
   const el = document.createElement('div');
   el.className = 'roll-flash ' + (value >= 0 ? 'pos' : 'neg');
@@ -1289,9 +1221,8 @@ function toast(msg) {
 }
 
 /* =========================================================
-   ☁️ 云同步（GitHub Gist）
+   云同步
    ========================================================= */
-
 let syncing = false;
 
 function setSyncStatus(text, kind = 'ok') {
@@ -1337,7 +1268,6 @@ async function ghFetch(path, opts = {}) {
 }
 
 async function findExistingGist() {
-  // 分页查询前 100 个，找描述匹配的 gist
   const gists = await ghFetch('/gists?per_page=100');
   const found = gists.find(g => g.description === GIST_DESC);
   return found ? found.id : null;
@@ -1345,58 +1275,44 @@ async function findExistingGist() {
 
 async function createGist() {
   const body = {
-    description: GIST_DESC,
-    public: false,
-    files: {
-      'rollday.json': {
-        content: JSON.stringify({ version: 2, updatedAt: Date.now(), state }, null, 2),
-      },
-    },
+    description: GIST_DESC, public: false,
+    files: { 'rollday.json': { content: JSON.stringify({ version: 2, updatedAt: Date.now(), state }, null, 2) } },
   };
   const data = await ghFetch('/gists', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
   return data.id;
 }
 
 async function syncPush() {
-  if (!syncState.enabled || !syncState.token) return;
-  if (syncing) return;
+  if (!syncState.enabled || !syncState.token || syncing) return;
   syncing = true;
   try {
     setSyncStatus('上传中…', 'busy');
     const content = JSON.stringify({ version: 2, updatedAt: Date.now(), state }, null, 2);
     const body = { files: { 'rollday.json': { content } } };
-
     if (syncState.gistId) {
       await ghFetch(`/gists/${syncState.gistId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
     } else {
-      const id = await createGist();
-      syncState.gistId = id;
-      persistSyncState();
+      syncState.gistId = await createGist();
+      persistSync();
     }
-
     syncState.lastSyncAt = Date.now();
-    persistSyncState();
+    persistSync();
     setSyncStatus('已连接 · ' + fmtRelative(syncState.lastSyncAt), 'ok');
     refreshSyncUI();
   } catch (e) {
     console.warn('[RollDay] push failed', e);
     setSyncStatus('上传失败：' + e.message, 'err');
-  } finally {
-    syncing = false;
-  }
+  } finally { syncing = false; }
 }
 
 async function syncPull(force = false) {
-  if (!syncState.enabled || !syncState.token || !syncState.gistId) return null;
-  if (syncing) return null;
+  if (!syncState.enabled || !syncState.token || !syncState.gistId || syncing) return null;
   syncing = true;
   try {
     setSyncStatus('拉取中…', 'busy');
@@ -1406,15 +1322,15 @@ async function syncPull(force = false) {
     const parsed = JSON.parse(file.content);
     if (!parsed || !parsed.state) { setSyncStatus('云端数据格式错误', 'err'); return null; }
 
-    // 判断是否需要覆盖本地
     const cloudAt = parsed.updatedAt || 0;
-    const localAt = 0; // 本地没有 updatedAt，简单起见启动时总是用云端（若 force 也覆盖）
+    const localAt = Number(localStorage.getItem(STORAGE_KEY + '.at')) || 0;
     if (force || cloudAt > localAt) {
       state = normalizeState(parsed.state);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      localStorage.setItem(STORAGE_KEY + '.at', String(cloudAt));
     }
     syncState.lastSyncAt = Date.now();
-    persistSyncState();
+    persistSync();
     refreshSyncUI();
     render();
     setSyncStatus('已连接 · ' + fmtRelative(syncState.lastSyncAt), 'ok');
@@ -1423,9 +1339,7 @@ async function syncPull(force = false) {
     console.warn('[RollDay] pull failed', e);
     setSyncStatus('拉取失败：' + e.message, 'err');
     return null;
-  } finally {
-    syncing = false;
-  }
+  } finally { syncing = false; }
 }
 
 async function connectSync() {
@@ -1440,44 +1354,34 @@ async function connectSync() {
   syncState.token = token;
   syncState.gistId = gistIdInput;
   syncState.enabled = true;
-  persistSyncState();
+  persistSync();
 
   setSyncStatus('连接中…', 'busy');
 
   try {
-    // 验证 token
     await ghFetch('/user');
 
-    // 如果没有 gistId，先找找已有的
     if (!syncState.gistId) {
       const existing = await findExistingGist();
       if (existing) {
         syncState.gistId = existing;
-        persistSyncState();
-        // 拉取云端数据
+        persistSync();
         await syncPull(true);
         toast('已连接，已拉取云端数据');
       } else {
-        // 第一次用，创建新 gist 并上传当前数据
         await syncPush();
         toast('已创建云端数据');
       }
     } else {
-      // 指定了 gistId，尝试拉取
       const ok = await syncPull(true);
-      if (!ok) {
-        // 拉取失败（可能 gist 不存在），提示用户
-        toast('无法读取该 Gist，请检查 ID');
-      } else {
-        toast('已连接，已拉取云端数据');
-      }
+      if (!ok) toast('无法读取该 Gist，请检查 ID');
+      else toast('已连接，已拉取云端数据');
     }
-
     refreshSyncUI();
   } catch (e) {
     console.warn('[RollDay] connect failed', e);
     syncState.enabled = false;
-    persistSyncState();
+    persistSync();
     setSyncStatus('连接失败：' + e.message, 'err');
     toast('连接失败：' + e.message);
     refreshSyncUI();
@@ -1487,7 +1391,7 @@ async function connectSync() {
 function disconnectSync() {
   if (!confirm('断开后本机数据仍保留，但不再与云端同步。确定？')) return;
   syncState.enabled = false;
-  persistSyncState();
+  persistSync();
   $('#syncToken').value = '';
   $('#syncGistId').value = '';
   refreshSyncUI();
@@ -1501,9 +1405,7 @@ function exportData() {
   const a = document.createElement('a');
   a.href = url;
   a.download = `rollday-${todayKey()}.json`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
+  document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
@@ -1513,17 +1415,14 @@ function importData(file) {
   reader.onload = e => {
     try {
       const parsed = JSON.parse(e.target.result);
-      if (!parsed || typeof parsed !== 'object') throw new Error('格式错误');
-      if (!parsed.tasks && !parsed.days) throw new Error('不是 RollDay 数据');
+      if (!parsed || (!parsed.tasks && !parsed.days)) throw new Error('不是 RollDay 数据');
       if (!confirm('导入将覆盖当前所有数据，确定继续吗？')) return;
       state = normalizeState(parsed);
-      save({ skipCloud: false });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      save();
       render();
       toast('导入成功');
-    } catch (err) {
-      toast('导入失败：' + err.message);
-    }
+    } catch (err) { toast('导入失败：' + err.message); }
   };
   reader.readAsText(file);
 }
@@ -1531,8 +1430,6 @@ function importData(file) {
 /* =========================================================
    事件绑定
    ========================================================= */
-
-/* 今日页 */
 $('#todayContent').addEventListener('click', e => {
   const toggle = e.target.closest('[data-toggle-block]');
   if (toggle) { toggleBlockDone(toggle.dataset.toggleBlock); return; }
@@ -1541,6 +1438,8 @@ $('#todayContent').addEventListener('click', e => {
   const act = btn.dataset.act, id = btn.dataset.id;
   switch (act) {
     case 'start': startBlock(id); break;
+    case 'pause': pauseBlock(id); break;
+    case 'resume': resumeBlock(id); break;
     case 'end': endBlock(id); break;
     case 'abort': abortBlock(id); break;
     case 'del': deleteBlock(id); break;
@@ -1551,7 +1450,6 @@ $('#todayContent').addEventListener('click', e => {
   }
 });
 
-/* 任务池 */
 $('#view-tasks').addEventListener('click', e => {
   const toggle = e.target.closest('[data-toggle-task]');
   if (toggle) { toggleTaskDone(toggle.dataset.toggleTask); return; }
@@ -1564,7 +1462,6 @@ $('#view-tasks').addEventListener('click', e => {
 $('#btnAddTask').addEventListener('click', addTask);
 $('#taskTitle').addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
 
-/* Tabbar */
 $$('.tabbar button').forEach(btn => {
   btn.addEventListener('click', () => {
     $$('.tabbar button').forEach(b => b.classList.remove('active'));
@@ -1575,6 +1472,16 @@ $$('.tabbar button').forEach(btn => {
     if (btn.dataset.view === 'log') renderLog();
     if (btn.dataset.view === 'settings') { fillSettings(); refreshSyncUI(); }
   });
+});
+
+/* 同步按钮 */
+$('#btnSyncConnect').addEventListener('click', connectSync);
+$('#btnSyncDisconnect').addEventListener('click', disconnectSync);
+$('#btnSyncPush').addEventListener('click', async () => { await syncPush(); toast('已上传'); });
+$('#btnSyncPull').addEventListener('click', async () => {
+  if (!confirm('从云端拉取会覆盖本机数据，确定？')) return;
+  const r = await syncPull(true);
+  if (r) toast('已从云端拉取');
 });
 
 /* 设置 */
@@ -1588,9 +1495,9 @@ const NUMERIC_SETTINGS = {
 
 function fillSettings() {
   const st = state.settings;
-  for (const [id, key] of Object.entries(NUMERIC_SETTINGS)) {
+  for (const [id, k] of Object.entries(NUMERIC_SETTINGS)) {
     const el = document.getElementById(id);
-    if (el) el.value = st[key];
+    if (el) el.value = st[k];
   }
   $('#setWake').value = st.wakeTarget;
   $('#setSleep').value = st.sleepTarget;
@@ -1598,46 +1505,31 @@ function fillSettings() {
 }
 
 function bindSettings() {
-  for (const [id, key] of Object.entries(NUMERIC_SETTINGS)) {
+  for (const [id, k] of Object.entries(NUMERIC_SETTINGS)) {
     const el = document.getElementById(id);
     if (!el) continue;
     el.addEventListener('change', () => {
       const v = Number(el.value);
       if (!Number.isFinite(v)) { fillSettings(); return; }
-      state.settings[key] = Math.max(0, Math.round(v));
-      if (key === 'workMin' && state.settings.workMin > state.settings.workMax) state.settings.workMax = state.settings.workMin;
-      if (key === 'workMax' && state.settings.workMax < state.settings.workMin) state.settings.workMin = state.settings.workMax;
-      if (key === 'startRollMin' && state.settings.startRollMin > state.settings.startRollMax) state.settings.startRollMax = state.settings.startRollMin;
-      if (key === 'startRollMax' && state.settings.startRollMax < state.settings.startRollMin) state.settings.startRollMin = state.settings.startRollMax;
-      if (key === 'endRollMin' && state.settings.endRollMin > state.settings.endRollMax) state.settings.endRollMax = state.settings.endRollMin;
-      if (key === 'endRollMax' && state.settings.endRollMax < state.settings.endRollMin) state.settings.endRollMin = state.settings.endRollMax;
-      if (key === 'goodSleepMin' && state.settings.goodSleepMin > state.settings.goodSleepMax) state.settings.goodSleepMax = state.settings.goodSleepMin;
-      if (key === 'goodSleepMax' && state.settings.goodSleepMax < state.settings.goodSleepMin) state.settings.goodSleepMin = state.settings.goodSleepMax;
+      state.settings[k] = Math.max(0, Math.round(v));
+      const pairs = [
+        ['workMin','workMax'], ['startRollMin','startRollMax'],
+        ['endRollMin','endRollMax'], ['goodSleepMin','goodSleepMax'],
+      ];
+      pairs.forEach(([a, b]) => {
+        if (state.settings[a] > state.settings[b]) {
+          if (k === a) state.settings[b] = state.settings[a];
+          else state.settings[a] = state.settings[b];
+        }
+      });
       save(); fillSettings(); render();
     });
   }
   $('#setWake').addEventListener('change', e => { state.settings.wakeTarget = e.target.value; save(); render(); });
   $('#setSleep').addEventListener('change', e => { state.settings.sleepTarget = e.target.value; save(); render(); });
-  $('#setNegEnabled').addEventListener('change', e => {
-    state.settings.enableNegative = e.target.checked;
-    save(); render();
-  });
+  $('#setNegEnabled').addEventListener('change', e => { state.settings.enableNegative = e.target.checked; save(); render(); });
 }
 
-/* 同步按钮 */
-$('#btnSyncConnect').addEventListener('click', connectSync);
-$('#btnSyncDisconnect').addEventListener('click', disconnectSync);
-$('#btnSyncPush').addEventListener('click', async () => {
-  await syncPush();
-  toast('已上传');
-});
-$('#btnSyncPull').addEventListener('click', async () => {
-  if (!confirm('从云端拉取会覆盖本机数据，确定？')) return;
-  const r = await syncPull(true);
-  if (r) toast('已从云端拉取');
-});
-
-/* 数据 */
 $('#btnExport').addEventListener('click', exportData);
 $('#btnImport').addEventListener('click', () => $('#importFile').click());
 $('#importFile').addEventListener('change', e => {
@@ -1653,15 +1545,12 @@ $('#btnReset').addEventListener('click', () => {
   location.reload();
 });
 
-/* =========================================================
-   倒计时刷新（不重排 DOM）
-   ========================================================= */
+/* 倒计时刷新 */
 function tickCountdowns() {
   document.querySelectorAll('[data-countdown]').forEach(el => {
-    const id = el.dataset.countdown;
-    const task = state.tasks.find(t => t.id === id);
-    if (!task) return;
-    const cd = formatCountdown(task);
+    const t = state.tasks.find(x => x.id === el.dataset.countdown);
+    if (!t) return;
+    const cd = formatCountdown(t);
     if (!cd) return;
     el.textContent = cd.text;
     el.className = 'cd ' + cd.cls;
@@ -1671,7 +1560,7 @@ function tickCountdowns() {
 /* =========================================================
    启动
    ========================================================= */
-async function init() {
+function init() {
   getDay();
   fillSettings();
   bindSettings();
@@ -1687,18 +1576,16 @@ async function init() {
     if (!document.hidden) {
       render();
       tickCountdowns();
-      // 回到前台时也拉一次
       if (syncState.enabled) syncPull().catch(() => {});
     }
   });
 
   setInterval(() => {
     tickCountdowns();
-    const el = document.getElementById('scoreSub');
-    if (el) renderHeader();
+    renderHeader();
   }, 60000);
 
-  // 启动时自动拉取一次云端数据
+  // 启动时自动拉取
   if (syncState.enabled && syncState.token) {
     syncPull().catch(() => {});
   }
@@ -1709,7 +1596,6 @@ async function init() {
 init();
 </script>
 
-<!-- PWA Service Worker 注册 -->
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
