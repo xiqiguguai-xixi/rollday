@@ -22,75 +22,45 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
 }
 .app{max-width:480px;margin:0 auto;padding-bottom:88px}
-
-/* ---------- 顶栏 ---------- */
 .topbar{
   position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
   padding:14px 16px 12px;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid #e8eaee;
+  -webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e8eaee;
 }
 .logo{font-weight:800;letter-spacing:.5px;font-size:15px;color:#1a1d23}
 .score{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1;transition:color .2s;color:#1a1d23}
 .score.pos{color:#10b981}
 .score.neg{color:#ef4444}
 .score-sub{font-size:11px;color:#9ca3af;text-align:right;margin-top:4px}
-
-/* ---------- 卡片 ---------- */
-.card{
-  background:#fff;border:1px solid #e8eaee;border-radius:16px;padding:16px;
-  margin:0 12px 12px;box-shadow:0 1px 2px rgba(15,23,42,.03);
-}
+.card{background:#fff;border:1px solid #e8eaee;border-radius:16px;padding:16px;margin:0 12px 12px;box-shadow:0 1px 2px rgba(15,23,42,.03)}
 .card-title{font-size:12px;color:#6b7280;margin-bottom:12px;font-weight:700;letter-spacing:.5px}
 .dim{color:#9ca3af}
 .sub{font-size:12px}
 .center{text-align:center}
-
-/* ---------- 优先级颜色 ---------- */
-.pri-3{color:#e5484d}  /* 高 */
-.pri-2{color:#f59e0b}  /* 中 */
-.pri-1{color:#3b82f6}  /* 低 */
-
-/* ---------- 复选框 ---------- */
+.pri-3{color:#e5484d}
+.pri-2{color:#f59e0b}
+.pri-1{color:#3b82f6}
 .check{
   width:22px;height:22px;flex:none;border-radius:6px;border:2px solid #d1d5db;
   display:flex;align-items:center;justify-content:center;cursor:pointer;
-  transition:.15s;background:#fff;padding:0;margin:0;
-  -webkit-appearance:none;appearance:none;
+  transition:.15s;background:#fff;padding:0;margin:0;-webkit-appearance:none;appearance:none;
 }
 .check:active{transform:scale(.92)}
-.check.checked{
-  background:linear-gradient(135deg,#5b7cfa,#7c5bfa);
-  border-color:transparent;
-}
-.check.checked::after{
-  content:'';width:10px;height:6px;
-  border-left:2px solid #fff;border-bottom:2px solid #fff;
-  transform:rotate(-45deg) translate(1px,-2px);
-}
-
-/* ---------- 拖拽手柄 ---------- */
+.check.checked{background:linear-gradient(135deg,#5b7cfa,#7c5bfa);border-color:transparent}
+.check.checked::after{content:'';width:10px;height:6px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-2px)}
 .drag-handle{
   width:22px;height:22px;flex:none;border:none;background:transparent;
   color:#cbd0d8;cursor:grab;padding:0;display:flex;align-items:center;justify-content:center;
-  touch-action:none;transition:color .15s;
-  -webkit-appearance:none;appearance:none;
+  touch-action:none;transition:color .15s;-webkit-appearance:none;appearance:none;
 }
 .drag-handle:hover{color:#9ca3af}
 .drag-handle:active{cursor:grabbing;color:#5b7cfa}
-
-/* ---------- 倒计时 ---------- */
-.cd{
-  font-weight:700;font-variant-numeric:tabular-nums;font-size:11px;
-  display:inline-flex;align-items:center;gap:3px;
-}
+.cd{font-weight:700;font-variant-numeric:tabular-nums;font-size:11px;display:inline-flex;align-items:center;gap:3px}
 .cd.fresh{color:#10b981}
 .cd.soon{color:#f59e0b}
 .cd.urgent{color:#ef4444}
 .cd.expired{color:#b91c1c;background:#fef2f2;padding:1px 6px;border-radius:99px}
 .cd::before{content:'⏱';font-size:10px;opacity:.8}
-
-/* ---------- 当前任务卡 ---------- */
 .current{text-align:center;padding:22px 16px}
 .current-tag{font-size:11px;color:#5b7cfa;letter-spacing:3px;font-weight:800}
 .current-tag.grey{color:#9ca3af}
@@ -102,8 +72,6 @@ body{
 .empty{padding:36px 16px;text-align:center}
 .big-emoji{font-size:48px;margin-bottom:10px}
 .empty-title{font-size:17px;font-weight:700;margin-bottom:6px;color:#1a1d23}
-
-/* ---------- 按钮 ---------- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:12px;
   padding:12px 16px;font-size:15px;font-weight:700;cursor:pointer;background:#f3f4f6;color:#374151;
@@ -111,10 +79,7 @@ body{
 }
 .btn:active{transform:scale(.97)}
 .btn:disabled{opacity:.4;cursor:default}
-.btn.primary{
-  background:linear-gradient(135deg,#5b7cfa,#7c5bfa);color:#fff;
-  box-shadow:0 6px 20px -6px rgba(92,124,250,.5);
-}
+.btn.primary{background:linear-gradient(135deg,#5b7cfa,#7c5bfa);color:#fff;box-shadow:0 6px 20px -6px rgba(92,124,250,.5)}
 .btn.ghost{background:#f3f4f6;border:1px solid #e5e7eb;color:#374151}
 .btn.danger{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
 .btn.big{width:100%;padding:16px;font-size:16px;margin-top:14px}
@@ -131,15 +96,9 @@ body{
 .icon-btn:hover{background:#f3f4f6;color:#5b7cfa}
 .icon-btn:active{color:#5b7cfa;background:#f3f4f6}
 .icon-btn.del:hover,.icon-btn.del:active{color:#ef4444;background:#fef2f2}
-
-/* ---------- 任务池任务项 ---------- */
 .task-item{
-  display:flex;align-items:center;gap:8px;
-  padding:10px 0 10px 8px;
-  border-bottom:1px solid #f3f4f6;
-  border-left:3px solid transparent;
-  position:relative;
-  transition:opacity .15s;
+  display:flex;align-items:center;gap:8px;padding:10px 0 10px 8px;
+  border-bottom:1px solid #f3f4f6;border-left:3px solid transparent;position:relative;transition:opacity .15s;
 }
 .task-item:last-child{border-bottom:none}
 .task-item.pri-3{border-left-color:#e5484d}
@@ -147,40 +106,17 @@ body{
 .task-item.pri-1{border-left-color:#3b82f6}
 .task-item.done .task-title{text-decoration:line-through;color:#9ca3af}
 .task-item.done{opacity:.55}
-.task-item.dragging{
-  opacity:.95;
-  background:#fff;
-  box-shadow:0 8px 24px rgba(15,23,42,.12),0 0 0 1px #e8eaee;
-  border-radius:12px;
-  cursor:grabbing;
-}
+.task-item.dragging{opacity:.95;background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.12),0 0 0 1px #e8eaee;border-radius:12px;cursor:grabbing}
 .task-main{flex:1;min-width:0}
 .task-title{font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1a1d23}
 .task-meta{font-size:11px;margin-top:3px;color:#9ca3af;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .task-actions{display:flex;gap:2px;flex:none}
-
-/* ---------- 拖拽指示线 ---------- */
-.drag-indicator{
-  position:absolute;left:8px;right:0;height:2px;
-  background:#5b7cfa;border-radius:2px;
-  pointer-events:none;z-index:60;
-  box-shadow:0 0 0 3px rgba(91,124,250,.12);
-}
-.drag-indicator::before,.drag-indicator::after{
-  content:'';position:absolute;top:50%;width:6px;height:6px;
-  background:#5b7cfa;border-radius:50%;transform:translateY(-50%);
-}
+.drag-indicator{position:absolute;left:8px;right:0;height:2px;background:#5b7cfa;border-radius:2px;pointer-events:none;z-index:60;box-shadow:0 0 0 3px rgba(91,124,250,.12)}
+.drag-indicator::before,.drag-indicator::after{content:'';position:absolute;top:50%;width:6px;height:6px;background:#5b7cfa;border-radius:50%;transform:translateY(-50%)}
 .drag-indicator::before{left:-3px}
 .drag-indicator::after{right:-3px}
-
-/* ---------- 队列（每日日程） ---------- */
 .queue{display:flex;flex-direction:column}
-.queue-item{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 0 10px 10px;
-  border-bottom:1px solid #f3f4f6;
-  border-left:3px solid transparent;
-}
+.queue-item{display:flex;align-items:center;gap:10px;padding:10px 0 10px 10px;border-bottom:1px solid #f3f4f6;border-left:3px solid transparent}
 .queue-item:last-child{border-bottom:none}
 .queue-item.pri-3{border-left-color:#e5484d}
 .queue-item.pri-2{border-left-color:#f59e0b}
@@ -189,8 +125,6 @@ body{
 .queue-item.done .q-title{text-decoration:line-through}
 .q-title{flex:1;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1a1d23}
 .q-meta{font-size:12px;color:#5b7cfa;font-variant-numeric:tabular-nums;white-space:nowrap;flex:none}
-
-/* ---------- 输入 ---------- */
 .input{
   width:100%;background:#f9fafb;border:1px solid #e5e7eb;color:#1a1d23;border-radius:10px;
   padding:12px;font-size:16px;font-family:inherit;margin-bottom:8px;
@@ -201,13 +135,10 @@ body{
 select.input{appearance:none;-webkit-appearance:none;
   background-image:linear-gradient(45deg,transparent 50%,#9ca3af 50%),linear-gradient(135deg,#9ca3af 50%,transparent 50%);
   background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;
-  background-size:5px 5px;background-repeat:no-repeat;
-  background-color:#f9fafb;
+  background-size:5px 5px;background-repeat:no-repeat;background-color:#f9fafb;
 }
 select.input:focus{background-color:#fff}
 .mini-label{font-size:11px;color:#9ca3af;white-space:nowrap}
-
-/* ---------- 记录 ---------- */
 .roll-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f3f4f6;font-size:13px}
 .roll-item:last-child{border-bottom:none}
 .roll-time{font-size:11px;width:38px;flex:none;font-variant-numeric:tabular-nums;color:#9ca3af}
@@ -215,8 +146,6 @@ select.input:focus{background-color:#fff}
 .roll-val{font-weight:800;font-variant-numeric:tabular-nums}
 .pos{color:#10b981}
 .neg{color:#ef4444}
-
-/* ---------- 图表 ---------- */
 .chart{display:flex;align-items:flex-end;justify-content:space-between;height:120px;gap:6px}
 .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%}
 .bar-val{font-size:10px;height:14px;color:#9ca3af;font-variant-numeric:tabular-nums}
@@ -225,8 +154,6 @@ select.input:focus{background-color:#fff}
 .bar-fill-v.pos{background:linear-gradient(180deg,#34d399,#10b981)}
 .bar-fill-v.neg{background:linear-gradient(180deg,#f87171,#ef4444)}
 .bar-label{font-size:10px;margin-top:6px;color:#9ca3af}
-
-/* ---------- 设置 ---------- */
 .setting-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 0;font-size:14px;border-bottom:1px solid #f3f4f6;color:#374151}
 .setting-row:last-child{border-bottom:none}
 .setting-row input[type=number],.setting-row input[type=time]{
@@ -236,67 +163,57 @@ select.input:focus{background-color:#fff}
 .setting-row input[type=time]{width:104px}
 .setting-row input:focus{outline:none;border-color:#5b7cfa;background:#fff}
 .setting-row input[type=checkbox]{width:20px;height:20px;accent-color:#5b7cfa}
-
-/* ---------- Tabbar ---------- */
 .tabbar{
   position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;
   display:flex;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border-top:1px solid #e8eaee;padding:6px 0 max(6px,env(safe-area-inset-bottom));
+  -webkit-backdrop-filter:blur(14px);border-top:1px solid #e8eaee;padding:6px 0 max(6px,env(safe-area-inset-bottom));
 }
 .tabbar button{
   flex:1;background:none;border:none;color:#9ca3af;font-size:11px;padding:8px 0;cursor:pointer;
-  font-family:inherit;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;
-  transition:color .15s;
+  font-family:inherit;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .15s;
 }
 .tabbar button .tb-ico{font-size:18px;line-height:1}
 .tabbar button.active{color:#5b7cfa}
-
-/* ---------- 视图 ---------- */
 .view{display:none}
 .view.active{display:block;animation:fade .18s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-/* ---------- Toast ---------- */
 #toast{
   position:fixed;left:50%;bottom:104px;transform:translate(-50%,12px);
   background:rgba(31,41,55,.95);color:#fff;padding:11px 20px;border-radius:99px;
   font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:100;
-  white-space:nowrap;max-width:88vw;overflow:hidden;
-  text-overflow:ellipsis;font-weight:600;
+  white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis;font-weight:600;
   box-shadow:0 8px 24px rgba(15,23,42,.2);
 }
 #toast.show{opacity:1;transform:translate(-50%,0)}
-
-/* ---------- Roll 闪光 ---------- */
 .roll-flash{
   position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
   z-index:200;pointer-events:none;opacity:0;transform:scale(.8);transition:opacity .2s,transform .2s;
-  background:rgba(255,255,255,.72);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  background:rgba(255,255,255,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
 }
 .roll-flash.show{opacity:1;transform:scale(1)}
 .rf-num{font-size:80px;font-weight:900;letter-spacing:-3px;line-height:1;font-variant-numeric:tabular-nums}
 .roll-flash.pos .rf-num{color:#10b981;text-shadow:0 0 50px rgba(16,185,129,.35)}
 .roll-flash.neg .rf-num{color:#ef4444;text-shadow:0 0 50px rgba(239,68,68,.35)}
 .rf-txt{font-size:14px;color:#6b7280;margin-top:10px;font-weight:600}
-
-/* ---------- 弹窗 ---------- */
 .modal-mask{
   position:fixed;inset:0;background:rgba(15,23,42,.45);display:flex;align-items:center;
   justify-content:center;z-index:300;padding:24px;backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
-  animation:fade .15s ease;
+  -webkit-backdrop-filter:blur(4px);animation:fade .15s ease;
 }
 .modal{
   background:#fff;border:1px solid #e8eaee;border-radius:22px;padding:24px 22px;
-  width:100%;max-width:340px;text-align:center;
-  box-shadow:0 30px 80px -20px rgba(15,23,42,.3);
+  width:100%;max-width:340px;text-align:center;box-shadow:0 30px 80px -20px rgba(15,23,42,.3);
 }
 .modal-tag{font-size:11px;color:#9ca3af;letter-spacing:3px;font-weight:800}
 .modal-big{font-size:62px;font-weight:900;margin:14px 0 4px;color:#5b7cfa;font-variant-numeric:tabular-nums;line-height:1}
 .modal-big .unit{font-size:17px;font-weight:700;color:#9ca3af;margin-left:6px}
 .modal-label{font-size:11px;color:#6b7280;text-align:left;margin:8px 0 4px;font-weight:600;letter-spacing:.5px}
+.sync-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#10b981;margin-right:5px;vertical-align:middle}
+.sync-dot.busy{background:#f59e0b;animation:pulse 1s infinite}
+.sync-dot.err{background:#ef4444}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+a{color:#5b7cfa;text-decoration:none}
+a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -311,12 +228,8 @@ select.input:focus{background-color:#fff}
   </header>
 
   <main>
-    <!-- ============ 今日 ============ -->
-    <section id="view-today" class="view active">
-      <div id="todayContent"></div>
-    </section>
+    <section id="view-today" class="view active"><div id="todayContent"></div></section>
 
-    <!-- ============ 任务池 ============ -->
     <section id="view-tasks" class="view">
       <div class="card">
         <div class="card-title">添加任务</div>
@@ -343,9 +256,7 @@ select.input:focus{background-color:#fff}
           <span class="mini-label">分钟</span>
         </div>
         <button id="btnAddTask" class="btn primary" style="width:100%;margin-top:12px">添加任务</button>
-        <div class="sub dim" style="margin-top:8px;text-align:center">
-          每个任务从创建开始计时，72 小时内完成
-        </div>
+        <div class="sub dim" style="margin-top:8px;text-align:center">每个任务从创建开始计时，72 小时内完成</div>
       </div>
 
       <div class="card">
@@ -359,7 +270,6 @@ select.input:focus{background-color:#fff}
       </div>
     </section>
 
-    <!-- ============ 记录 ============ -->
     <section id="view-log" class="view">
       <div class="card">
         <div class="card-title">近 7 天得分</div>
@@ -371,8 +281,47 @@ select.input:focus{background-color:#fff}
       </div>
     </section>
 
-    <!-- ============ 设置 ============ -->
     <section id="view-settings" class="view">
+      <!-- 云同步 -->
+      <div class="card">
+        <div class="card-title">☁️ 云同步（GitHub Gist）</div>
+
+        <div id="syncNotConfigured">
+          <div class="sub dim" style="margin-bottom:10px;line-height:1.7">
+            把数据存在你 GitHub 账号下的私有 Gist 里，电脑、手机填同一个 Token 即可自动同步。
+            <br>步骤：<br>
+            1. <a href="https://github.com/settings/tokens/new" target="_blank" rel="noopener">点此创建 Token</a>（只勾选 <b>gist</b> 权限）<br>
+            2. 复制那串 ghp_xxx 填到下面<br>
+            3. 第一台设备直接点连接，第二台设备只需填 Token
+          </div>
+          <input id="syncToken" class="input" placeholder="ghp_xxxxxxxxxxxx" type="password" autocomplete="off">
+          <input id="syncGistId" class="input" placeholder="Gist ID（可选，第二台设备一般留空）" autocomplete="off">
+          <button class="btn primary" id="btnSyncConnect" style="width:100%">连接并同步</button>
+        </div>
+
+        <div id="syncConfigured" style="display:none">
+          <div class="setting-row">
+            <span>状态</span>
+            <span id="syncStatus" style="font-weight:700;color:#10b981">
+              <span class="sync-dot"></span>已连接
+            </span>
+          </div>
+          <div class="setting-row">
+            <span>Gist ID</span>
+            <span id="syncGistIdDisplay" class="sub dim" style="font-size:11px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</span>
+          </div>
+          <div class="setting-row">
+            <span>上次同步</span>
+            <span id="syncLastTime" class="sub dim" style="font-size:12px">—</span>
+          </div>
+          <div class="row gap" style="margin-top:12px">
+            <button class="btn ghost" id="btnSyncPull">⬇ 从云端拉取</button>
+            <button class="btn ghost" id="btnSyncPush">⬆ 上传到云端</button>
+          </div>
+          <button class="btn danger" id="btnSyncDisconnect" style="width:100%;margin-top:8px">断开同步</button>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-title">随机范围</div>
         <div class="setting-row"><span>工作块时长(分)</span>
@@ -412,11 +361,15 @@ select.input:focus{background-color:#fff}
 
       <div class="card">
         <div class="card-title">数据</div>
-        <button class="btn ghost" id="btnExport" style="width:100%">导出数据 (JSON)</button>
+        <div class="row gap" style="margin-top:0">
+          <button class="btn ghost" id="btnExport">导出 JSON</button>
+          <button class="btn ghost" id="btnImport">导入 JSON</button>
+        </div>
+        <input id="importFile" type="file" accept="application/json,.json" style="display:none">
         <button class="btn danger" id="btnReset" style="width:100%;margin-top:8px">清空全部数据</button>
         <div class="sub dim" style="margin-top:12px;line-height:1.6">
           分数只是启动器，不是自我价值。<br>
-          数据全部保存在本机浏览器，不会上传。
+          未连接云同步时，数据只存在本机浏览器。
         </div>
       </div>
     </section>
@@ -432,10 +385,10 @@ select.input:focus{background-color:#fff}
 
 <script>
 /* =========================================================
-   RollDay · 骰子日程
+   RollDay · 骰子日程（含云同步）
    ========================================================= */
 
-/* ---------- 工具函数 ---------- */
+/* ---------- 工具 ---------- */
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
@@ -455,20 +408,30 @@ const fmtTimer = sec => {
   const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
   return h ? `${h}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
 };
+const fmtRelative = ts => {
+  if (!ts) return '—';
+  const diff = Date.now() - ts;
+  if (diff < 60000) return '刚刚';
+  if (diff < 3600000) return `${Math.floor(diff / 60000)} 分钟前`;
+  if (diff < 86400000) return `${Math.floor(diff / 3600000)} 小时前`;
+  return fmtClock(ts) + ' ' + new Date(ts).toLocaleDateString('zh-CN');
+};
 
 /* ---------- 常量 ---------- */
 const STORAGE_KEY = 'rollday.v2';
 const OLD_STORAGE_KEY = 'rollday.v1';
+const SYNC_KEY = 'rollday.sync.v1';
 const CATEGORIES = ['脑力', '体力', '创意', '杂事', '社交'];
 const PRIORITY_NAME = { 1: '低', 2: '中', 3: '高' };
-const COUNTDOWN_MS = 72 * 3600 * 1000;   // 72 小时
+const COUNTDOWN_MS = 72 * 3600 * 1000;
+const GIST_DESC = 'RollDay 数据同步';
 
 const DEFAULT_SETTINGS = {
-  workMin: 5,        workMax: 60,
-  startRollMin: 1,   startRollMax: 50,
-  endRollMin: 1,     endRollMax: 50,
+  workMin: 5, workMax: 60,
+  startRollMin: 1, startRollMax: 50,
+  endRollMin: 1, endRollMax: 50,
   goodSleepMin: 100, goodSleepMax: 300,
-  badSleepMin: 1,    badSleepMax: 100,
+  badSleepMin: 1, badSleepMax: 100,
   enableNegative: true,
   negativeDailyCap: 200,
   rerollLimit: 3,
@@ -476,56 +439,85 @@ const DEFAULT_SETTINGS = {
   sleepTarget: '23:00',
 };
 
-/* ---------- 状态 ---------- */
+/* ---------- 本地状态 ---------- */
 let state = loadState();
+
+function normalizeState(s) {
+  s.settings = { ...DEFAULT_SETTINGS, ...(s.settings || {}) };
+  s.tasks = Array.isArray(s.tasks) ? s.tasks : [];
+  s.days = s.days && typeof s.days === 'object' ? s.days : {};
+  const now = Date.now();
+  s.tasks.forEach(t => {
+    if (typeof t.done !== 'boolean') t.done = false;
+    if (!t.priority) t.priority = 2;
+    if (!t.minDur) t.minDur = 5;
+    if (!t.maxDur) t.maxDur = 60;
+    if (!t.category) t.category = '脑力';
+    if (!t.createdAt) t.createdAt = now;
+  });
+  return s;
+}
 
 function loadState() {
   try {
-    // 优先读新 key，如果没读到就尝试从旧 key 迁移
     let raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {
       const oldRaw = localStorage.getItem(OLD_STORAGE_KEY);
       if (oldRaw) {
         raw = oldRaw;
-        // 迁移完成后不再用旧 key
         localStorage.removeItem(OLD_STORAGE_KEY);
       }
     }
-    if (raw) {
-      const s = JSON.parse(raw);
-      s.settings = { ...DEFAULT_SETTINGS, ...(s.settings || {}) };
-      s.tasks = Array.isArray(s.tasks) ? s.tasks : [];
-      s.days = s.days && typeof s.days === 'object' ? s.days : {};
-      // 补齐字段
-      const now = Date.now();
-      s.tasks.forEach(t => {
-        if (typeof t.done !== 'boolean') t.done = false;
-        if (!t.priority) t.priority = 2;
-        if (!t.minDur) t.minDur = 5;
-        if (!t.maxDur) t.maxDur = 60;
-        if (!t.category) t.category = '脑力';
-        if (!t.createdAt) t.createdAt = now;   // 老任务从现在开始计时
-      });
-      return s;
-    }
+    if (raw) return normalizeState(JSON.parse(raw));
   } catch (e) { console.warn('[RollDay] load failed', e); }
   return { settings: { ...DEFAULT_SETTINGS }, tasks: [], days: {} };
 }
 
+/* ---------- 云同步状态 ---------- */
+let syncState = loadSyncState();
+
+function loadSyncState() {
+  try {
+    const raw = localStorage.getItem(SYNC_KEY);
+    if (raw) {
+      const s = JSON.parse(raw);
+      return {
+        token: s.token || '',
+        gistId: s.gistId || '',
+        enabled: !!s.enabled,
+        lastSyncAt: s.lastSyncAt || 0,
+      };
+    }
+  } catch (e) {}
+  return { token: '', gistId: '', enabled: false, lastSyncAt: 0 };
+}
+
+function persistSyncState() {
+  try { localStorage.setItem(SYNC_KEY, JSON.stringify(syncState)); } catch (e) {}
+}
+
+/* ---------- 保存（本地 + 云端） ---------- */
 let saveTimer = null;
-function save() {
+let pushTimer = null;
+
+function save(opts = {}) {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
     catch (e) { console.warn('[RollDay] save failed', e); }
+
+    // 触发云同步（debounce，避免频繁请求）
+    if (syncState.enabled && syncState.token && !opts.skipCloud) {
+      clearTimeout(pushTimer);
+      pushTimer = setTimeout(() => { syncPush().catch(() => {}); }, 2500);
+    }
   }, 60);
 }
 
+/* ---------- 天数据 ---------- */
 function getDay(key = todayKey()) {
   let d = state.days[key];
-  if (!d) {
-    d = state.days[key] = { blocks: [], rolls: [], rerolls: 0, sleep: { wake: null, sleep: null } };
-  }
+  if (!d) d = state.days[key] = { blocks: [], rolls: [], rerolls: 0, sleep: { wake: null, sleep: null } };
   d.blocks  = Array.isArray(d.blocks) ? d.blocks : (d.blocks = []);
   d.rolls   = Array.isArray(d.rolls)  ? d.rolls  : (d.rolls  = []);
   d.rerolls = d.rerolls || 0;
@@ -552,7 +544,6 @@ function pushRoll(type, value, label) {
   save();
 }
 
-/* ---------- 连续天数 ---------- */
 function streak() {
   const today = getDay();
   let n = 0;
@@ -560,9 +551,8 @@ function streak() {
   if (!today.blocks.some(b => b.status === 'done')) d.setDate(d.getDate() - 1);
   for (let i = 0; i < 3650; i++) {
     const day = state.days[dateKey(d)];
-    if (day && day.blocks.some(b => b.status === 'done')) {
-      n++; d.setDate(d.getDate() - 1);
-    } else break;
+    if (day && day.blocks.some(b => b.status === 'done')) { n++; d.setDate(d.getDate() - 1); }
+    else break;
   }
   return n;
 }
@@ -577,30 +567,19 @@ function formatCountdown(task) {
   const totalHour = Math.floor(absLeft / 3600000);
 
   let text, cls;
-
   if (left < 0) {
     cls = 'expired';
-    if (totalHour >= 24) {
-      text = `超时 ${Math.floor(totalHour / 24)}天${totalHour % 24}时`;
-    } else if (totalHour >= 1) {
-      text = `超时 ${totalHour}时${totalMin % 60}分`;
-    } else {
-      text = `超时 ${totalMin}分`;
-    }
+    if (totalHour >= 24) text = `超时 ${Math.floor(totalHour / 24)}天${totalHour % 24}时`;
+    else if (totalHour >= 1) text = `超时 ${totalHour}时${totalMin % 60}分`;
+    else text = `超时 ${totalMin}分`;
   } else {
-    if (totalHour >= 24) {
-      text = `剩 ${Math.floor(totalHour / 24)}天${totalHour % 24}时`;
-    } else if (totalHour >= 1) {
-      text = `剩 ${totalHour}时${totalMin % 60}分`;
-    } else {
-      text = `剩 ${totalMin}分`;
-    }
-
+    if (totalHour >= 24) text = `剩 ${Math.floor(totalHour / 24)}天${totalHour % 24}时`;
+    else if (totalHour >= 1) text = `剩 ${totalHour}时${totalMin % 60}分`;
+    else text = `剩 ${totalMin}分`;
     if (left < 24 * 3600 * 1000) cls = 'urgent';
     else if (left < 48 * 3600 * 1000) cls = 'soon';
     else cls = 'fresh';
   }
-
   return { text, cls };
 }
 
@@ -625,12 +604,10 @@ function renderHeader() {
   $('#scoreSub').textContent = s > 0 ? `今日分 · 连续 ${s} 天` : '今日分';
 }
 
-/* ---------- 今日视图 ---------- */
 function renderToday() {
   const day = getDay();
   const active  = day.blocks.find(b => b.status === 'active');
   const pending = day.blocks.filter(b => b.status === 'pending');
-  const done    = day.blocks.filter(b => b.status === 'done');
 
   let html = '';
 
@@ -702,7 +679,6 @@ function renderToday() {
     </div>`;
 
   html += renderHabitCard(day);
-
   $('#todayContent').innerHTML = html;
 }
 
@@ -726,7 +702,6 @@ function renderHabitCard(day) {
     </div>`;
 }
 
-/* ---------- 任务池 ---------- */
 function renderTasks() {
   const active = state.tasks.filter(t => !t.done);
   const done   = state.tasks.filter(t => t.done);
@@ -736,34 +711,29 @@ function renderTasks() {
 
   const activeEl = $('#taskListActive');
   activeEl.innerHTML = active.length
-    ? active.map(taskItemHTML).join('')
+    ? active.map(t => taskItemHTML(t, true)).join('')
     : `<div class="dim center" style="padding:20px 0;font-size:13px">还没有进行中的任务，在上面加一个吧 👆</div>`;
 
   const doneCard = $('#taskDoneCard');
   if (done.length) {
     doneCard.style.display = '';
-    $('#taskListDone').innerHTML = done.map(taskItemHTML).join('');
+    $('#taskListDone').innerHTML = done.map(t => taskItemHTML(t, false)).join('');
   } else {
     doneCard.style.display = 'none';
   }
 }
 
-function taskItemHTML(t, showDrag = true) {
+function taskItemHTML(t, showDrag) {
   const pri = t.priority || 2;
   const cd = formatCountdown(t);
-  const cdHTML = cd
-    ? `<span class="cd ${cd.cls}" data-countdown="${t.id}">${cd.text}</span>`
-    : '';
+  const cdHTML = cd ? `<span class="cd ${cd.cls}" data-countdown="${t.id}">${cd.text}</span>` : '';
 
   const dragHandle = (!t.done && showDrag)
     ? `<button class="drag-handle" data-drag-handle aria-label="拖动排序">
          <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
-           <circle cx="4" cy="3" r="1.1"/>
-           <circle cx="10" cy="3" r="1.1"/>
-           <circle cx="4" cy="7" r="1.1"/>
-           <circle cx="10" cy="7" r="1.1"/>
-           <circle cx="4" cy="11" r="1.1"/>
-           <circle cx="10" cy="11" r="1.1"/>
+           <circle cx="4" cy="3" r="1.1"/><circle cx="10" cy="3" r="1.1"/>
+           <circle cx="4" cy="7" r="1.1"/><circle cx="10" cy="7" r="1.1"/>
+           <circle cx="4" cy="11" r="1.1"/><circle cx="10" cy="11" r="1.1"/>
          </svg>
        </button>`
     : '';
@@ -787,7 +757,6 @@ function taskItemHTML(t, showDrag = true) {
     </div>`;
 }
 
-/* ---------- 记录 ---------- */
 function renderLog() {
   const day = getDay();
   const rolls = [...day.rolls].reverse();
@@ -811,9 +780,7 @@ function renderLog() {
     const h = Math.max(3, Math.round(Math.abs(d.score) / maxAbs * 62));
     return `<div class="bar-col">
       <div class="bar-val">${d.score ? d.score : ''}</div>
-      <div class="bar-track">
-        <div class="bar-fill-v ${d.score >= 0 ? 'pos' : 'neg'}" style="height:${h}px"></div>
-      </div>
+      <div class="bar-track"><div class="bar-fill-v ${d.score >= 0 ? 'pos' : 'neg'}" style="height:${h}px"></div></div>
       <div class="bar-label dim">${d.label}</div>
     </div>`;
   }).join('');
@@ -832,14 +799,11 @@ function addTask() {
   if (maxDur < minDur) maxDur = minDur;
 
   state.tasks.push({
-    id: uid(),
-    title,
+    id: uid(), title,
     category: $('#taskCat').value,
     priority: Number($('#taskPri').value) || 2,
     minDur, maxDur,
-    done: false,
-    doneAt: null,
-    createdAt: Date.now(),
+    done: false, doneAt: null, createdAt: Date.now(),
   });
   save();
 
@@ -872,7 +836,6 @@ function toggleTaskDone(id) {
 function openEditTask(id) {
   const task = state.tasks.find(t => t.id === id);
   if (!task) return;
-
   const pri = task.priority || 2;
 
   const modal = document.createElement('div');
@@ -880,10 +843,8 @@ function openEditTask(id) {
   modal.innerHTML = `
     <div class="modal" style="text-align:left">
       <div class="modal-tag" style="text-align:center;display:block;margin-bottom:16px">编 辑 任 务</div>
-
       <div class="modal-label">标题</div>
       <input id="editTitle" class="input" value="${esc(task.title)}" maxlength="30">
-
       <div class="row" style="gap:8px">
         <div style="flex:1">
           <div class="modal-label">类别</div>
@@ -900,14 +861,12 @@ function openEditTask(id) {
           </select>
         </div>
       </div>
-
       <div class="modal-label" style="margin-top:12px">时长范围（分钟）</div>
       <div class="row" style="gap:6px">
         <input id="editMin" type="number" class="input" value="${task.minDur}" min="1" style="flex:1;margin:0">
         <span class="dim">~</span>
         <input id="editMax" type="number" class="input" value="${task.maxDur}" min="1" style="flex:1;margin:0">
       </div>
-
       <div class="row gap" style="margin-top:18px">
         <button class="btn ghost" data-m="cancel">取消</button>
         <button class="btn primary" data-m="save">保存</button>
@@ -925,40 +884,27 @@ function openEditTask(id) {
     const btn = e.target.closest('[data-m]');
     if (!btn) return;
     const m = btn.dataset.m;
-
     if (m === 'cancel') { modal.remove(); return; }
-
     if (m === 'save') {
       const title = modal.querySelector('#editTitle').value.trim();
       if (!title) { toast('标题不能为空'); return; }
-
       let minDur = Number(modal.querySelector('#editMin').value) || 5;
       let maxDur = Number(modal.querySelector('#editMax').value) || 60;
       if (minDur < 1) minDur = 1;
       if (maxDur < minDur) maxDur = minDur;
-
       const newCat = modal.querySelector('#editCat').value;
       const newPri = Number(modal.querySelector('#editPri').value) || 2;
 
-      task.title    = title;
-      task.category = newCat;
-      task.priority = newPri;
-      task.minDur   = minDur;
-      task.maxDur   = maxDur;
+      task.title = title; task.category = newCat; task.priority = newPri;
+      task.minDur = minDur; task.maxDur = maxDur;
 
       const day = getDay();
       day.blocks.forEach(b => {
         if (b.taskId === id && b.status === 'pending') {
-          b.title    = title;
-          b.category = newCat;
-          b.priority = newPri;
+          b.title = title; b.category = newCat; b.priority = newPri;
         }
       });
-
-      save();
-      modal.remove();
-      render();
-      toast('已保存');
+      save(); modal.remove(); render(); toast('已保存');
     }
   });
 }
@@ -972,7 +918,6 @@ function initDragSort() {
   const list = $('#taskListActive');
   if (!list) return;
 
-  // pointerdown 判断是否按在手柄上
   list.addEventListener('pointerdown', e => {
     const handle = e.target.closest('[data-drag-handle]');
     if (!handle) return;
@@ -987,7 +932,6 @@ function initDragSort() {
     const rects = items.map(el => el.getBoundingClientRect());
     const currentIndex = items.indexOf(item);
 
-    // 创建指示线
     list.style.position = 'relative';
     const indicator = document.createElement('div');
     indicator.className = 'drag-indicator';
@@ -997,17 +941,13 @@ function initDragSort() {
       id, item, list, items, rects,
       pointerId: e.pointerId,
       startY: e.clientY,
-      currentIndex,
-      targetIndex: currentIndex,
+      currentIndex, targetIndex: currentIndex,
       indicator,
     };
 
     item.classList.add('dragging');
     item.style.zIndex = '50';
-
-    // 高亮手柄
     handle.style.color = '#5b7cfa';
-
     updateIndicator();
   });
 }
@@ -1016,36 +956,29 @@ function updateIndicator() {
   if (!dragState) return;
   const { list, items, targetIndex, indicator } = dragState;
   const listTop = list.getBoundingClientRect().top;
-
   let top;
   if (targetIndex >= items.length) {
     const last = items[items.length - 1];
     top = last.getBoundingClientRect().bottom - listTop;
   } else {
-    const el = items[targetIndex];
-    top = el.getBoundingClientRect().top - listTop;
+    top = items[targetIndex].getBoundingClientRect().top - listTop;
   }
-
   indicator.style.top = top + 'px';
 }
 
 function onDragMove(e) {
   if (!dragState || e.pointerId !== dragState.pointerId) return;
   e.preventDefault();
-
   const dy = e.clientY - dragState.startY;
   dragState.item.style.transform = `translateY(${dy}px)`;
 
-  // 计算插入位置
   const y = e.clientY;
   const { rects } = dragState;
   let target = rects.length;
   for (let i = 0; i < rects.length; i++) {
     const r = rects[i];
-    const mid = r.top + r.height / 2;
-    if (y < mid) { target = i; break; }
+    if (y < r.top + r.height / 2) { target = i; break; }
   }
-
   if (target !== dragState.targetIndex) {
     dragState.targetIndex = target;
     updateIndicator();
@@ -1054,40 +987,30 @@ function onDragMove(e) {
 
 function onDragEnd(e) {
   if (!dragState || e.pointerId !== dragState.pointerId) return;
-
-  const { item, items, targetIndex, currentIndex, indicator, id, list } = dragState;
+  const { item, items, targetIndex, currentIndex, indicator, id } = dragState;
 
   item.classList.remove('dragging');
   item.style.transform = '';
   item.style.zIndex = '';
   if (indicator) indicator.remove();
-
-  // 恢复手柄颜色
   const handle = item.querySelector('[data-drag-handle]');
   if (handle) handle.style.color = '';
 
   dragState = null;
 
-  // 计算目标位置：如果原位在当前 index 之前，则需要减 1
   let destIndex = targetIndex;
   if (currentIndex < targetIndex) destIndex = targetIndex - 1;
-
-  if (destIndex !== currentIndex) {
-    reorderActiveTasks(id, destIndex);
-  }
+  if (destIndex !== currentIndex) reorderActiveTasks(id, destIndex);
 }
 
 function reorderActiveTasks(id, destIndex) {
   const activeTasks = state.tasks.filter(t => !t.done);
   const fromIdx = activeTasks.findIndex(t => t.id === id);
   if (fromIdx === -1) return;
-
   const [moved] = activeTasks.splice(fromIdx, 1);
   activeTasks.splice(destIndex, 0, moved);
-
   const doneTasks = state.tasks.filter(t => t.done);
   state.tasks = [...activeTasks, ...doneTasks];
-
   save();
   renderTasks();
   toast('顺序已保存');
@@ -1102,7 +1025,7 @@ function pickTask(tasks, lastCat, lastTaskId) {
   const weights = pool.map(t => {
     let w = Number(t.priority) || 2;
     if (t.category !== lastCat) w *= 2;
-    if (t.id === lastTaskId)  w *= 0.15;
+    if (t.id === lastTaskId) w *= 0.15;
     return w;
   });
   const total = weights.reduce((a, b) => a + b, 0);
@@ -1116,8 +1039,7 @@ function pickTask(tasks, lastCat, lastTaskId) {
 
 function generateSchedule(count = 6) {
   if (!state.tasks.filter(t => !t.done).length) {
-    toast('先去「任务池」添加至少一个进行中的任务');
-    return;
+    toast('先去「任务池」添加至少一个进行中的任务'); return;
   }
   const day = getDay();
   const pendingCount = day.blocks.filter(b => b.status === 'pending').length;
@@ -1153,16 +1075,11 @@ function startBlock(id) {
   if (day.blocks.some(b => b.status === 'active')) { toast('先结束当前工作块'); return; }
   const b = day.blocks.find(x => x.id === id);
   if (!b || b.status !== 'pending') return;
-
-  b.status = 'active';
-  b.actualStart = Date.now();
-  b._notified = false;
-
+  b.status = 'active'; b.actualStart = Date.now(); b._notified = false;
   const st = state.settings;
   const s = randInt(st.startRollMin, st.startRollMax);
   b.startRoll = s;
   pushRoll('start', s, `开始「${b.title}」`);
-
   save(); render();
   showRollFlash(s, '启动分');
 }
@@ -1171,16 +1088,11 @@ function endBlock(id) {
   const day = getDay();
   const b = day.blocks.find(x => x.id === id);
   if (!b || b.status !== 'active') return;
-
-  b.status = 'done';
-  b.actualEnd = Date.now();
-  b._notified = true;
-
+  b.status = 'done'; b.actualEnd = Date.now(); b._notified = true;
   const st = state.settings;
   const s = randInt(st.endRollMin, st.endRollMax);
   b.endRoll = s;
   pushRoll('end', s, `完成「${b.title}」`);
-
   save(); render();
   showRollFlash(s, '完成分');
 }
@@ -1190,9 +1102,7 @@ function abortBlock(id) {
   const b = day.blocks.find(x => x.id === id);
   if (!b) return;
   if (!confirm('放弃这个工作块？启动分不会收回，但也不会有完成分。')) return;
-  b.status = 'pending';
-  b.actualStart = null;
-  b._notified = false;
+  b.status = 'pending'; b.actualStart = null; b._notified = false;
   save(); render();
 }
 
@@ -1206,16 +1116,9 @@ function toggleBlockDone(id) {
   const day = getDay();
   const b = day.blocks.find(x => x.id === id);
   if (!b) return;
-
-  if (b.status === 'active') {
-    toast('先结束当前工作块');
-    return;
-  }
-
+  if (b.status === 'active') { toast('先结束当前工作块'); return; }
   if (b.status === 'done') {
-    b.status = 'pending';
-    b.actualStart = null;
-    b.actualEnd = null;
+    b.status = 'pending'; b.actualStart = null; b.actualEnd = null;
   } else {
     b.status = 'done';
     b.actualStart = b.actualStart || Date.now();
@@ -1235,7 +1138,6 @@ function rollWorkDuration() {
 function openDurationModal(initial) {
   const st = state.settings;
   let current = initial;
-
   const modal = document.createElement('div');
   modal.className = 'modal-mask';
 
@@ -1262,12 +1164,10 @@ function openDurationModal(initial) {
     const btn = e.target.closest('[data-m]');
     if (!btn) return;
     const m = btn.dataset.m;
-
     if (m === 'reroll') {
       const d = getDay();
       if (d.rerolls >= st.rerollLimit) return;
-      d.rerolls++;
-      save();
+      d.rerolls++; save();
       current = randInt(st.workMin, st.workMax);
       paint();
     } else if (m === 'accept') {
@@ -1283,8 +1183,7 @@ function acceptRandomBlock(minutes) {
   const day = getDay();
   const block = {
     id: uid(), taskId: null, title: '随机工作块', category: '随机',
-    priority: 2,
-    plannedMin: minutes, status: 'pending',
+    priority: 2, plannedMin: minutes, status: 'pending',
     actualStart: null, actualEnd: null, startRoll: null, endRoll: null, _notified: false,
   };
   const idx = day.blocks.findIndex(b => b.status === 'pending');
@@ -1301,29 +1200,19 @@ function habitCheck(kind) {
   const day = getDay();
   const st = state.settings;
   if (day.sleep[kind]) { toast('今天已经打过卡了'); return; }
-
   const now = new Date();
   const nowMin = now.getHours() * 60 + now.getMinutes();
   const target = kind === 'wake' ? st.wakeTarget : st.sleepTarget;
   const [th, tm] = target.split(':').map(Number);
   const targetMin = th * 60 + tm;
-
   let diff;
-  if (kind === 'wake') {
-    diff = nowMin - targetMin;
-  } else {
-    diff = nowMin < 12 * 60
-      ? (nowMin + 1440 - targetMin)
-      : (nowMin - targetMin);
-  }
-
+  if (kind === 'wake') diff = nowMin - targetMin;
+  else diff = nowMin < 12 * 60 ? (nowMin + 1440 - targetMin) : (nowMin - targetMin);
   let value;
-  if (diff <= 30)       value =  randInt(st.goodSleepMin, st.goodSleepMax);
-  else if (diff <= 120) value =  randInt(Math.round(st.goodSleepMin / 2), Math.round(st.goodSleepMax / 2));
-  else                  value = -randInt(st.badSleepMin, st.badSleepMax);
-
+  if (diff <= 30) value = randInt(st.goodSleepMin, st.goodSleepMax);
+  else if (diff <= 120) value = randInt(Math.round(st.goodSleepMin / 2), Math.round(st.goodSleepMax / 2));
+  else value = -randInt(st.badSleepMin, st.badSleepMax);
   if (value < 0 && !st.enableNegative) value = 0;
-
   day.sleep[kind] = { at: Date.now(), value, diff };
   const label = kind === 'wake' ? '起床打卡' : '入睡打卡';
   if (value !== 0) {
@@ -1346,21 +1235,15 @@ function startTick() {
 function tick() {
   const day = getDay();
   const active = day.blocks.find(b => b.status === 'active');
-  if (!active) {
-    clearInterval(tickHandle); tickHandle = null; return;
-  }
+  if (!active) { clearInterval(tickHandle); tickHandle = null; return; }
   const el = document.getElementById('liveTimer');
   if (!el) return;
-
   const sec = Math.floor((Date.now() - active.actualStart) / 1000);
   el.textContent = fmtTimer(sec);
-
   const bar = document.getElementById('liveBar');
   if (bar) bar.style.width = Math.min(100, (sec / 60) / active.plannedMin * 100) + '%';
-
   const over = sec / 60 >= active.plannedMin;
   el.classList.toggle('overtime', over);
-
   if (over && !active._notified) {
     active._notified = true;
     toast('⏰ 计划时间到了，可以结束或继续');
@@ -1392,10 +1275,7 @@ function showRollFlash(value, text) {
   el.innerHTML = `<div class="rf-num">${signed(value)}</div><div class="rf-txt">${esc(text)}</div>`;
   document.body.appendChild(el);
   requestAnimationFrame(() => el.classList.add('show'));
-  setTimeout(() => {
-    el.classList.remove('show');
-    setTimeout(() => el.remove(), 250);
-  }, 950);
+  setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.remove(), 250); }, 950);
 }
 
 let toastTimer = null;
@@ -1409,61 +1289,282 @@ function toast(msg) {
 }
 
 /* =========================================================
+   ☁️ 云同步（GitHub Gist）
+   ========================================================= */
+
+let syncing = false;
+
+function setSyncStatus(text, kind = 'ok') {
+  const el = $('#syncStatus');
+  if (!el) return;
+  const dotCls = kind === 'ok' ? 'sync-dot' : (kind === 'busy' ? 'sync-dot busy' : 'sync-dot err');
+  el.innerHTML = `<span class="${dotCls}"></span>${text}`;
+  el.style.color = kind === 'err' ? '#ef4444' : (kind === 'busy' ? '#f59e0b' : '#10b981');
+}
+
+function refreshSyncUI() {
+  const notConf = $('#syncNotConfigured');
+  const conf = $('#syncConfigured');
+  if (!notConf || !conf) return;
+
+  if (syncState.enabled && syncState.token) {
+    notConf.style.display = 'none';
+    conf.style.display = '';
+    const gidEl = $('#syncGistIdDisplay');
+    if (gidEl) gidEl.textContent = syncState.gistId || '—';
+    const tEl = $('#syncLastTime');
+    if (tEl) tEl.textContent = fmtRelative(syncState.lastSyncAt);
+    setSyncStatus('已连接', 'ok');
+  } else {
+    notConf.style.display = '';
+    conf.style.display = 'none';
+  }
+}
+
+async function ghFetch(path, opts = {}) {
+  const headers = {
+    'Authorization': `token ${syncState.token}`,
+    'Accept': 'application/vnd.github+json',
+    ...(opts.headers || {}),
+  };
+  const res = await fetch(`https://api.github.com${path}`, { ...opts, headers });
+  if (!res.ok) {
+    let msg = `HTTP ${res.status}`;
+    try { const j = await res.json(); if (j.message) msg = j.message; } catch (e) {}
+    throw new Error(msg);
+  }
+  return res.json();
+}
+
+async function findExistingGist() {
+  // 分页查询前 100 个，找描述匹配的 gist
+  const gists = await ghFetch('/gists?per_page=100');
+  const found = gists.find(g => g.description === GIST_DESC);
+  return found ? found.id : null;
+}
+
+async function createGist() {
+  const body = {
+    description: GIST_DESC,
+    public: false,
+    files: {
+      'rollday.json': {
+        content: JSON.stringify({ version: 2, updatedAt: Date.now(), state }, null, 2),
+      },
+    },
+  };
+  const data = await ghFetch('/gists', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  return data.id;
+}
+
+async function syncPush() {
+  if (!syncState.enabled || !syncState.token) return;
+  if (syncing) return;
+  syncing = true;
+  try {
+    setSyncStatus('上传中…', 'busy');
+    const content = JSON.stringify({ version: 2, updatedAt: Date.now(), state }, null, 2);
+    const body = { files: { 'rollday.json': { content } } };
+
+    if (syncState.gistId) {
+      await ghFetch(`/gists/${syncState.gistId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+    } else {
+      const id = await createGist();
+      syncState.gistId = id;
+      persistSyncState();
+    }
+
+    syncState.lastSyncAt = Date.now();
+    persistSyncState();
+    setSyncStatus('已连接 · ' + fmtRelative(syncState.lastSyncAt), 'ok');
+    refreshSyncUI();
+  } catch (e) {
+    console.warn('[RollDay] push failed', e);
+    setSyncStatus('上传失败：' + e.message, 'err');
+  } finally {
+    syncing = false;
+  }
+}
+
+async function syncPull(force = false) {
+  if (!syncState.enabled || !syncState.token || !syncState.gistId) return null;
+  if (syncing) return null;
+  syncing = true;
+  try {
+    setSyncStatus('拉取中…', 'busy');
+    const data = await ghFetch(`/gists/${syncState.gistId}`);
+    const file = data.files && data.files['rollday.json'];
+    if (!file) { setSyncStatus('云端无数据', 'err'); return null; }
+    const parsed = JSON.parse(file.content);
+    if (!parsed || !parsed.state) { setSyncStatus('云端数据格式错误', 'err'); return null; }
+
+    // 判断是否需要覆盖本地
+    const cloudAt = parsed.updatedAt || 0;
+    const localAt = 0; // 本地没有 updatedAt，简单起见启动时总是用云端（若 force 也覆盖）
+    if (force || cloudAt > localAt) {
+      state = normalizeState(parsed.state);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+    syncState.lastSyncAt = Date.now();
+    persistSyncState();
+    refreshSyncUI();
+    render();
+    setSyncStatus('已连接 · ' + fmtRelative(syncState.lastSyncAt), 'ok');
+    return parsed;
+  } catch (e) {
+    console.warn('[RollDay] pull failed', e);
+    setSyncStatus('拉取失败：' + e.message, 'err');
+    return null;
+  } finally {
+    syncing = false;
+  }
+}
+
+async function connectSync() {
+  const token = $('#syncToken').value.trim();
+  const gistIdInput = $('#syncGistId').value.trim();
+
+  if (!token) { toast('请填入 GitHub Token'); return; }
+  if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
+    if (!confirm('Token 看起来不像 GitHub Token，确定继续吗？')) return;
+  }
+
+  syncState.token = token;
+  syncState.gistId = gistIdInput;
+  syncState.enabled = true;
+  persistSyncState();
+
+  setSyncStatus('连接中…', 'busy');
+
+  try {
+    // 验证 token
+    await ghFetch('/user');
+
+    // 如果没有 gistId，先找找已有的
+    if (!syncState.gistId) {
+      const existing = await findExistingGist();
+      if (existing) {
+        syncState.gistId = existing;
+        persistSyncState();
+        // 拉取云端数据
+        await syncPull(true);
+        toast('已连接，已拉取云端数据');
+      } else {
+        // 第一次用，创建新 gist 并上传当前数据
+        await syncPush();
+        toast('已创建云端数据');
+      }
+    } else {
+      // 指定了 gistId，尝试拉取
+      const ok = await syncPull(true);
+      if (!ok) {
+        // 拉取失败（可能 gist 不存在），提示用户
+        toast('无法读取该 Gist，请检查 ID');
+      } else {
+        toast('已连接，已拉取云端数据');
+      }
+    }
+
+    refreshSyncUI();
+  } catch (e) {
+    console.warn('[RollDay] connect failed', e);
+    syncState.enabled = false;
+    persistSyncState();
+    setSyncStatus('连接失败：' + e.message, 'err');
+    toast('连接失败：' + e.message);
+    refreshSyncUI();
+  }
+}
+
+function disconnectSync() {
+  if (!confirm('断开后本机数据仍保留，但不再与云端同步。确定？')) return;
+  syncState.enabled = false;
+  persistSyncState();
+  $('#syncToken').value = '';
+  $('#syncGistId').value = '';
+  refreshSyncUI();
+  toast('已断开同步');
+}
+
+/* ---------- 导入 / 导出 ---------- */
+function exportData() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `rollday-${todayKey()}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function importData(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      if (!parsed || typeof parsed !== 'object') throw new Error('格式错误');
+      if (!parsed.tasks && !parsed.days) throw new Error('不是 RollDay 数据');
+      if (!confirm('导入将覆盖当前所有数据，确定继续吗？')) return;
+      state = normalizeState(parsed);
+      save({ skipCloud: false });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      render();
+      toast('导入成功');
+    } catch (err) {
+      toast('导入失败：' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+/* =========================================================
    事件绑定
    ========================================================= */
 
-/* --- 今日页（事件委托） --- */
+/* 今日页 */
 $('#todayContent').addEventListener('click', e => {
   const toggle = e.target.closest('[data-toggle-block]');
-  if (toggle) {
-    toggleBlockDone(toggle.dataset.toggleBlock);
-    return;
-  }
-
+  if (toggle) { toggleBlockDone(toggle.dataset.toggleBlock); return; }
   const btn = e.target.closest('[data-act]');
   if (!btn) return;
-  const act = btn.dataset.act;
-  const id  = btn.dataset.id;
-
+  const act = btn.dataset.act, id = btn.dataset.id;
   switch (act) {
-    case 'start':      startBlock(id); break;
-    case 'end':        endBlock(id); break;
-    case 'abort':      abortBlock(id); break;
-    case 'del':        deleteBlock(id); break;
-    case 'generate':   generateSchedule(6); break;
-    case 'rollDur':    rollWorkDuration(); break;
-    case 'habitWake':  habitCheck('wake'); break;
+    case 'start': startBlock(id); break;
+    case 'end': endBlock(id); break;
+    case 'abort': abortBlock(id); break;
+    case 'del': deleteBlock(id); break;
+    case 'generate': generateSchedule(6); break;
+    case 'rollDur': rollWorkDuration(); break;
+    case 'habitWake': habitCheck('wake'); break;
     case 'habitSleep': habitCheck('sleep'); break;
   }
 });
 
-/* --- 任务池（事件委托） --- */
+/* 任务池 */
 $('#view-tasks').addEventListener('click', e => {
   const toggle = e.target.closest('[data-toggle-task]');
-  if (toggle) {
-    toggleTaskDone(toggle.dataset.toggleTask);
-    return;
-  }
+  if (toggle) { toggleTaskDone(toggle.dataset.toggleTask); return; }
   const edit = e.target.closest('[data-edit]');
-  if (edit) {
-    openEditTask(edit.dataset.edit);
-    return;
-  }
+  if (edit) { openEditTask(edit.dataset.edit); return; }
   const del = e.target.closest('[data-del-task]');
-  if (del) {
-    deleteTask(del.dataset.delTask);
-    return;
-  }
+  if (del) { deleteTask(del.dataset.delTask); return; }
 });
 
-/* --- 添加任务 --- */
 $('#btnAddTask').addEventListener('click', addTask);
+$('#taskTitle').addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
 
-$('#taskTitle').addEventListener('keydown', e => {
-  if (e.key === 'Enter') addTask();
-});
-
-/* --- Tabbar --- */
+/* Tabbar */
 $$('.tabbar button').forEach(btn => {
   btn.addEventListener('click', () => {
     $$('.tabbar button').forEach(b => b.classList.remove('active'));
@@ -1472,16 +1573,16 @@ $$('.tabbar button').forEach(btn => {
     const view = document.getElementById('view-' + btn.dataset.view);
     if (view) view.classList.add('active');
     if (btn.dataset.view === 'log') renderLog();
-    if (btn.dataset.view === 'settings') fillSettings();
+    if (btn.dataset.view === 'settings') { fillSettings(); refreshSyncUI(); }
   });
 });
 
-/* --- 设置 --- */
+/* 设置 */
 const NUMERIC_SETTINGS = {
-  setWorkMin: 'workMin',   setWorkMax: 'workMax',
+  setWorkMin: 'workMin', setWorkMax: 'workMax',
   setStartMin: 'startRollMin', setStartMax: 'startRollMax',
   setEndMin: 'endRollMin', setEndMax: 'endRollMax',
-  setGoodMin: 'goodSleepMin',  setGoodMax: 'goodSleepMax',
+  setGoodMin: 'goodSleepMin', setGoodMax: 'goodSleepMax',
   setNegCap: 'negativeDailyCap', setReroll: 'rerollLimit',
 };
 
@@ -1491,7 +1592,7 @@ function fillSettings() {
     const el = document.getElementById(id);
     if (el) el.value = st[key];
   }
-  $('#setWake').value  = st.wakeTarget;
+  $('#setWake').value = st.wakeTarget;
   $('#setSleep').value = st.sleepTarget;
   $('#setNegEnabled').checked = st.enableNegative;
 }
@@ -1504,50 +1605,46 @@ function bindSettings() {
       const v = Number(el.value);
       if (!Number.isFinite(v)) { fillSettings(); return; }
       state.settings[key] = Math.max(0, Math.round(v));
-      if (key === 'workMin' && state.settings.workMin > state.settings.workMax)
-        state.settings.workMax = state.settings.workMin;
-      if (key === 'workMax' && state.settings.workMax < state.settings.workMin)
-        state.settings.workMin = state.settings.workMax;
-      if (key === 'startRollMin' && state.settings.startRollMin > state.settings.startRollMax)
-        state.settings.startRollMax = state.settings.startRollMin;
-      if (key === 'startRollMax' && state.settings.startRollMax < state.settings.startRollMin)
-        state.settings.startRollMin = state.settings.startRollMax;
-      if (key === 'endRollMin' && state.settings.endRollMin > state.settings.endRollMax)
-        state.settings.endRollMax = state.settings.endRollMin;
-      if (key === 'endRollMax' && state.settings.endRollMax < state.settings.endRollMin)
-        state.settings.endRollMin = state.settings.endRollMax;
-      if (key === 'goodSleepMin' && state.settings.goodSleepMin > state.settings.goodSleepMax)
-        state.settings.goodSleepMax = state.settings.goodSleepMin;
-      if (key === 'goodSleepMax' && state.settings.goodSleepMax < state.settings.goodSleepMin)
-        state.settings.goodSleepMin = state.settings.goodSleepMax;
-      save();
-      fillSettings();
-      render();
+      if (key === 'workMin' && state.settings.workMin > state.settings.workMax) state.settings.workMax = state.settings.workMin;
+      if (key === 'workMax' && state.settings.workMax < state.settings.workMin) state.settings.workMin = state.settings.workMax;
+      if (key === 'startRollMin' && state.settings.startRollMin > state.settings.startRollMax) state.settings.startRollMax = state.settings.startRollMin;
+      if (key === 'startRollMax' && state.settings.startRollMax < state.settings.startRollMin) state.settings.startRollMin = state.settings.startRollMax;
+      if (key === 'endRollMin' && state.settings.endRollMin > state.settings.endRollMax) state.settings.endRollMax = state.settings.endRollMin;
+      if (key === 'endRollMax' && state.settings.endRollMax < state.settings.endRollMin) state.settings.endRollMin = state.settings.endRollMax;
+      if (key === 'goodSleepMin' && state.settings.goodSleepMin > state.settings.goodSleepMax) state.settings.goodSleepMax = state.settings.goodSleepMin;
+      if (key === 'goodSleepMax' && state.settings.goodSleepMax < state.settings.goodSleepMin) state.settings.goodSleepMin = state.settings.goodSleepMax;
+      save(); fillSettings(); render();
     });
   }
-
-  $('#setWake').addEventListener('change',  e => { state.settings.wakeTarget  = e.target.value; save(); render(); });
+  $('#setWake').addEventListener('change', e => { state.settings.wakeTarget = e.target.value; save(); render(); });
   $('#setSleep').addEventListener('change', e => { state.settings.sleepTarget = e.target.value; save(); render(); });
-
   $('#setNegEnabled').addEventListener('change', e => {
     state.settings.enableNegative = e.target.checked;
     save(); render();
   });
 }
 
-/* --- 数据 --- */
-$('#btnExport').addEventListener('click', () => {
-  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `rollday-${todayKey()}.json`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+/* 同步按钮 */
+$('#btnSyncConnect').addEventListener('click', connectSync);
+$('#btnSyncDisconnect').addEventListener('click', disconnectSync);
+$('#btnSyncPush').addEventListener('click', async () => {
+  await syncPush();
+  toast('已上传');
+});
+$('#btnSyncPull').addEventListener('click', async () => {
+  if (!confirm('从云端拉取会覆盖本机数据，确定？')) return;
+  const r = await syncPull(true);
+  if (r) toast('已从云端拉取');
 });
 
+/* 数据 */
+$('#btnExport').addEventListener('click', exportData);
+$('#btnImport').addEventListener('click', () => $('#importFile').click());
+$('#importFile').addEventListener('change', e => {
+  const f = e.target.files[0];
+  if (f) importData(f);
+  e.target.value = '';
+});
 $('#btnReset').addEventListener('click', () => {
   if (!confirm('这会清空所有任务、日程、分数和记录，且不可恢复。确定吗？')) return;
   if (!confirm('真的确定？再点一次就没了。')) return;
@@ -1557,7 +1654,7 @@ $('#btnReset').addEventListener('click', () => {
 });
 
 /* =========================================================
-   倒计时刷新（不重排 DOM，避免打断拖拽）
+   倒计时刷新（不重排 DOM）
    ========================================================= */
 function tickCountdowns() {
   document.querySelectorAll('[data-countdown]').forEach(el => {
@@ -1574,34 +1671,38 @@ function tickCountdowns() {
 /* =========================================================
    启动
    ========================================================= */
-function init() {
+async function init() {
   getDay();
   fillSettings();
   bindSettings();
   render();
+  refreshSyncUI();
   initDragSort();
 
-  // 全局拖拽事件
   document.addEventListener('pointermove', onDragMove, { passive: false });
   document.addEventListener('pointerup', onDragEnd);
   document.addEventListener('pointercancel', onDragEnd);
 
-  // 页面回到前台时刷新
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
       render();
       tickCountdowns();
+      // 回到前台时也拉一次
+      if (syncState.enabled) syncPull().catch(() => {});
     }
   });
 
-  // 每分钟更新倒计时和分数副标题（不重排列表）
   setInterval(() => {
     tickCountdowns();
     const el = document.getElementById('scoreSub');
     if (el) renderHeader();
   }, 60000);
 
-  // 先跑一次
+  // 启动时自动拉取一次云端数据
+  if (syncState.enabled && syncState.token) {
+    syncPull().catch(() => {});
+  }
+
   tickCountdowns();
 }
 
@@ -1612,20 +1713,7 @@ init();
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => {
-        console.log('[RollDay] SW 已注册', reg.scope);
-        reg.addEventListener('updatefound', () => {
-          const nw = reg.installing;
-          if (!nw) return;
-          nw.addEventListener('statechange', () => {
-            if (nw.state === 'installed' && navigator.serviceWorker.controller) {
-              console.log('[RollDay] 有新版本，下次打开生效');
-            }
-          });
-        });
-      })
-      .catch(err => console.warn('[RollDay] SW 注册失败', err));
+    navigator.serviceWorker.register('./sw.js').catch(err => console.warn('[RollDay] SW 注册失败', err));
   });
 }
 </script>
