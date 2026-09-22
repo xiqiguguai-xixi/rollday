@@ -212,7 +212,6 @@ select.input:focus{background-color:#fff}
 a{color:#5b7cfa;text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* 签到卡 */
 .checkin-row{display:flex;align-items:center;gap:14px}
 .checkin-fire{
   width:52px;height:52px;flex:none;border-radius:14px;
@@ -231,7 +230,6 @@ a:hover{text-decoration:underline}
 .checkin-pill.done{background:#5b7cfa;color:#fff;border-color:#5b7cfa}
 .checkin-pill.today{box-shadow:0 0 0 2px rgba(91,124,250,.3)}
 
-/* 商店 */
 .shop-balance{
   background:linear-gradient(135deg,#ecfdf5,#f0fdf4);
   border:1px solid #a7f3d0;border-radius:16px;padding:18px 16px;
@@ -286,7 +284,6 @@ a:hover{text-decoration:underline}
 .ck-stat .n{font-size:20px;font-weight:900;color:#1a1d23;font-variant-numeric:tabular-nums;line-height:1}
 .ck-stat .l{font-size:10px;color:#9ca3af;margin-top:4px;font-weight:600}
 
-/* 本周签到格子 */
 .ck-week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;}
 .ck-day{
   aspect-ratio:1;border-radius:8px;background:#f3f4f6;
@@ -299,12 +296,10 @@ a:hover{text-decoration:underline}
 .ck-day .d{font-size:12px;font-weight:800}
 .ck-day .w{font-size:9px;opacity:.7;margin-top:1px}
 
-/* 日历网格通用 */
 .ck-month{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
 .ck-month-head{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px;}
 .ck-month-head span{text-align:center;font-size:10px;color:#9ca3af;font-weight:700;}
 
-/* 签到日历格子：固定高度，不再撑破 */
 .ck-cell{
   height:38px;
   border-radius:8px;
@@ -318,7 +313,6 @@ a:hover{text-decoration:underline}
 .ck-cell.checked{background:#5b7cfa;color:#fff;font-weight:800}
 .ck-cell.today{box-shadow:0 0 0 2px rgba(91,124,250,.3)}
 
-/* 分数日历格子 */
 .cal-cell{
   height:44px;
   border-radius:8px;
@@ -337,7 +331,6 @@ a:hover{text-decoration:underline}
 .cal-cell .sc.pos{color:#10b981}
 .cal-cell .sc.neg{color:#ef4444}
 
-/* 年视图 */
 .ck-year{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
 .ck-month-card{background:#f9fafb;border-radius:12px;padding:10px 8px;text-align:center;}
 .ck-month-card .m{font-size:11px;color:#6b7280;font-weight:700}
@@ -345,7 +338,6 @@ a:hover{text-decoration:underline}
 .ck-month-card .sc{font-size:10px;color:#5b7cfa;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
 .ck-month-card .tm{font-size:10px;color:#9ca3af;margin-top:1px;font-variant-numeric:tabular-nums}
 
-/* 周视图（分数日历） */
 .cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
 .cal-day{background:#f9fafb;border-radius:10px;padding:8px 4px;text-align:center;min-width:0;overflow:hidden}
 .cal-day.today{box-shadow:0 0 0 2px rgba(91,124,250,.3)}
@@ -354,7 +346,6 @@ a:hover{text-decoration:underline}
 .cal-day .sc{font-size:11px;font-weight:900;font-variant-numeric:tabular-nums}
 .cal-day .tm{font-size:9px;color:#9ca3af;margin-top:1px}
 
-/* 周报 */
 .wk-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .wk-stat{background:#f9fafb;border-radius:12px;padding:12px;}
 .wk-stat .lbl{font-size:11px;color:#6b7280;font-weight:600;margin-bottom:6px}
@@ -401,8 +392,13 @@ a:hover{text-decoration:underline}
           <input id="taskMax" class="input" type="number" value="60" min="1" max="600" style="flex:1;margin:0">
           <span class="mini-label">分钟</span>
         </div>
+        <div class="row" id="taskCountdownRow" style="gap:6px">
+          <span class="mini-label">倒计时</span>
+          <input id="taskCountdown" class="input" type="number" value="72" min="1" max="9999" style="flex:1;margin:0">
+          <span class="mini-label">小时</span>
+        </div>
         <button id="btnAddTask" class="btn primary" style="width:100%;margin-top:12px">添加任务</button>
-        <div class="sub dim" style="margin-top:8px;text-align:center">每个任务从创建开始计时，72 小时内完成</div>
+        <div class="sub dim" style="margin-top:8px;text-align:center">高优先级固定 72 小时；中/低优先级可自定义</div>
       </div>
 
       <div class="card">
@@ -523,7 +519,7 @@ a:hover{text-decoration:underline}
 
       <div class="card">
         <div class="card-title">惩罚分（自动扣分）</div>
-        <div class="setting-row"><span>任务超 72h</span>
+        <div class="setting-row"><span>任务超时</span>
           <div class="row" style="gap:6px">
             <input type="number" id="setExpireMin" min="0"><span class="dim">~</span><input type="number" id="setExpireMax" min="0">
           </div>
@@ -656,7 +652,7 @@ const OLD_STORAGE_KEY = 'rollday.v1';
 const SYNC_KEY = 'rollday.sync.v1';
 const CATEGORIES = ['脑力', '体力', '创意', '杂事', '社交'];
 const PRIORITY_NAME = { 1: '低', 2: '中', 3: '高' };
-const COUNTDOWN_MS = 72 * 3600 * 1000;
+const DEFAULT_COUNTDOWN_HOURS = 72;
 const GIST_DESC = 'RollDay 数据同步';
 const ENTERTAINMENTS = [
   { key: 'tv',      name: '看电视',   emoji: '📺' },
@@ -705,6 +701,7 @@ function normalizeState(s) {
     if (!t.category) t.category = '脑力';
     if (!t.createdAt) t.createdAt = now;
     if (t.expiredPenalized === undefined) t.expiredPenalized = false;
+    if (!t.countdownHours) t.countdownHours = DEFAULT_COUNTDOWN_HOURS;
   });
   Object.values(s.days).forEach(day => {
     if (Array.isArray(day.blocks)) {
@@ -803,7 +800,9 @@ function pushRoll(type, value, label) {
 
 function formatCountdown(task) {
   if (!task.createdAt) return null;
-  const left = (task.createdAt + COUNTDOWN_MS) - Date.now();
+  const hours = task.countdownHours || DEFAULT_COUNTDOWN_HOURS;
+  const countdownMs = hours * 3600 * 1000;
+  const left = (task.createdAt + countdownMs) - Date.now();
   const abs = Math.abs(left);
   const m = Math.floor(abs / 60000), h = Math.floor(abs / 3600000);
   let text, cls;
@@ -816,8 +815,9 @@ function formatCountdown(task) {
     if (h >= 24) text = `剩 ${Math.floor(h / 24)}天${h % 24}时`;
     else if (h >= 1) text = `剩 ${h}时${m % 60}分`;
     else text = `剩 ${m}分`;
-    if (left < 24 * 3600000) cls = 'urgent';
-    else if (left < 48 * 3600000) cls = 'soon';
+    const ratio = left / countdownMs;
+    if (ratio < 0.33) cls = 'urgent';
+    else if (ratio < 0.66) cls = 'soon';
     else cls = 'fresh';
   }
   return { text, cls };
@@ -910,11 +910,13 @@ function checkExpiredTasks() {
   state.tasks.forEach(t => {
     if (t.done || t.expiredPenalized) return;
     if (!t.createdAt) return;
-    if (now <= t.createdAt + COUNTDOWN_MS) return;
+    const hours = t.countdownHours || DEFAULT_COUNTDOWN_HOURS;
+    const countdownMs = hours * 3600 * 1000;
+    if (now <= t.createdAt + countdownMs) return;
     if (!st.enableNegative) { t.expiredPenalized = true; return; }
     const penalty = randInt(st.expirePenaltyMin, st.expirePenaltyMax);
     if (penalty > 0) {
-      pushRoll('expired', -penalty, `任务「${t.title}」超过 72 小时未完成`);
+      pushRoll('expired', -penalty, `任务「${t.title}」超过 ${hours} 小时未完成`);
       totalPenalty += penalty;
     }
     t.expiredPenalized = true;
@@ -1099,12 +1101,13 @@ function taskItemHTML(t, showDrag) {
   const cdHTML = cd ? `<span class="cd ${cd.cls}" data-countdown="${t.id}">${cd.text}</span>` : '';
   const drag = (!t.done && showDrag)
     ? `<button class="drag-handle" data-drag-handle><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><circle cx="4" cy="3" r="1.1"/><circle cx="10" cy="3" r="1.1"/><circle cx="4" cy="7" r="1.1"/><circle cx="10" cy="7" r="1.1"/><circle cx="4" cy="11" r="1.1"/><circle cx="10" cy="11" r="1.1"/></svg></button>` : '';
+  const cdHoursTag = (pri !== 3) ? ` · ⏳${t.countdownHours || DEFAULT_COUNTDOWN_HOURS}h` : '';
   return `<div class="task-item pri-${pri} ${t.done ? 'done' : ''}" data-task-id="${t.id}">
     <button class="check ${t.done ? 'checked' : ''}" data-toggle-task="${t.id}"></button>
     ${drag}
     <div class="task-main">
       <div class="task-title">${esc(t.title)}</div>
-      <div class="task-meta"><span class="pri-${pri}">${PRIORITY_NAME[pri]}优先</span> · ${esc(t.category)} · ${t.minDur}~${t.maxDur} 分${cdHTML ? ' · ' + cdHTML : ''}</div>
+      <div class="task-meta"><span class="pri-${pri}">${PRIORITY_NAME[pri]}优先</span> · ${esc(t.category)} · ${t.minDur}~${t.maxDur} 分${cdHoursTag}${cdHTML ? ' · ' + cdHTML : ''}</div>
     </div>
     <div class="task-actions">
       <button class="icon-btn" data-edit="${t.id}">✎</button>
@@ -1130,7 +1133,6 @@ function renderLog() {
   renderWeeklyReport();
 }
 
-/* ---------- 近 7 天得分柱状图 ---------- */
 function renderWeekChart() {
   const box = $('#weekChart');
   if (!box) return;
@@ -1168,7 +1170,6 @@ function renderWeekChart() {
   }).join('');
 }
 
-/* ---------- 签到记录 ---------- */
 function renderCheckinStats() {
   const box = $('#checkinStats');
   if (!box) return;
@@ -1257,7 +1258,6 @@ function renderCheckinStats() {
     return;
   }
 
-  // 年视图
   const y = todayDate.getFullYear();
   let html = '';
   const monthStats = [];
@@ -1295,7 +1295,6 @@ function renderCheckinStats() {
   box.innerHTML = html;
 }
 
-/* ---------- 分数日历 ---------- */
 function renderScoreCalendar() {
   const box = $('#scoreCalendar');
   if (!box) return;
@@ -1357,7 +1356,6 @@ function renderScoreCalendar() {
     return;
   }
 
-  // 年视图
   const y = todayDate.getFullYear();
   let html = `<div class="ck-year">`;
   for (let m = 0; m < 12; m++) {
@@ -1380,7 +1378,6 @@ function renderScoreCalendar() {
   box.innerHTML = html;
 }
 
-/* ---------- 周报 ---------- */
 function renderWeeklyReport() {
   const box = $('#weeklyReport');
   if (!box) return;
@@ -1626,16 +1623,28 @@ function addTask() {
   let maxDur = Number($('#taskMax').value) || 60;
   if (minDur < 1) minDur = 1;
   if (maxDur < minDur) maxDur = minDur;
+
+  const pri = Number($('#taskPri').value) || 2;
+  let countdownHours = DEFAULT_COUNTDOWN_HOURS;
+  if (pri !== 3) {
+    const v = Number($('#taskCountdown').value);
+    countdownHours = Number.isFinite(v) && v >= 1 ? Math.min(9999, Math.round(v)) : DEFAULT_COUNTDOWN_HOURS;
+  }
+
   state.tasks.push({
     id: uid(), title, category: $('#taskCat').value,
-    priority: Number($('#taskPri').value) || 2, minDur, maxDur,
+    priority: pri, minDur, maxDur,
+    countdownHours,
     done: false, doneAt: null, createdAt: Date.now(),
     expiredPenalized: false,
   });
   save();
-  $('#taskTitle').value = ''; $('#taskMin').value = 5; $('#taskMax').value = 60;
+  $('#taskTitle').value = '';
+  $('#taskMin').value = 5;
+  $('#taskMax').value = 60;
+  $('#taskCountdown').value = 72;
   renderTasks();
-  toast('任务已添加 · 72h 倒计时开始');
+  toast('任务已添加 · 倒计时开始');
 }
 
 function deleteTask(id) {
@@ -1659,6 +1668,8 @@ function openEditTask(id) {
   const task = state.tasks.find(t => t.id === id);
   if (!task) return;
   const pri = task.priority || 2;
+  const cdHours = task.countdownHours || DEFAULT_COUNTDOWN_HOURS;
+
   const modal = document.createElement('div');
   modal.className = 'modal-mask';
   modal.innerHTML = `<div class="modal" style="text-align:left">
@@ -1685,13 +1696,31 @@ function openEditTask(id) {
       <span class="dim">~</span>
       <input id="editMax" type="number" class="input" value="${task.maxDur}" min="1" style="flex:1;margin:0">
     </div>
+    <div id="editCountdownRow" style="margin-top:12px;${pri === 3 ? 'display:none' : ''}">
+      <div class="modal-label">倒计时（小时）</div>
+      <input id="editCountdown" type="number" class="input"
+             value="${cdHours}" min="1" max="9999" style="margin:0">
+      <div class="sub dim" style="font-size:10px;margin-top:4px">高优先级固定 72 小时</div>
+    </div>
     <div class="row gap" style="margin-top:18px">
       <button class="btn ghost" data-m="cancel">取消</button>
       <button class="btn primary" data-m="save">保存</button>
     </div>
   </div>`;
   document.body.appendChild(modal);
-  setTimeout(() => { const el = modal.querySelector('#editTitle'); if (el) { el.focus(); el.select(); } }, 50);
+
+  setTimeout(() => {
+    const el = modal.querySelector('#editTitle');
+    if (el) { el.focus(); el.select(); }
+  }, 50);
+
+  // 优先级切换时显示/隐藏倒计时
+  modal.querySelector('#editPri').addEventListener('change', e => {
+    const isHigh = Number(e.target.value) === 3;
+    const row = modal.querySelector('#editCountdownRow');
+    if (row) row.style.display = isHigh ? 'none' : '';
+  });
+
   modal.addEventListener('click', e => {
     if (e.target === modal) { modal.remove(); return; }
     const btn = e.target.closest('[data-m]');
@@ -1708,6 +1737,18 @@ function openEditTask(id) {
       task.category = modal.querySelector('#editCat').value;
       task.priority = Number(modal.querySelector('#editPri').value) || 2;
       task.minDur = minDur; task.maxDur = maxDur;
+
+      // 倒计时：高优先级固定 72，中/低从输入框读
+      if (task.priority === 3) {
+        task.countdownHours = DEFAULT_COUNTDOWN_HOURS;
+      } else {
+        const cdInput = modal.querySelector('#editCountdown');
+        let v = Number(cdInput && cdInput.value);
+        if (!Number.isFinite(v) || v < 1) v = DEFAULT_COUNTDOWN_HOURS;
+        if (v > 9999) v = 9999;
+        task.countdownHours = Math.round(v);
+      }
+
       const day = getDay();
       day.blocks.forEach(b => {
         if (b.taskId === id && b.status === 'pending') {
@@ -2148,7 +2189,7 @@ async function findExistingGist() {
 async function createGist() {
   const body = {
     description: GIST_DESC, public: false,
-    files: { 'rollday.json': { content: JSON.stringify({ version: 5, updatedAt: Date.now(), state }, null, 2) } },
+    files: { 'rollday.json': { content: JSON.stringify({ version: 6, updatedAt: Date.now(), state }, null, 2) } },
   };
   const data = await ghFetch('/gists', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -2162,7 +2203,7 @@ async function syncPush() {
   syncing = true;
   try {
     setSyncStatus('上传中…', 'busy');
-    const content = JSON.stringify({ version: 5, updatedAt: Date.now(), state }, null, 2);
+    const content = JSON.stringify({ version: 6, updatedAt: Date.now(), state }, null, 2);
     const body = { files: { 'rollday.json': { content } } };
     if (syncState.gistId) {
       await ghFetch(`/gists/${syncState.gistId}`, {
@@ -2359,6 +2400,12 @@ $('#calTabs').addEventListener('click', e => {
 
 $('#btnAddTask').addEventListener('click', addTask);
 $('#taskTitle').addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
+
+// 添加任务时：高优先级隐藏倒计时输入框
+$('#taskPri').addEventListener('change', e => {
+  const isHigh = Number(e.target.value) === 3;
+  $('#taskCountdownRow').style.display = isHigh ? 'none' : '';
+});
 
 $$('.tabbar button').forEach(btn => {
   btn.addEventListener('click', () => {

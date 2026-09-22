@@ -1,5 +1,5 @@
 /* RollDay Service Worker */
-const CACHE_NAME = 'rollday-v9';
+const CACHE_NAME = 'rollday-v10';
 
 // 需要离线缓存的核心文件
 const CORE_ASSETS = [
