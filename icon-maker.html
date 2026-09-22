@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>RollDay 图标生成器</title>
+<style>
+  body{
+    margin:0;padding:60px 20px;background:#0d0f14;color:#e6e9f0;
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    text-align:center;min-height:100vh;
+  }
+  h1{margin:0 0 10px;font-size:22px}
+  p{color:#8b93a7;font-size:14px;margin:0 0 30px}
+  button{
+    background:linear-gradient(135deg,#5b7cfa,#7c5bfa);color:#fff;border:none;
+    border-radius:12px;padding:14px 28px;font-size:15px;font-weight:700;
+    cursor:pointer;margin:6px;font-family:inherit;
+  }
+  button:active{transform:scale(.97)}
+  #preview{margin-top:40px;display:flex;gap:20px;justify-content:center;align-items:center;flex-wrap:wrap}
+  #preview canvas{border-radius:22%;box-shadow:0 20px 50px -15px rgba(92,124,250,.6)}
+  .hint{margin-top:30px;font-size:13px;color:#5b6376;line-height:1.7}
+</style>
+</head>
+<body>
+  <h1>🎲 RollDay 图标生成器</h1>
+  <p>点击下方按钮，浏览器会自动下载 PNG 图标</p>
+
+  <button onclick="download(192)">下载 icon-192.png</button>
+  <button onclick="download(512)">下载 icon-512.png</button>
+
+  <div id="preview"></div>
+
+  <div class="hint">
+    下载后把两个 PNG 放到和 index.html 同一个文件夹里<br>
+    文件名必须是 icon-192.png 和 icon-512.png
+  </div>
+
+<script>
+function make(size){
+  const c = document.createElement('canvas');
+  c.width = c.height = size;
+  const ctx = c.getContext('2d');
+
+  // 渐变圆角背景
+  const g = ctx.createLinearGradient(0, 0, size, size);
+  g.addColorStop(0, '#5b7cfa');
+  g.addColorStop(1, '#7c5bfa');
+  const r = size * 0.24;
+  ctx.beginPath();
+  ctx.moveTo(r, 0);
+  ctx.arcTo(size, 0, size, size, r);
+  ctx.arcTo(size, size, 0, size, r);
+  ctx.arcTo(0, size, 0, 0, r);
+  ctx.arcTo(0, 0, size, 0, r);
+  ctx.closePath();
+  ctx.fillStyle = g;
+  ctx.fill();
+
+  // 骰子 emoji
+  ctx.font = `${Math.round(size * 0.6)}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('🎲', size / 2, size / 2 + size * 0.04);
+
+  return c;
+}
+
+function download(size){
+  const c = make(size);
+  c.toBlob(b => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(b);
+    a.download = `icon-${size}.png`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }, 'image/png');
+}
+
+// 页面加载时生成预览
+window.addEventListener('load', () => {
+  [192, 512].forEach(s => {
+    const c = make(s);
+    c.style.width = s / 2 + 'px';
+    c.style.height = s / 2 + 'px';
+    document.getElementById('preview').appendChild(c);
+  });
+});
+</script>
+</body>
+</html>
