@@ -144,7 +144,7 @@ select.input:focus{background-color:#fff}
 .roll-val{font-weight:800;font-variant-numeric:tabular-nums}
 .pos{color:#10b981}.neg{color:#ef4444}
 .chart{display:flex;align-items:flex-end;justify-content:space-between;height:120px;gap:6px}
-.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;min-width:0}
 .bar-val{font-size:10px;height:14px;color:#9ca3af;font-variant-numeric:tabular-nums}
 .bar-track{flex:1;width:100%;display:flex;align-items:flex-end}
 .bar-fill-v{width:100%;border-radius:6px 6px 3px 3px;min-height:3px;transition:height .3s}
@@ -211,6 +211,155 @@ select.input:focus{background-color:#fff}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 a{color:#5b7cfa;text-decoration:none}
 a:hover{text-decoration:underline}
+
+/* 签到卡 */
+.checkin-row{display:flex;align-items:center;gap:14px}
+.checkin-fire{
+  width:52px;height:52px;flex:none;border-radius:14px;
+  background:#f3f4f6;color:#f59e0b;
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+}
+.checkin-info{flex:1;min-width:0}
+.checkin-days{font-size:22px;font-weight:900;color:#1a1d23;line-height:1.1}
+.checkin-days small{font-size:12px;color:#9ca3af;font-weight:600;margin-left:4px}
+.checkin-next{font-size:11px;color:#6b7280;margin-top:4px}
+.checkin-rewards{display:flex;gap:4px;margin-top:12px;flex-wrap:wrap}
+.checkin-pill{
+  font-size:10px;padding:3px 7px;border-radius:99px;font-weight:700;
+  background:#f3f4f6;color:#6b7280;border:1px solid #e5e7eb;
+}
+.checkin-pill.done{background:#5b7cfa;color:#fff;border-color:#5b7cfa}
+.checkin-pill.today{box-shadow:0 0 0 2px rgba(91,124,250,.3)}
+
+/* 商店 */
+.shop-balance{
+  background:linear-gradient(135deg,#ecfdf5,#f0fdf4);
+  border:1px solid #a7f3d0;border-radius:16px;padding:18px 16px;
+  margin:0 12px 12px;text-align:center;
+}
+.shop-balance .label{font-size:11px;color:#047857;font-weight:700;letter-spacing:2px}
+.shop-balance .val{font-size:44px;font-weight:900;color:#065f46;line-height:1.05;margin:6px 0;font-variant-numeric:tabular-nums}
+.shop-balance .hint{font-size:12px;color:#047857;opacity:.8}
+
+.chip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.chip{
+  padding:10px 6px;border-radius:12px;background:#f9fafb;border:1.5px solid #e5e7eb;
+  font-size:12px;font-weight:700;cursor:pointer;text-align:center;color:#374151;
+  transition:.15s;font-family:inherit;
+}
+.chip:active{transform:scale(.96)}
+.chip.active{background:linear-gradient(135deg,#5b7cfa,#7c5bfa);color:#fff;border-color:transparent;box-shadow:0 4px 12px -4px rgba(92,124,250,.6)}
+.chip .e{display:block;font-size:18px;line-height:1;margin-bottom:3px}
+
+.cost-box{
+  background:#f9fafb;border-radius:12px;padding:14px;margin-top:8px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.cost-box .cost-label{font-size:12px;color:#6b7280;font-weight:600}
+.cost-box .cost-num{font-size:26px;font-weight:900;color:#5b7cfa;font-variant-numeric:tabular-nums}
+.cost-box .cost-num.low{color:#ef4444}
+
+.exchange-item{
+  display:flex;align-items:center;gap:10px;padding:10px 0;
+  border-bottom:1px solid #f3f4f6;font-size:13px;
+}
+.exchange-item:last-child{border-bottom:none}
+.exchange-emoji{font-size:20px;flex:none;width:28px;text-align:center}
+.exchange-main{flex:1;min-width:0}
+.exchange-type{font-weight:700;color:#1a1d23;font-size:13px}
+.exchange-meta{font-size:11px;color:#9ca3af;margin-top:2px}
+.exchange-cost{font-weight:900;color:#ef4444;font-variant-numeric:tabular-nums;flex:none}
+
+.tabs{
+  display:flex;gap:4px;background:#f3f4f6;border-radius:10px;padding:3px;
+  margin-bottom:12px;
+}
+.tabs button{
+  flex:1;background:none;border:none;padding:8px 4px;font-size:12px;font-weight:700;
+  color:#6b7280;cursor:pointer;border-radius:8px;font-family:inherit;
+  transition:.15s;
+}
+.tabs button.active{background:#fff;color:#1a1d23;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+
+.ck-summary{display:flex;gap:10px;margin-bottom:14px;}
+.ck-stat{flex:1;background:#f9fafb;border-radius:12px;padding:10px 8px;text-align:center;min-width:0}
+.ck-stat .n{font-size:20px;font-weight:900;color:#1a1d23;font-variant-numeric:tabular-nums;line-height:1}
+.ck-stat .l{font-size:10px;color:#9ca3af;margin-top:4px;font-weight:600}
+
+/* 本周签到格子 */
+.ck-week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;}
+.ck-day{
+  aspect-ratio:1;border-radius:8px;background:#f3f4f6;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:10px;color:#9ca3af;font-weight:700;position:relative;
+  min-width:0;overflow:hidden;
+}
+.ck-day.checked{background:#5b7cfa;color:#fff}
+.ck-day.today{box-shadow:0 0 0 2px rgba(91,124,250,.3)}
+.ck-day .d{font-size:12px;font-weight:800}
+.ck-day .w{font-size:9px;opacity:.7;margin-top:1px}
+
+/* 日历网格通用 */
+.ck-month{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.ck-month-head{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px;}
+.ck-month-head span{text-align:center;font-size:10px;color:#9ca3af;font-weight:700;}
+
+/* 签到日历格子：固定高度，不再撑破 */
+.ck-cell{
+  height:38px;
+  border-radius:8px;
+  background:#f9fafb;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:#9ca3af;font-weight:600;
+  min-width:0;overflow:hidden;
+  position:relative;
+}
+.ck-cell.empty{background:transparent}
+.ck-cell.checked{background:#5b7cfa;color:#fff;font-weight:800}
+.ck-cell.today{box-shadow:0 0 0 2px rgba(91,124,250,.3)}
+
+/* 分数日历格子 */
+.cal-cell{
+  height:44px;
+  border-radius:8px;
+  background:#f9fafb;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  padding:2px;min-width:0;overflow:hidden;
+}
+.cal-cell.empty{background:transparent}
+.cal-cell.today{box-shadow:0 0 0 2px rgba(91,124,250,.3)}
+.cal-cell .d{font-size:11px;font-weight:700;color:#9ca3af;line-height:1}
+.cal-cell.has-score .d{color:#1a1d23}
+.cal-cell .sc{
+  font-size:10px;font-weight:900;line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.cal-cell .sc.pos{color:#10b981}
+.cal-cell .sc.neg{color:#ef4444}
+
+/* 年视图 */
+.ck-year{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.ck-month-card{background:#f9fafb;border-radius:12px;padding:10px 8px;text-align:center;}
+.ck-month-card .m{font-size:11px;color:#6b7280;font-weight:700}
+.ck-month-card .cnt{font-size:16px;font-weight:900;color:#1a1d23;margin-top:4px;font-variant-numeric:tabular-nums}
+.ck-month-card .sc{font-size:10px;color:#5b7cfa;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.ck-month-card .tm{font-size:10px;color:#9ca3af;margin-top:1px;font-variant-numeric:tabular-nums}
+
+/* 周视图（分数日历） */
+.cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-day{background:#f9fafb;border-radius:10px;padding:8px 4px;text-align:center;min-width:0;overflow:hidden}
+.cal-day.today{box-shadow:0 0 0 2px rgba(91,124,250,.3)}
+.cal-day .wd{font-size:10px;color:#9ca3af;font-weight:700}
+.cal-day .dt{font-size:14px;font-weight:800;color:#1a1d23;margin:2px 0}
+.cal-day .sc{font-size:11px;font-weight:900;font-variant-numeric:tabular-nums}
+.cal-day .tm{font-size:9px;color:#9ca3af;margin-top:1px}
+
+/* 周报 */
+.wk-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.wk-stat{background:#f9fafb;border-radius:12px;padding:12px;}
+.wk-stat .lbl{font-size:11px;color:#6b7280;font-weight:600;margin-bottom:6px}
+.wk-stat .val{font-size:18px;font-weight:900;color:#1a1d23;font-variant-numeric:tabular-nums;line-height:1.1}
+.wk-stat .sub{font-size:10px;color:#9ca3af;margin-top:3px}
 </style>
 </head>
 <body>
@@ -220,7 +369,7 @@ a:hover{text-decoration:underline}
     <div class="logo">🎲 RollDay</div>
     <div>
       <div class="score" id="scoreVal">0</div>
-      <div class="score-sub" id="scoreSub">今日分</div>
+      <div class="score-sub" id="scoreSub">余额</div>
     </div>
   </header>
 
@@ -269,17 +418,46 @@ a:hover{text-decoration:underline}
 
     <section id="view-log" class="view">
       <div class="card">
-        <div class="card-title">近 7 天得分</div>
+        <div class="card-title">📊 近 7 天得分</div>
         <div id="weekChart" class="chart"></div>
       </div>
+
+      <div class="card">
+        <div class="card-title">📅 签到记录</div>
+        <div class="tabs" id="ckTabs">
+          <button data-ck="week" class="active">本周</button>
+          <button data-ck="month">本月</button>
+          <button data-ck="year">今年</button>
+        </div>
+        <div id="checkinStats"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🗓️ 分数日历</div>
+        <div class="tabs" id="calTabs">
+          <button data-cal="week" class="active">本周</button>
+          <button data-cal="month">本月</button>
+          <button data-cal="year">今年</button>
+        </div>
+        <div id="scoreCalendar"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📈 本周周报</div>
+        <div id="weeklyReport"></div>
+      </div>
+
       <div class="card">
         <div class="card-title">今日流水</div>
         <div id="rollList"></div>
       </div>
     </section>
 
+    <section id="view-shop" class="view">
+      <div id="shopContent"></div>
+    </section>
+
     <section id="view-settings" class="view">
-      <!-- 云同步 -->
       <div class="card">
         <div class="card-title">☁️ 云同步（GitHub Gist）</div>
 
@@ -344,9 +522,38 @@ a:hover{text-decoration:underline}
       </div>
 
       <div class="card">
+        <div class="card-title">惩罚分（自动扣分）</div>
+        <div class="setting-row"><span>任务超 72h</span>
+          <div class="row" style="gap:6px">
+            <input type="number" id="setExpireMin" min="0"><span class="dim">~</span><input type="number" id="setExpireMax" min="0">
+          </div>
+        </div>
+        <div class="setting-row"><span>中途放弃</span>
+          <div class="row" style="gap:6px">
+            <input type="number" id="setAbortMin" min="0"><span class="dim">~</span><input type="number" id="setAbortMax" min="0">
+          </div>
+        </div>
+        <div class="setting-row"><span>断签惩罚</span>
+          <div class="row" style="gap:6px">
+            <input type="number" id="setBreakMin" min="0"><span class="dim">~</span><input type="number" id="setBreakMax" min="0">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">分数商店</div>
+        <div class="setting-row"><span>每分钟娱乐消耗分数</span>
+          <input type="number" id="setExchangeRate" min="1" step="1">
+        </div>
+        <div class="sub dim" style="padding:6px 0 0;font-size:11px">
+          默认 5：5 分 = 1 分钟娱乐时间
+        </div>
+      </div>
+
+      <div class="card">
         <div class="card-title">负分机制</div>
         <div class="setting-row"><span>启用负分</span><input type="checkbox" id="setNegEnabled"></div>
-        <div class="setting-row"><span>每日负分上限</span><input type="number" id="setNegCap" min="0"></div>
+        <div class="setting-row"><span>每日惩罚分上限</span><input type="number" id="setNegCap" min="0"></div>
         <div class="setting-row"><span>每日重摇次数</span><input type="number" id="setReroll" min="0"></div>
       </div>
 
@@ -354,6 +561,9 @@ a:hover{text-decoration:underline}
         <div class="card-title">作息目标</div>
         <div class="setting-row"><span>起床目标</span><input type="time" id="setWake"></div>
         <div class="setting-row"><span>入睡目标</span><input type="time" id="setSleep"></div>
+        <div class="sub dim" style="padding:6px 0 0;font-size:11px">
+          每日数据凌晨 5 点刷新
+        </div>
       </div>
 
       <div class="card">
@@ -375,6 +585,7 @@ a:hover{text-decoration:underline}
   <nav class="tabbar">
     <button data-view="today" class="active"><span class="tb-ico">🎲</span>今日</button>
     <button data-view="tasks"><span class="tb-ico">📋</span>任务池</button>
+    <button data-view="shop"><span class="tb-ico">🛍️</span>商店</button>
     <button data-view="log"><span class="tb-ico">📈</span>记录</button>
     <button data-view="settings"><span class="tb-ico">⚙️</span>设置</button>
   </nav>
@@ -382,10 +593,9 @@ a:hover{text-decoration:underline}
 
 <script>
 /* =========================================================
-   RollDay · 骰子日程（云同步版 + 暂停功能）
+   RollDay · 骰子日程
    ========================================================= */
 
-/* ---------- 工具 ---------- */
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
@@ -398,12 +608,30 @@ const randInt = (min, max) => {
   if (max < min) max = min;
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+
+/* ---------- 每日数据凌晨 5 点刷新 ---------- */
+const SHIFT_HOURS = 5;
+const SHIFT_MS = SHIFT_HOURS * 3600 * 1000;
 const dateKey = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-const todayKey = () => dateKey(new Date());
+const todayKey = () => dateKey(new Date(Date.now() - SHIFT_MS));
+const yesterdayKey = () => dateKey(new Date(Date.now() - SHIFT_MS - 86400000));
+
 const fmtClock = ts => { const d = new Date(ts); return `${pad(d.getHours())}:${pad(d.getMinutes())}`; };
 const fmtTimer = sec => {
   const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
   return h ? `${h}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
+};
+const fmtDuration = ms => {
+  const total = Math.round(ms / 60000);
+  if (total < 60) return total + ' 分';
+  const h = Math.floor(total / 60), m = total % 60;
+  return m > 0 ? `${h} 时 ${m} 分` : `${h} 时`;
+};
+const fmtDurationShort = ms => {
+  const total = Math.round(ms / 60000);
+  if (total < 60) return total + 'm';
+  const h = Math.floor(total / 60), m = total % 60;
+  return m > 0 ? `${h}h${m}m` : `${h}h`;
 };
 const fmtRelative = ts => {
   if (!ts) return '—';
@@ -413,8 +641,16 @@ const fmtRelative = ts => {
   if (diff < 86400000) return `${Math.floor(diff / 3600000)} 小时前`;
   return fmtClock(ts) + ' ' + new Date(ts).toLocaleDateString('zh-CN');
 };
+const daysBetween = (aKey, bKey) => {
+  const a = new Date(aKey + 'T00:00:00');
+  const b = new Date(bKey + 'T00:00:00');
+  return Math.round((b - a) / 86400000);
+};
+const fmtHM = minutes => {
+  const h = Math.floor(minutes / 60), m = Math.round(minutes % 60);
+  return `${pad(h)}:${pad(m)}`;
+};
 
-/* ---------- 常量 ---------- */
 const STORAGE_KEY = 'rollday.v2';
 const OLD_STORAGE_KEY = 'rollday.v1';
 const SYNC_KEY = 'rollday.sync.v1';
@@ -422,6 +658,14 @@ const CATEGORIES = ['脑力', '体力', '创意', '杂事', '社交'];
 const PRIORITY_NAME = { 1: '低', 2: '中', 3: '高' };
 const COUNTDOWN_MS = 72 * 3600 * 1000;
 const GIST_DESC = 'RollDay 数据同步';
+const ENTERTAINMENTS = [
+  { key: 'tv',      name: '看电视',   emoji: '📺' },
+  { key: 'game',    name: '玩游戏',   emoji: '🎮' },
+  { key: 'xhs',     name: '刷小红书', emoji: '📱' },
+  { key: 'douyin',  name: '刷抖音',   emoji: '🎵' },
+  { key: 'novel',   name: '看小说',   emoji: '📖' },
+  { key: 'other',   name: '其他',     emoji: '✨' },
+];
 
 const DEFAULT_SETTINGS = {
   workMin: 5, workMax: 60,
@@ -429,6 +673,10 @@ const DEFAULT_SETTINGS = {
   endRollMin: 1, endRollMax: 50,
   goodSleepMin: 100, goodSleepMax: 300,
   badSleepMin: 1, badSleepMax: 100,
+  expirePenaltyMin: 10, expirePenaltyMax: 50,
+  abortPenaltyMin: 5, abortPenaltyMax: 30,
+  breakStreakPenaltyMin: 20, breakStreakPenaltyMax: 80,
+  exchangeRate: 5,
   enableNegative: true,
   negativeDailyCap: 200,
   rerollLimit: 3,
@@ -436,13 +684,18 @@ const DEFAULT_SETTINGS = {
   sleepTarget: '23:00',
 };
 
-/* ---------- 状态 ---------- */
 let state = loadState();
 
 function normalizeState(s) {
   s.settings = { ...DEFAULT_SETTINGS, ...(s.settings || {}) };
   s.tasks = Array.isArray(s.tasks) ? s.tasks : [];
   s.days = (s.days && typeof s.days === 'object') ? s.days : {};
+  s.exchanges = Array.isArray(s.exchanges) ? s.exchanges : [];
+  if (!s.checkin || typeof s.checkin !== 'object') {
+    s.checkin = { lastDate: '', streak: 0, brokenDates: [] };
+  }
+  if (!Array.isArray(s.checkin.brokenDates)) s.checkin.brokenDates = [];
+
   const now = Date.now();
   s.tasks.forEach(t => {
     if (typeof t.done !== 'boolean') t.done = false;
@@ -451,8 +704,8 @@ function normalizeState(s) {
     if (!t.maxDur) t.maxDur = 60;
     if (!t.category) t.category = '脑力';
     if (!t.createdAt) t.createdAt = now;
+    if (t.expiredPenalized === undefined) t.expiredPenalized = false;
   });
-  // 给 block 补暂停字段
   Object.values(s.days).forEach(day => {
     if (Array.isArray(day.blocks)) {
       day.blocks.forEach(b => {
@@ -473,7 +726,11 @@ function loadState() {
     }
     if (raw) return normalizeState(JSON.parse(raw));
   } catch (e) { console.warn('[RollDay] load failed', e); }
-  return { settings: { ...DEFAULT_SETTINGS }, tasks: [], days: {} };
+  return {
+    settings: { ...DEFAULT_SETTINGS }, tasks: [], days: {},
+    checkin: { lastDate: '', streak: 0, brokenDates: [] },
+    exchanges: [],
+  };
 }
 
 let syncState = loadSync();
@@ -483,10 +740,8 @@ function loadSync() {
     if (raw) {
       const s = JSON.parse(raw);
       return {
-        token: s.token || '',
-        gistId: s.gistId || '',
-        enabled: !!s.enabled,
-        lastSyncAt: s.lastSyncAt || 0,
+        token: s.token || '', gistId: s.gistId || '',
+        enabled: !!s.enabled, lastSyncAt: s.lastSyncAt || 0,
       };
     }
   } catch (e) {}
@@ -496,13 +751,12 @@ function persistSync() {
   try { localStorage.setItem(SYNC_KEY, JSON.stringify(syncState)); } catch (e) {}
 }
 
-/* ---------- 保存 ---------- */
 let saveTimer = null, pushTimer = null;
 function save(opts = {}) {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-    catch (e) { console.warn('[RollDay] save failed', e); }
+    catch (e) {}
     if (syncState.enabled && syncState.token && !opts.skipCloud) {
       clearTimeout(pushTimer);
       pushTimer = setTimeout(() => syncPush().catch(() => {}), 2500);
@@ -510,7 +764,6 @@ function save(opts = {}) {
   }, 60);
 }
 
-/* ---------- 天 ---------- */
 function getDay(key = todayKey()) {
   let d = state.days[key];
   if (!d) d = state.days[key] = { blocks: [], rolls: [], rerolls: 0, sleep: { wake: null, sleep: null } };
@@ -521,16 +774,25 @@ function getDay(key = todayKey()) {
   return d;
 }
 
-/* ---------- 分数 ---------- */
 function calcScore(day) {
   const st = state.settings;
-  let pos = 0, neg = 0;
+  let pos = 0, penalty = 0, spend = 0;
   for (const r of day.rolls) {
-    if (r.value >= 0) pos += r.value; else neg += -r.value;
+    if (r.value >= 0) pos += r.value;
+    else if (r.type === 'exchange') spend += -r.value;
+    else penalty += -r.value;
   }
-  if (!st.enableNegative) neg = 0;
-  else neg = Math.min(neg, st.negativeDailyCap);
-  return pos - neg;
+  if (!st.enableNegative) penalty = 0;
+  else penalty = Math.min(penalty, st.negativeDailyCap);
+  return pos - penalty - spend;
+}
+
+function getBalance() {
+  let sum = 0;
+  Object.values(state.days).forEach(day => {
+    day.rolls.forEach(r => sum += r.value);
+  });
+  return sum;
 }
 
 function pushRoll(type, value, label) {
@@ -539,19 +801,6 @@ function pushRoll(type, value, label) {
   save();
 }
 
-function streak() {
-  let n = 0;
-  const d = new Date();
-  if (!getDay().blocks.some(b => b.status === 'done')) d.setDate(d.getDate() - 1);
-  for (let i = 0; i < 3650; i++) {
-    const day = state.days[dateKey(d)];
-    if (day && day.blocks.some(b => b.status === 'done')) { n++; d.setDate(d.getDate() - 1); }
-    else break;
-  }
-  return n;
-}
-
-/* ---------- 72h 倒计时 ---------- */
 function formatCountdown(task) {
   if (!task.createdAt) return null;
   const left = (task.createdAt + COUNTDOWN_MS) - Date.now();
@@ -574,7 +823,6 @@ function formatCountdown(task) {
   return { text, cls };
 }
 
-/* ---------- 工作时长（扣除暂停） ---------- */
 function getElapsedMs(block) {
   if (!block.actualStart) return 0;
   const end = block.actualEnd || Date.now();
@@ -584,24 +832,127 @@ function getElapsedMs(block) {
   return Math.max(0, total);
 }
 
+function getDayStats(key) {
+  const dd = state.days[key];
+  if (!dd) return { score: 0, workMs: 0, checked: false, doneBlocks: 0 };
+  let workMs = 0, checked = false, doneBlocks = 0;
+  (dd.blocks || []).forEach(b => {
+    if (b.status === 'done') {
+      doneBlocks++;
+      workMs += getElapsedMs(b);
+      if (b.startRoll != null && b.endRoll != null) checked = true;
+    }
+  });
+  return { score: calcScore(dd), workMs, checked, doneBlocks };
+}
+
+/* ---------- 签到 ---------- */
+function tryCheckin() {
+  const today = todayKey();
+  const checkin = state.checkin;
+  if (checkin.lastDate === today) return false;
+
+  const day = getDay();
+  const complete = day.blocks.some(b =>
+    b.status === 'done' && b.startRoll !== null && b.startRoll !== undefined &&
+    b.endRoll !== null && b.endRoll !== undefined
+  );
+  if (!complete) return false;
+
+  const yesterday = yesterdayKey();
+  let newStreak;
+  if (checkin.lastDate === yesterday) newStreak = (checkin.streak || 0) + 1;
+  else newStreak = 1;
+
+  const reward = Math.min(newStreak * 10, 70);
+  checkin.lastDate = today;
+  checkin.streak = newStreak;
+
+  pushRoll('checkin', reward, `签到成功 · 连续 ${newStreak} 天`);
+  save();
+  showRollFlash(reward, `签到 · 连续 ${newStreak} 天`);
+  toast(`✅ 签到成功！连续 ${newStreak} 天，+${reward} 分`);
+  return true;
+}
+
+function checkBrokenStreak() {
+  const checkin = state.checkin;
+  if (!checkin.lastDate) return;
+  const today = todayKey();
+  const yesterday = yesterdayKey();
+  if (checkin.lastDate === today || checkin.lastDate === yesterday) return;
+  if (checkin.brokenDates.includes(today)) return;
+
+  const st = state.settings;
+  const penalty = randInt(st.breakStreakPenaltyMin, st.breakStreakPenaltyMax);
+  const gap = daysBetween(checkin.lastDate, today);
+  const oldStreak = checkin.streak || 0;
+
+  checkin.streak = 0;
+  checkin.brokenDates.push(today);
+  if (checkin.brokenDates.length > 30) checkin.brokenDates = checkin.brokenDates.slice(-30);
+
+  if (st.enableNegative && penalty > 0) {
+    pushRoll('breakStreak', -penalty, `断签惩罚（原连续 ${oldStreak} 天，断了 ${gap} 天）`);
+    showRollFlash(-penalty, `断签 · 原连续 ${oldStreak} 天`);
+  }
+  save();
+}
+
+let lastExpireCheck = 0;
+function checkExpiredTasks() {
+  const now = Date.now();
+  if (now - lastExpireCheck < 30000) return;
+  lastExpireCheck = now;
+
+  const st = state.settings;
+  let count = 0, totalPenalty = 0;
+  state.tasks.forEach(t => {
+    if (t.done || t.expiredPenalized) return;
+    if (!t.createdAt) return;
+    if (now <= t.createdAt + COUNTDOWN_MS) return;
+    if (!st.enableNegative) { t.expiredPenalized = true; return; }
+    const penalty = randInt(st.expirePenaltyMin, st.expirePenaltyMax);
+    if (penalty > 0) {
+      pushRoll('expired', -penalty, `任务「${t.title}」超过 72 小时未完成`);
+      totalPenalty += penalty;
+    }
+    t.expiredPenalized = true;
+    count++;
+  });
+  if (count > 0) {
+    save();
+    if (totalPenalty > 0) toast(`⏰ ${count} 个任务超时，共扣 ${totalPenalty} 分`);
+  }
+}
+
 /* =========================================================
    渲染
    ========================================================= */
+let ckRange = 'week';
+let calRange = 'week';
+
 function render() {
   renderHeader();
   renderToday();
   renderTasks();
   renderLog();
+  renderShop();
   if (getDay().blocks.some(b => b.status === 'active')) startTick();
 }
 
 function renderHeader() {
-  const score = calcScore(getDay());
+  const balance = getBalance();
+  const todayScore = calcScore(getDay());
   const el = $('#scoreVal');
-  el.textContent = (score > 0 ? '+' : '') + score;
-  el.className = 'score ' + (score > 0 ? 'pos' : score < 0 ? 'neg' : '');
-  const s = streak();
-  $('#scoreSub').textContent = s > 0 ? `今日分 · 连续 ${s} 天` : '今日分';
+  el.textContent = (balance > 0 ? '+' : '') + balance;
+  el.className = 'score ' + (balance > 0 ? 'pos' : balance < 0 ? 'neg' : '');
+
+  const s = state.checkin.streak || 0;
+  const parts = [];
+  if (s > 0) parts.push(`🔥 连续 ${s} 天`);
+  parts.push(`今日 ${todayScore >= 0 ? '+' : ''}${todayScore}`);
+  $('#scoreSub').textContent = parts.join(' · ');
 }
 
 function renderToday() {
@@ -654,6 +1005,8 @@ function renderToday() {
     </div>`;
   }
 
+  html += renderCheckinCard();
+
   const rest = day.blocks.filter(b => b.status !== 'active');
   if (rest.length) {
     const dc = rest.filter(b => b.status === 'done').length;
@@ -692,6 +1045,37 @@ function renderToday() {
   </div>`;
 
   $('#todayContent').innerHTML = html;
+}
+
+function renderCheckinCard() {
+  const c = state.checkin;
+  const today = todayKey();
+  const doneToday = c.lastDate === today;
+  const streak = c.streak || 0;
+
+  let pills = '';
+  for (let i = 1; i <= 7; i++) {
+    const isDone = streak >= i;
+    const isToday = (streak === i) && doneToday;
+    pills += `<span class="checkin-pill ${isDone ? 'done' : ''} ${isToday ? 'today' : ''}">${i * 10}</span>`;
+  }
+
+  let subtitle;
+  if (doneToday) subtitle = `已签到 · 明天继续可 +${Math.min((streak + 1) * 10, 70)} 分`;
+  else if (streak > 0) subtitle = `今天还没签到 · 完成一次工作块即可 +${Math.min((streak + 1) * 10, 70)} 分`;
+  else subtitle = '今天还没签到 · 完成一次完整工作块即可 +10 分';
+
+  return `<div class="card">
+    <div class="card-title">🔥 签到</div>
+    <div class="checkin-row">
+      <div class="checkin-fire">${doneToday ? '🔥' : '💤'}</div>
+      <div class="checkin-info">
+        <div class="checkin-days">${streak}<small>天连续</small></div>
+        <div class="checkin-next">${subtitle}</div>
+      </div>
+    </div>
+    <div class="checkin-rewards">${pills}</div>
+  </div>`;
 }
 
 function renderTasks() {
@@ -740,19 +1124,496 @@ function renderLog() {
       </div>`).join('')
     : `<div class="dim center" style="padding:20px 0;font-size:13px">今天还没有记录</div>`;
 
+  renderWeekChart();
+  renderCheckinStats();
+  renderScoreCalendar();
+  renderWeeklyReport();
+}
+
+/* ---------- 近 7 天得分柱状图 ---------- */
+function renderWeekChart() {
+  const box = $('#weekChart');
+  if (!box) return;
+
   const days = [];
+  const todayKeyStr = todayKey();
+  const todayDate = new Date(todayKeyStr + 'T00:00:00');
+
   for (let i = 6; i >= 0; i--) {
-    const d = new Date(); d.setDate(d.getDate() - i);
-    const dd = state.days[dateKey(d)];
-    days.push({ label: '日一二三四五六'[d.getDay()], score: dd ? calcScore(dd) : 0 });
+    const d = new Date(todayDate);
+    d.setDate(d.getDate() - i);
+    const key = dateKey(d);
+    const dd = state.days[key];
+    days.push({
+      label: '日一二三四五六'[d.getDay()],
+      score: dd ? calcScore(dd) : 0,
+      key,
+    });
   }
+
   const maxAbs = Math.max(10, ...days.map(d => Math.abs(d.score)));
-  $('#weekChart').innerHTML = days.map(d => {
+  box.innerHTML = days.map(d => {
     const h = Math.max(3, Math.round(Math.abs(d.score) / maxAbs * 62));
-    return `<div class="bar-col"><div class="bar-val">${d.score || ''}</div>
-      <div class="bar-track"><div class="bar-fill-v ${d.score >= 0 ? 'pos' : 'neg'}" style="height:${h}px"></div></div>
-      <div class="bar-label dim">${d.label}</div></div>`;
+    const isToday = d.key === todayKeyStr;
+    const valStyle = isToday ? 'color:#5b7cfa;font-weight:900' : '';
+    const labelStyle = isToday ? 'color:#5b7cfa;font-weight:900' : '';
+    const barShadow = isToday ? 'box-shadow:0 0 0 2px rgba(91,124,250,.25)' : '';
+    return `<div class="bar-col">
+      <div class="bar-val" style="${valStyle}">${d.score || ''}</div>
+      <div class="bar-track">
+        <div class="bar-fill-v ${d.score >= 0 ? 'pos' : 'neg'}" style="height:${h}px;${barShadow}"></div>
+      </div>
+      <div class="bar-label dim" style="${labelStyle}">${d.label}</div>
+    </div>`;
   }).join('');
+}
+
+/* ---------- 签到记录 ---------- */
+function renderCheckinStats() {
+  const box = $('#checkinStats');
+  if (!box) return;
+  const todayDate = new Date(todayKey() + 'T00:00:00');
+  const todayKeyStr = todayKey();
+
+  if (ckRange === 'week') {
+    const dow = (todayDate.getDay() + 6) % 7;
+    const start = new Date(todayDate);
+    start.setDate(start.getDate() - dow);
+
+    let html = '';
+    const days = [];
+    let checkedCount = 0, totalWork = 0, totalScore = 0;
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(start);
+      d.setDate(d.getDate() + i);
+      const key = dateKey(d);
+      const s = getDayStats(key);
+      if (s.checked) checkedCount++;
+      totalWork += s.workMs;
+      totalScore += s.score;
+      days.push({ d, key, s });
+    }
+
+    html += `<div class="ck-summary">
+      <div class="ck-stat"><div class="n">${checkedCount}/7</div><div class="l">签到天数</div></div>
+      <div class="ck-stat"><div class="n">${fmtDurationShort(totalWork)}</div><div class="l">总工作时长</div></div>
+      <div class="ck-stat"><div class="n" style="color:${totalScore >= 0 ? '#10b981' : '#ef4444'}">${totalScore >= 0 ? '+' : ''}${totalScore}</div><div class="l">总得分</div></div>
+    </div>`;
+
+    html += `<div class="ck-week">`;
+    const wkNames = ['一', '二', '三', '四', '五', '六', '日'];
+    days.forEach((row, i) => {
+      const cls = ['ck-day'];
+      if (row.s.checked) cls.push('checked');
+      if (row.key === todayKeyStr) cls.push('today');
+      html += `<div class="${cls.join(' ')}">
+        <div class="w">${wkNames[i]}</div>
+        <div class="d">${row.d.getDate()}</div>
+      </div>`;
+    });
+    html += `</div>`;
+    box.innerHTML = html;
+    return;
+  }
+
+  if (ckRange === 'month') {
+    const y = todayDate.getFullYear(), m = todayDate.getMonth();
+    const first = new Date(y, m, 1);
+    const total = new Date(y, m + 1, 0).getDate();
+    const dowStart = (first.getDay() + 6) % 7;
+
+    let checkedCount = 0, totalWork = 0, totalScore = 0;
+    const dayStats = {};
+    for (let d = 1; d <= total; d++) {
+      const key = `${y}-${pad(m + 1)}-${pad(d)}`;
+      const s = getDayStats(key);
+      dayStats[key] = s;
+      if (s.checked) checkedCount++;
+      totalWork += s.workMs;
+      totalScore += s.score;
+    }
+
+    let html = `<div class="ck-summary">
+      <div class="ck-stat"><div class="n">${checkedCount}/${total}</div><div class="l">签到天数</div></div>
+      <div class="ck-stat"><div class="n">${fmtDurationShort(totalWork)}</div><div class="l">总工作时长</div></div>
+      <div class="ck-stat"><div class="n" style="color:${totalScore >= 0 ? '#10b981' : '#ef4444'}">${totalScore >= 0 ? '+' : ''}${totalScore}</div><div class="l">总得分</div></div>
+    </div>`;
+
+    html += `<div class="ck-month-head">
+      <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+    </div><div class="ck-month">`;
+
+    for (let i = 0; i < dowStart; i++) html += `<div class="ck-cell empty"></div>`;
+    for (let d = 1; d <= total; d++) {
+      const key = `${y}-${pad(m + 1)}-${pad(d)}`;
+      const s = dayStats[key];
+      const cls = ['ck-cell'];
+      if (s.checked) cls.push('checked');
+      if (key === todayKeyStr) cls.push('today');
+      html += `<div class="${cls.join(' ')}">${d}</div>`;
+    }
+    html += `</div>`;
+    box.innerHTML = html;
+    return;
+  }
+
+  // 年视图
+  const y = todayDate.getFullYear();
+  let html = '';
+  const monthStats = [];
+  let totalChecked = 0, totalWork = 0, totalScore = 0;
+  for (let m = 0; m < 12; m++) {
+    const total = new Date(y, m + 1, 0).getDate();
+    let ck = 0, wk = 0, sc = 0;
+    for (let d = 1; d <= total; d++) {
+      const key = `${y}-${pad(m + 1)}-${pad(d)}`;
+      const s = getDayStats(key);
+      if (s.checked) ck++;
+      wk += s.workMs;
+      sc += s.score;
+    }
+    totalChecked += ck; totalWork += wk; totalScore += sc;
+    monthStats.push({ m: m + 1, ck, wk, sc });
+  }
+
+  html += `<div class="ck-summary">
+    <div class="ck-stat"><div class="n">${totalChecked}</div><div class="l">年度签到</div></div>
+    <div class="ck-stat"><div class="n">${fmtDurationShort(totalWork)}</div><div class="l">年度时长</div></div>
+    <div class="ck-stat"><div class="n" style="color:${totalScore >= 0 ? '#10b981' : '#ef4444'}">${totalScore >= 0 ? '+' : ''}${totalScore}</div><div class="l">年度得分</div></div>
+  </div>`;
+
+  html += `<div class="ck-year">`;
+  monthStats.forEach(m => {
+    html += `<div class="ck-month-card">
+      <div class="m">${m.m}月</div>
+      <div class="cnt">${m.ck}天</div>
+      <div class="sc">${m.sc >= 0 ? '+' : ''}${m.sc}</div>
+      <div class="tm">${fmtDurationShort(m.wk)}</div>
+    </div>`;
+  });
+  html += `</div>`;
+  box.innerHTML = html;
+}
+
+/* ---------- 分数日历 ---------- */
+function renderScoreCalendar() {
+  const box = $('#scoreCalendar');
+  if (!box) return;
+  const todayDate = new Date(todayKey() + 'T00:00:00');
+  const todayKeyStr = todayKey();
+
+  if (calRange === 'week') {
+    const dow = (todayDate.getDay() + 6) % 7;
+    const start = new Date(todayDate);
+    start.setDate(start.getDate() - dow);
+
+    const wkNames = ['一', '二', '三', '四', '五', '六', '日'];
+    let html = `<div class="cal-week">`;
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(start);
+      d.setDate(d.getDate() + i);
+      const key = dateKey(d);
+      const s = getDayStats(key);
+      const cls = ['cal-day'];
+      if (key === todayKeyStr) cls.push('today');
+      const scoreCls = s.score >= 0 ? 'pos' : 'neg';
+      html += `<div class="${cls.join(' ')}">
+        <div class="wd">${wkNames[i]}</div>
+        <div class="dt">${d.getDate()}</div>
+        <div class="sc ${scoreCls}">${s.score !== 0 ? (s.score > 0 ? '+' : '') + s.score : '·'}</div>
+        <div class="tm">${s.workMs > 0 ? fmtDurationShort(s.workMs) : '—'}</div>
+      </div>`;
+    }
+    html += `</div>`;
+    box.innerHTML = html;
+    return;
+  }
+
+  if (calRange === 'month') {
+    const y = todayDate.getFullYear(), m = todayDate.getMonth();
+    const first = new Date(y, m, 1);
+    const total = new Date(y, m + 1, 0).getDate();
+    const dowStart = (first.getDay() + 6) % 7;
+
+    let html = `<div class="ck-month-head">
+      <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+    </div><div class="ck-month">`;
+
+    for (let i = 0; i < dowStart; i++) html += `<div class="cal-cell empty"></div>`;
+    for (let d = 1; d <= total; d++) {
+      const key = `${y}-${pad(m + 1)}-${pad(d)}`;
+      const s = getDayStats(key);
+      const cls = ['cal-cell'];
+      if (s.score !== 0) cls.push('has-score');
+      if (key === todayKeyStr) cls.push('today');
+      const scCls = s.score > 0 ? 'pos' : (s.score < 0 ? 'neg' : '');
+      html += `<div class="${cls.join(' ')}">
+        <div class="d">${d}</div>
+        ${s.score !== 0 ? `<div class="sc ${scCls}">${s.score > 0 ? '+' : ''}${s.score}</div>` : ''}
+      </div>`;
+    }
+    html += `</div>`;
+    box.innerHTML = html;
+    return;
+  }
+
+  // 年视图
+  const y = todayDate.getFullYear();
+  let html = `<div class="ck-year">`;
+  for (let m = 0; m < 12; m++) {
+    const total = new Date(y, m + 1, 0).getDate();
+    let wk = 0, sc = 0;
+    for (let d = 1; d <= total; d++) {
+      const key = `${y}-${pad(m + 1)}-${pad(d)}`;
+      const s = getDayStats(key);
+      wk += s.workMs;
+      sc += s.score;
+    }
+    const isCurrentMonth = (m === todayDate.getMonth());
+    html += `<div class="ck-month-card" style="${isCurrentMonth ? 'box-shadow:0 0 0 2px rgba(91,124,250,.3)' : ''}">
+      <div class="m">${m + 1}月</div>
+      <div class="cnt">${wk > 0 ? fmtDurationShort(wk) : '—'}</div>
+      <div class="sc" style="color:${sc > 0 ? '#10b981' : sc < 0 ? '#ef4444' : '#9ca3af'}">${sc !== 0 ? (sc > 0 ? '+' : '') + sc : '·'}</div>
+    </div>`;
+  }
+  html += `</div>`;
+  box.innerHTML = html;
+}
+
+/* ---------- 周报 ---------- */
+function renderWeeklyReport() {
+  const box = $('#weeklyReport');
+  if (!box) return;
+
+  const todayDate = new Date(todayKey() + 'T00:00:00');
+  const dow = (todayDate.getDay() + 6) % 7;
+  const monday = new Date(todayDate);
+  monday.setDate(monday.getDate() - dow);
+  monday.setHours(0, 0, 0, 0);
+
+  const allStartMins = [];
+  const allEndMins = [];
+  let totalWorkMs = 0;
+  let totalScore = 0;
+  const dailyWorkMs = [];
+
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(monday);
+    d.setDate(d.getDate() + i);
+    const key = dateKey(d);
+    const dd = state.days[key];
+    let dayWork = 0;
+    if (dd && Array.isArray(dd.blocks)) {
+      dd.blocks.forEach(b => {
+        if (b.status === 'done' && b.actualStart && b.actualEnd) {
+          const startD = new Date(b.actualStart);
+          const endD = new Date(b.actualEnd);
+          allStartMins.push(startD.getHours() * 60 + startD.getMinutes());
+          allEndMins.push(endD.getHours() * 60 + endD.getMinutes());
+          const ms = getElapsedMs(b);
+          dayWork += ms;
+          totalWorkMs += ms;
+        }
+      });
+    }
+    dailyWorkMs.push(dayWork);
+    totalScore += getDayStats(key).score;
+  }
+
+  const avgStartMin = allStartMins.length
+    ? allStartMins.reduce((a, b) => a + b, 0) / allStartMins.length
+    : null;
+  const latestEndMin = allEndMins.length ? Math.max(...allEndMins) : null;
+  const maxDayWork = dailyWorkMs.length ? Math.max(...dailyWorkMs) : 0;
+  let maxDayIdx = -1;
+  dailyWorkMs.forEach((ms, i) => { if (ms === maxDayWork && maxDayWork > 0) maxDayIdx = i; });
+  const wkNames = ['一', '二', '三', '四', '五', '六', '日'];
+
+  let html = `<div class="wk-grid">
+    <div class="wk-stat">
+      <div class="lbl">平均开始时间</div>
+      <div class="val">${avgStartMin != null ? fmtHM(avgStartMin) : '—'}</div>
+      <div class="sub">${allStartMins.length} 个工作块</div>
+    </div>
+    <div class="wk-stat">
+      <div class="lbl">总工作时长</div>
+      <div class="val">${totalWorkMs > 0 ? fmtDuration(totalWorkMs) : '—'}</div>
+      <div class="sub">本周累计</div>
+    </div>
+    <div class="wk-stat">
+      <div class="lbl">总计分数</div>
+      <div class="val" style="color:${totalScore >= 0 ? '#10b981' : '#ef4444'}">${totalScore >= 0 ? '+' : ''}${totalScore}</div>
+      <div class="sub">含签到/惩罚</div>
+    </div>
+    <div class="wk-stat">
+      <div class="lbl">最晚结束时间</div>
+      <div class="val">${latestEndMin != null ? fmtHM(latestEndMin) : '—'}</div>
+      <div class="sub">本周最晚</div>
+    </div>
+    <div class="wk-stat" style="grid-column:1 / -1">
+      <div class="lbl">单日最高工作时间</div>
+      <div class="val">${maxDayWork > 0 ? fmtDuration(maxDayWork) : '—'}</div>
+      <div class="sub">${maxDayIdx >= 0 ? `周${wkNames[maxDayIdx]}` : '本周暂无记录'}</div>
+    </div>
+  </div>`;
+
+  box.innerHTML = html;
+}
+
+/* =========================================================
+   商店（5 分 = 1 分钟）
+   ========================================================= */
+let shopPicked = { key: 'tv', customName: '', minutes: 30 };
+
+function renderShop() {
+  const balance = getBalance();
+  const rate = state.settings.exchangeRate || 5;
+  const minutes = shopPicked.minutes;
+  const cost = minutes * rate;
+  const canAfford = cost <= balance && minutes > 0;
+
+  const exchanges = (state.exchanges || []).slice(-20).reverse();
+
+  let html = '';
+
+  html += `<div class="shop-balance">
+    <div class="label">可用余额</div>
+    <div class="val">${balance}</div>
+    <div class="hint">${rate} 分 = 1 分钟娱乐</div>
+  </div>`;
+
+  html += `<div class="card">
+    <div class="card-title">兑换娱乐时间</div>
+
+    <div class="chip-grid">
+      ${ENTERTAINMENTS.map(e => `
+        <button class="chip ${shopPicked.key === e.key ? 'active' : ''}" data-shop-type="${e.key}">
+          <span class="e">${e.emoji}</span>${e.name}
+        </button>
+      `).join('')}
+    </div>
+
+    ${shopPicked.key === 'other' ? `
+      <input id="shopCustomName" class="input" placeholder="输入娱乐类型，例如：看剧、逛街"
+             value="${esc(shopPicked.customName)}" maxlength="20">
+    ` : ''}
+
+    <div class="modal-label" style="margin-top:8px">娱乐时长（分钟）</div>
+    <input id="shopMinutes" class="input" type="number" min="1" max="100"
+           value="${minutes}" style="margin-bottom:4px">
+
+    <div class="row" style="gap:6px;flex-wrap:wrap">
+      ${[10, 20, 30, 60, 100].map(m =>
+        `<button class="btn small ghost" data-shop-min="${m}" style="flex:0 0 auto">${m}分</button>`
+      ).join('')}
+    </div>
+
+    <div class="cost-box">
+      <div>
+        <div class="cost-label">本次需要</div>
+        <div class="cost-num ${canAfford ? '' : 'low'}">${cost} 分</div>
+      </div>
+      <button class="btn primary" id="btnRedeem" ${canAfford ? '' : 'disabled'} style="padding:14px 20px">
+        兑换
+      </button>
+    </div>
+    ${!canAfford && minutes > 0 ? `<div class="sub" style="color:#ef4444;margin-top:8px;text-align:center">分数不足，还差 ${cost - balance} 分</div>` : ''}
+  </div>`;
+
+  if (exchanges.length) {
+    html += `<div class="card">
+      <div class="card-title">兑换记录</div>
+      ${exchanges.map(ex => {
+        const e = ENTERTAINMENTS.find(x => x.key === ex.typeKey) || { emoji: '✨', name: ex.type };
+        return `<div class="exchange-item">
+          <div class="exchange-emoji">${e.emoji}</div>
+          <div class="exchange-main">
+            <div class="exchange-type">${esc(ex.type)}</div>
+            <div class="exchange-meta">${ex.minutes} 分钟 · ${new Date(ex.at).toLocaleString('zh-CN', { month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' })}</div>
+          </div>
+          <div class="exchange-cost">-${ex.cost}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  } else {
+    html += `<div class="card">
+      <div class="card-title">兑换记录</div>
+      <div class="dim center" style="padding:16px 0;font-size:13px">还没有兑换记录</div>
+    </div>`;
+  }
+
+  $('#shopContent').innerHTML = html;
+
+  const minInput = $('#shopMinutes');
+  if (minInput) {
+    minInput.addEventListener('input', () => {
+      let v = Number(minInput.value) || 0;
+      if (v < 0) v = 0;
+      if (v > 100) v = 100;
+      shopPicked.minutes = v;
+      updateShopCost();
+    });
+    minInput.addEventListener('blur', () => {
+      if (shopPicked.minutes < 1) shopPicked.minutes = 1;
+      renderShop();
+    });
+  }
+  const customInput = $('#shopCustomName');
+  if (customInput) {
+    customInput.addEventListener('input', () => {
+      shopPicked.customName = customInput.value;
+    });
+  }
+}
+
+function updateShopCost() {
+  const balance = getBalance();
+  const rate = state.settings.exchangeRate || 5;
+  const cost = shopPicked.minutes * rate;
+  const canAfford = cost <= balance && shopPicked.minutes > 0;
+  const costEl = $('.cost-num');
+  const btn = $('#btnRedeem');
+  if (costEl) {
+    costEl.textContent = cost + ' 分';
+    costEl.className = 'cost-num ' + (canAfford ? '' : 'low');
+  }
+  if (btn) btn.disabled = !canAfford;
+}
+
+function redeem() {
+  const balance = getBalance();
+  const rate = state.settings.exchangeRate || 5;
+  const minutes = Math.max(1, Math.min(100, Number(shopPicked.minutes) || 0));
+  const cost = minutes * rate;
+
+  if (minutes < 1) { toast('时长至少 1 分钟'); return; }
+  if (cost > balance) { toast('分数不足'); return; }
+
+  let typeName;
+  if (shopPicked.key === 'other') {
+    typeName = (shopPicked.customName || '').trim();
+    if (!typeName) { toast('请输入娱乐类型'); return; }
+  } else {
+    typeName = (ENTERTAINMENTS.find(e => e.key === shopPicked.key) || {}).name || '娱乐';
+  }
+
+  if (!confirm(`兑换 ${minutes} 分钟「${typeName}」，消耗 ${cost} 分？`)) return;
+
+  const ex = {
+    id: uid(),
+    typeKey: shopPicked.key,
+    type: typeName,
+    minutes, cost,
+    at: Date.now(),
+  };
+  state.exchanges.push(ex);
+  if (state.exchanges.length > 500) state.exchanges = state.exchanges.slice(-500);
+
+  pushRoll('exchange', -cost, `兑换 ${minutes} 分钟「${typeName}」`);
+  save();
+  showRollFlash(-cost, `兑换 ${minutes} 分钟「${typeName}」`);
+  toast(`✅ 已兑换 ${minutes} 分钟「${typeName}」`);
+  render();
 }
 
 /* =========================================================
@@ -769,6 +1630,7 @@ function addTask() {
     id: uid(), title, category: $('#taskCat').value,
     priority: Number($('#taskPri').value) || 2, minDur, maxDur,
     done: false, doneAt: null, createdAt: Date.now(),
+    expiredPenalized: false,
   });
   save();
   $('#taskTitle').value = ''; $('#taskMin').value = 5; $('#taskMax').value = 60;
@@ -861,7 +1723,6 @@ function openEditTask(id) {
    拖拽排序
    ========================================================= */
 let dragState = null;
-
 function initDragSort() {
   const list = $('#taskListActive');
   if (!list) return;
@@ -1019,7 +1880,6 @@ function endBlock(id) {
   const b = day.blocks.find(x => x.id === id);
   if (!b || b.status !== 'active') return;
 
-  // 如果暂停中，先结算暂停时长
   if (b.pausedAt) {
     b.totalPaused = (b.totalPaused || 0) + (Date.now() - b.pausedAt);
     b.pausedAt = null;
@@ -1035,19 +1895,32 @@ function endBlock(id) {
 
   save(); render();
   showRollFlash(b.endRoll, '完成分');
+
+  setTimeout(() => { tryCheckin(); render(); }, 1100);
 }
 
 function abortBlock(id) {
   const day = getDay();
   const b = day.blocks.find(x => x.id === id);
   if (!b) return;
-  if (!confirm('放弃这个工作块？启动分不会收回，但也不会有完成分。')) return;
+  if (!confirm('放弃这个工作块？\n\n放弃会扣随机惩罚分。确定？')) return;
+
+  const st = state.settings;
+  if (st.enableNegative) {
+    const penalty = randInt(st.abortPenaltyMin, st.abortPenaltyMax);
+    if (penalty > 0) {
+      pushRoll('abort', -penalty, `放弃「${b.title}」`);
+      showRollFlash(-penalty, '放弃惩罚');
+    }
+  }
+
   b.status = 'pending';
   b.actualStart = null;
   b.actualEnd = null;
   b.pausedAt = null;
   b.totalPaused = 0;
   b._notified = false;
+  b.startRoll = null;
   save(); render();
 }
 
@@ -1174,7 +2047,6 @@ function tick() {
   const bar = document.getElementById('liveBar');
   if (bar) bar.style.width = Math.min(100, (ms / 60000) / active.plannedMin * 100) + '%';
 
-  // 暂停中不触发超时提醒
   if (active.pausedAt) return;
 
   const over = ms / 60000 >= active.plannedMin;
@@ -1217,7 +2089,7 @@ function toast(msg) {
   el.textContent = msg;
   el.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
 }
 
 /* =========================================================
@@ -1276,7 +2148,7 @@ async function findExistingGist() {
 async function createGist() {
   const body = {
     description: GIST_DESC, public: false,
-    files: { 'rollday.json': { content: JSON.stringify({ version: 2, updatedAt: Date.now(), state }, null, 2) } },
+    files: { 'rollday.json': { content: JSON.stringify({ version: 5, updatedAt: Date.now(), state }, null, 2) } },
   };
   const data = await ghFetch('/gists', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -1290,7 +2162,7 @@ async function syncPush() {
   syncing = true;
   try {
     setSyncStatus('上传中…', 'busy');
-    const content = JSON.stringify({ version: 2, updatedAt: Date.now(), state }, null, 2);
+    const content = JSON.stringify({ version: 5, updatedAt: Date.now(), state }, null, 2);
     const body = { files: { 'rollday.json': { content } } };
     if (syncState.gistId) {
       await ghFetch(`/gists/${syncState.gistId}`, {
@@ -1345,22 +2217,17 @@ async function syncPull(force = false) {
 async function connectSync() {
   const token = $('#syncToken').value.trim();
   const gistIdInput = $('#syncGistId').value.trim();
-
   if (!token) { toast('请填入 GitHub Token'); return; }
   if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
     if (!confirm('Token 看起来不像 GitHub Token，确定继续吗？')) return;
   }
-
   syncState.token = token;
   syncState.gistId = gistIdInput;
   syncState.enabled = true;
   persistSync();
-
   setSyncStatus('连接中…', 'busy');
-
   try {
     await ghFetch('/user');
-
     if (!syncState.gistId) {
       const existing = await findExistingGist();
       if (existing) {
@@ -1379,7 +2246,6 @@ async function connectSync() {
     }
     refreshSyncUI();
   } catch (e) {
-    console.warn('[RollDay] connect failed', e);
     syncState.enabled = false;
     persistSync();
     setSyncStatus('连接失败：' + e.message, 'err');
@@ -1398,7 +2264,6 @@ function disconnectSync() {
   toast('已断开同步');
 }
 
-/* ---------- 导入 / 导出 ---------- */
 function exportData() {
   const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -1459,6 +2324,39 @@ $('#view-tasks').addEventListener('click', e => {
   if (del) { deleteTask(del.dataset.delTask); return; }
 });
 
+$('#view-shop').addEventListener('click', e => {
+  const chip = e.target.closest('[data-shop-type]');
+  if (chip) {
+    shopPicked.key = chip.dataset.shopType;
+    if (shopPicked.key !== 'other') shopPicked.customName = '';
+    renderShop();
+    return;
+  }
+  const minBtn = e.target.closest('[data-shop-min]');
+  if (minBtn) {
+    shopPicked.minutes = Number(minBtn.dataset.shopMin);
+    renderShop();
+    return;
+  }
+  if (e.target.closest('#btnRedeem')) { redeem(); return; }
+});
+
+$('#ckTabs').addEventListener('click', e => {
+  const btn = e.target.closest('[data-ck]');
+  if (!btn) return;
+  ckRange = btn.dataset.ck;
+  $$('#ckTabs button').forEach(b => b.classList.toggle('active', b === btn));
+  renderCheckinStats();
+});
+
+$('#calTabs').addEventListener('click', e => {
+  const btn = e.target.closest('[data-cal]');
+  if (!btn) return;
+  calRange = btn.dataset.cal;
+  $$('#calTabs button').forEach(b => b.classList.toggle('active', b === btn));
+  renderScoreCalendar();
+});
+
 $('#btnAddTask').addEventListener('click', addTask);
 $('#taskTitle').addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
 
@@ -1470,11 +2368,11 @@ $$('.tabbar button').forEach(btn => {
     const view = document.getElementById('view-' + btn.dataset.view);
     if (view) view.classList.add('active');
     if (btn.dataset.view === 'log') renderLog();
+    if (btn.dataset.view === 'shop') renderShop();
     if (btn.dataset.view === 'settings') { fillSettings(); refreshSyncUI(); }
   });
 });
 
-/* 同步按钮 */
 $('#btnSyncConnect').addEventListener('click', connectSync);
 $('#btnSyncDisconnect').addEventListener('click', disconnectSync);
 $('#btnSyncPush').addEventListener('click', async () => { await syncPush(); toast('已上传'); });
@@ -1484,12 +2382,15 @@ $('#btnSyncPull').addEventListener('click', async () => {
   if (r) toast('已从云端拉取');
 });
 
-/* 设置 */
 const NUMERIC_SETTINGS = {
   setWorkMin: 'workMin', setWorkMax: 'workMax',
   setStartMin: 'startRollMin', setStartMax: 'startRollMax',
   setEndMin: 'endRollMin', setEndMax: 'endRollMax',
   setGoodMin: 'goodSleepMin', setGoodMax: 'goodSleepMax',
+  setExpireMin: 'expirePenaltyMin', setExpireMax: 'expirePenaltyMax',
+  setAbortMin: 'abortPenaltyMin', setAbortMax: 'abortPenaltyMax',
+  setBreakMin: 'breakStreakPenaltyMin', setBreakMax: 'breakStreakPenaltyMax',
+  setExchangeRate: 'exchangeRate',
   setNegCap: 'negativeDailyCap', setReroll: 'rerollLimit',
 };
 
@@ -1515,6 +2416,9 @@ function bindSettings() {
       const pairs = [
         ['workMin','workMax'], ['startRollMin','startRollMax'],
         ['endRollMin','endRollMax'], ['goodSleepMin','goodSleepMax'],
+        ['expirePenaltyMin','expirePenaltyMax'],
+        ['abortPenaltyMin','abortPenaltyMax'],
+        ['breakStreakPenaltyMin','breakStreakPenaltyMax'],
       ];
       pairs.forEach(([a, b]) => {
         if (state.settings[a] > state.settings[b]) {
@@ -1545,7 +2449,6 @@ $('#btnReset').addEventListener('click', () => {
   location.reload();
 });
 
-/* 倒计时刷新 */
 function tickCountdowns() {
   document.querySelectorAll('[data-countdown]').forEach(el => {
     const t = state.tasks.find(x => x.id === el.dataset.countdown);
@@ -1572,8 +2475,16 @@ function init() {
   document.addEventListener('pointerup', onDragEnd);
   document.addEventListener('pointercancel', onDragEnd);
 
+  checkBrokenStreak();
+  checkExpiredTasks();
+  tryCheckin();
+  render();
+
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
+      checkBrokenStreak();
+      checkExpiredTasks();
+      tryCheckin();
       render();
       tickCountdowns();
       if (syncState.enabled) syncPull().catch(() => {});
@@ -1582,10 +2493,11 @@ function init() {
 
   setInterval(() => {
     tickCountdowns();
-    renderHeader();
+    checkExpiredTasks();
+    const el = document.getElementById('scoreSub');
+    if (el) renderHeader();
   }, 60000);
 
-  // 启动时自动拉取
   if (syncState.enabled && syncState.token) {
     syncPull().catch(() => {});
   }
