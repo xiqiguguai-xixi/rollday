@@ -314,50 +314,81 @@ a:hover{text-decoration:underline}
 .ck-month-head span{text-align:center;font-size:10px;color:#9ca3af;font-weight:700;}
 
 .ck-cell{
-  height:38px;
-  border-radius:8px;
-  background:#f9fafb;
+  height:38px;border-radius:8px;background:#f9fafb;
   display:flex;align-items:center;justify-content:center;
   font-size:11px;color:#9ca3af;font-weight:600;
-  min-width:0;overflow:hidden;
-  position:relative;
+  min-width:0;overflow:hidden;position:relative;
 }
 .ck-cell.empty{background:transparent}
 .ck-cell.checked{background:#5b7cfa;color:#fff;font-weight:800}
 .ck-cell.today{box-shadow:0 0 0 2px rgba(91,124,250,.3)}
 
 .cal-cell{
-  height:44px;
-  border-radius:8px;
-  background:#f9fafb;
+  height:44px;border-radius:8px;background:#f9fafb;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
   padding:2px;min-width:0;overflow:hidden;
+  cursor:pointer;transition:.15s;
 }
-.cal-cell.empty{background:transparent}
-.cal-cell.today{box-shadow:0 0 0 2px rgba(91,124,250,.3)}
+.cal-cell.empty{background:transparent;cursor:default}
+.cal-cell:not(.empty):active{transform:scale(.94)}
 .cal-cell .d{font-size:11px;font-weight:700;color:#9ca3af;line-height:1}
 .cal-cell.has-score .d{color:#1a1d23}
-.cal-cell .sc{
-  font-size:10px;font-weight:900;line-height:1;
-  font-variant-numeric:tabular-nums;
-}
+.cal-cell .sc{font-size:10px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums;}
 .cal-cell .sc.pos{color:#10b981}
 .cal-cell .sc.neg{color:#ef4444}
+.cal-cell.today{background:#f0f4ff}
+.cal-cell.selected{background:#eef2ff;box-shadow:0 0 0 2px #5b7cfa;}
 
-.ck-year{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-.ck-month-card{background:#f9fafb;border-radius:12px;padding:10px 8px;text-align:center;}
-.ck-month-card .m{font-size:11px;color:#6b7280;font-weight:700}
-.ck-month-card .cnt{font-size:16px;font-weight:900;color:#1a1d23;margin-top:4px;font-variant-numeric:tabular-nums}
-.ck-month-card .sc{font-size:10px;color:#5b7cfa;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
-.ck-month-card .tm{font-size:10px;color:#9ca3af;margin-top:1px;font-variant-numeric:tabular-nums}
-
-.cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
-.cal-day{background:#f9fafb;border-radius:10px;padding:8px 4px;text-align:center;min-width:0;overflow:hidden}
-.cal-day.today{box-shadow:0 0 0 2px rgba(91,124,250,.3)}
+.cal-day{
+  background:#f9fafb;border-radius:10px;padding:8px 4px;text-align:center;
+  min-width:0;overflow:hidden;cursor:pointer;transition:.15s;
+}
+.cal-day:active{transform:scale(.95)}
+.cal-day.today{background:#f0f4ff}
+.cal-day.selected{background:#eef2ff;box-shadow:0 0 0 2px #5b7cfa;}
 .cal-day .wd{font-size:10px;color:#9ca3af;font-weight:700}
 .cal-day .dt{font-size:14px;font-weight:800;color:#1a1d23;margin:2px 0}
 .cal-day .sc{font-size:11px;font-weight:900;font-variant-numeric:tabular-nums}
 .cal-day .tm{font-size:9px;color:#9ca3af;margin-top:1px}
+
+.ck-year{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+
+/* 月份卡片（年视图） */
+.ck-month-card{
+  background:#f9fafb;border:1.5px solid transparent;border-radius:12px;padding:10px 8px;
+  text-align:center;cursor:pointer;transition:.15s;font-family:inherit;
+  color:#1a1d23;width:100%;display:block;
+  -webkit-appearance:none;appearance:none;
+}
+.ck-month-card:active{transform:scale(.95)}
+.ck-month-card.active{
+  background:#eef2ff;
+  border-color:#5b7cfa;
+  box-shadow:0 0 0 1px rgba(91,124,250,.2);
+}
+.ck-month-card .m{font-size:11px;color:#6b7280;font-weight:700}
+.ck-month-card.active .m{color:#5b7cfa}
+.ck-month-card .cnt{font-size:16px;font-weight:900;color:#1a1d23;margin-top:4px;font-variant-numeric:tabular-nums}
+.ck-month-card .sc{font-size:10px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.ck-month-card .tm{font-size:10px;color:#9ca3af;margin-top:1px;font-variant-numeric:tabular-nums}
+
+.cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+
+/* 月份导航头 */
+.cal-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px;gap:8px;
+}
+.cal-nav .cal-nav-label{
+  font-size:15px;font-weight:900;color:#1a1d23;font-variant-numeric:tabular-nums;
+}
+.cal-nav button{
+  width:34px;height:34px;border-radius:10px;background:#f3f4f6;border:1px solid #e5e7eb;
+  color:#374151;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;justify-content:center;flex:none;
+  -webkit-appearance:none;appearance:none;
+}
+.cal-nav button:active{transform:scale(.94);color:#5b7cfa}
 
 .wk-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .wk-stat{background:#f9fafb;border-radius:12px;padding:12px;}
@@ -365,33 +396,15 @@ a:hover{text-decoration:underline}
 .wk-stat .val{font-size:18px;font-weight:900;color:#1a1d23;font-variant-numeric:tabular-nums;line-height:1.1}
 .wk-stat .sub{font-size:10px;color:#9ca3af;margin-top:3px}
 
-/* 历史流水日期选择条 */
-.history-days{
-  display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+.report-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.report-stat{background:#f9fafb;border-radius:12px;padding:12px 8px;text-align:center;min-width:0;}
+.report-stat .lbl{font-size:10px;color:#9ca3af;font-weight:600;margin-bottom:6px}
+.report-stat .val{font-size:16px;font-weight:900;color:#1a1d23;font-variant-numeric:tabular-nums;line-height:1.1;word-break:break-all}
+.report-stat .sub{font-size:9px;color:#9ca3af;margin-top:4px}
+.report-note{
+  background:#fffbeb;border:1px solid #fde68a;border-radius:10px;
+  padding:8px 12px;margin-top:10px;font-size:11px;color:#92400e;
 }
-.history-days::-webkit-scrollbar{display:none}
-.history-day{
-  flex:none;padding:8px 10px;border-radius:10px;
-  background:#f9fafb;border:1.5px solid #e5e7eb;
-  font-size:12px;font-weight:700;color:#6b7280;
-  cursor:pointer;transition:.15s;font-family:inherit;
-  display:flex;flex-direction:column;align-items:center;gap:2px;
-  min-width:52px;
-}
-.history-day:active{transform:scale(.96)}
-.history-day.active{
-  background:linear-gradient(135deg,#5b7cfa,#7c5bfa);color:#fff;border-color:transparent;
-  box-shadow:0 4px 12px -4px rgba(92,124,250,.6);
-}
-.history-day .dow{font-size:10px;opacity:.85}
-.history-day .dnum{font-size:14px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1}
-.history-day .dot{
-  width:5px;height:5px;border-radius:50%;background:#10b981;
-  margin-top:2px;
-}
-.history-day.active .dot{background:#fff}
-.history-day .dot.empty{background:#e5e7eb}
 </style>
 </head>
 <body>
@@ -477,7 +490,7 @@ a:hover{text-decoration:underline}
       </div>
 
       <div class="card">
-        <div class="card-title">🗓️ 分数日历</div>
+        <div class="card-title">🗓️ 分数日历 <span class="dim" style="font-size:10px;font-weight:600">· 点击查看当天详情</span></div>
         <div class="tabs" id="calTabs">
           <button data-cal="week" class="active">本周</button>
           <button data-cal="month">本月</button>
@@ -487,18 +500,12 @@ a:hover{text-decoration:underline}
       </div>
 
       <div class="card">
-        <div class="card-title">📈 本周周报</div>
-        <div id="weeklyReport"></div>
+        <div class="card-title" id="reportTitle">📋 当日工作日报</div>
+        <div id="dayReport"></div>
       </div>
 
       <div class="card">
-        <div class="card-title">今日流水</div>
-        <div id="rollList"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">📜 历史流水</div>
-        <div class="history-days" id="historyDays"></div>
+        <div class="card-title" id="historyTitle">📜 历史流水</div>
         <div id="historyList"></div>
       </div>
     </section>
@@ -682,6 +689,12 @@ const fmtDurationShort = ms => {
   const h = Math.floor(total / 60), m = total % 60;
   return m > 0 ? `${h}h${m}m` : `${h}h`;
 };
+const fmtDurationCompact = ms => {
+  const total = Math.round(ms / 60000);
+  if (total < 60) return total + 'm';
+  const h = Math.floor(total / 60), m = total % 60;
+  return m > 0 ? `${h}h${m}m` : `${h}h`;
+};
 const fmtRelative = ts => {
   if (!ts) return '—';
   const diff = Date.now() - ts;
@@ -698,6 +711,10 @@ const daysBetween = (aKey, bKey) => {
 const fmtHM = minutes => {
   const h = Math.floor(minutes / 60), m = Math.round(minutes % 60);
   return `${pad(h)}:${pad(m)}`;
+};
+const fmtDateFull = key => {
+  const d = new Date(key + 'T00:00:00');
+  return `${d.getMonth() + 1}月${d.getDate()}日`;
 };
 
 const STORAGE_KEY = 'rollday.v2';
@@ -902,6 +919,55 @@ function getDayStats(key) {
   return { score: calcScore(dd), workMs, checked, doneBlocks };
 }
 
+function getDayWorkReport(key) {
+  const dd = state.days[key];
+  const empty = { workMs: 0, startTime: null, endTime: null, truncated: false, hasActive: false };
+  if (!dd || !Array.isArray(dd.blocks)) return empty;
+
+  let workMs = 0;
+  let firstStart = null;
+  let lastEnd = null;
+  let hasAny = false;
+  let hasActive = false;
+
+  dd.blocks.forEach(b => {
+    if (b.status === 'done') {
+      if (b.actualStart) {
+        hasAny = true;
+        workMs += getElapsedMs(b);
+        if (firstStart === null || b.actualStart < firstStart) firstStart = b.actualStart;
+      }
+      if (b.actualEnd) {
+        if (lastEnd === null || b.actualEnd > lastEnd) lastEnd = b.actualEnd;
+      }
+    }
+    if (b.status === 'active' && b.actualStart) {
+      hasAny = true;
+      hasActive = true;
+      workMs += getElapsedMs(b);
+      if (firstStart === null || b.actualStart < firstStart) firstStart = b.actualStart;
+      const now = Date.now();
+      if (lastEnd === null || now > lastEnd) lastEnd = now;
+    }
+  });
+
+  if (!hasAny) return empty;
+
+  const dayDate = new Date(key + 'T00:00:00');
+  const boundary = new Date(dayDate);
+  boundary.setDate(boundary.getDate() + 1);
+  boundary.setHours(5, 0, 0, 0);
+  const boundaryTs = boundary.getTime();
+
+  let truncated = false;
+  if (lastEnd && lastEnd > boundaryTs) {
+    lastEnd = boundaryTs;
+    truncated = true;
+  }
+
+  return { workMs, startTime: firstStart, endTime: lastEnd, truncated, hasActive };
+}
+
 function autoGenerateDailyTasks(opts = {}) {
   const today = todayKey();
   const day = getDay(today);
@@ -920,20 +986,10 @@ function autoGenerateDailyTasks(opts = {}) {
 
     const dur = randInt(t.minDur || 5, t.maxDur || 60);
     day.blocks.push({
-      id: uid(),
-      taskId: t.id,
-      title: t.title,
-      category: t.category,
-      priority: t.priority || 2,
-      plannedMin: dur,
-      status: 'pending',
-      actualStart: null,
-      actualEnd: null,
-      startRoll: null,
-      endRoll: null,
-      pausedAt: null,
-      totalPaused: 0,
-      isRepeat: true,
+      id: uid(), taskId: t.id, title: t.title, category: t.category,
+      priority: t.priority || 2, plannedMin: dur, status: 'pending',
+      actualStart: null, actualEnd: null, startRoll: null, endRoll: null,
+      pausedAt: null, totalPaused: 0, isRepeat: true,
     });
 
     t.repeatGenDate = today;
@@ -1037,7 +1093,8 @@ function checkExpiredTasks() {
    ========================================================= */
 let ckRange = 'week';
 let calRange = 'week';
-let historySelectedKey = null;
+let selectedDateKey = null;                 // 当前选中的日期
+let calViewMonth = { y: null, m: null };    // 月视图当前显示的月份（m: 0-11）
 
 function render() {
   renderHeader();
@@ -1228,60 +1285,177 @@ function taskItemHTML(t, showDrag) {
 }
 
 function renderLog() {
-  const day = getDay();
-  const rolls = [...day.rolls].reverse();
-  $('#rollList').innerHTML = rolls.length
-    ? rolls.map(r => `<div class="roll-item">
-        <span class="roll-time dim">${fmtClock(r.at)}</span>
-        <span class="roll-label">${esc(r.label)}</span>
-        <span class="roll-val ${r.value >= 0 ? 'pos' : 'neg'}">${signed(r.value)}</span>
-      </div>`).join('')
-    : `<div class="dim center" style="padding:20px 0;font-size:13px">今天还没有记录</div>`;
-
+  if (!selectedDateKey) selectedDateKey = todayKey();
   renderWeekChart();
   renderCheckinStats();
   renderScoreCalendar();
-  renderWeeklyReport();
+  renderDayReport();
   renderHistory();
+}
+
+/* ---------- 分数日历 ---------- */
+function renderScoreCalendar() {
+  const box = $('#scoreCalendar');
+  if (!box) return;
+  const todayDate = new Date(todayKey() + 'T00:00:00');
+  const todayKeyStr = todayKey();
+  const selKey = selectedDateKey || todayKeyStr;
+
+  if (calRange === 'week') {
+    const dow = (todayDate.getDay() + 6) % 7;
+    const start = new Date(todayDate);
+    start.setDate(start.getDate() - dow);
+
+    const wkNames = ['一', '二', '三', '四', '五', '六', '日'];
+    let html = `<div class="cal-week">`;
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(start);
+      d.setDate(d.getDate() + i);
+      const key = dateKey(d);
+      const s = getDayStats(key);
+      const cls = ['cal-day'];
+      if (key === todayKeyStr) cls.push('today');
+      if (key === selKey) cls.push('selected');
+      const scoreCls = s.score >= 0 ? 'pos' : 'neg';
+      html += `<div class="${cls.join(' ')}" data-cal-key="${key}">
+        <div class="wd">${wkNames[i]}</div>
+        <div class="dt">${d.getDate()}</div>
+        <div class="sc ${scoreCls}">${s.score !== 0 ? (s.score > 0 ? '+' : '') + s.score : '·'}</div>
+        <div class="tm">${s.workMs > 0 ? fmtDurationShort(s.workMs) : '—'}</div>
+      </div>`;
+    }
+    html += `</div>`;
+    box.innerHTML = html;
+    return;
+  }
+
+  if (calRange === 'month') {
+    // 使用 calViewMonth 或今天所在月份
+    const viewY = (calViewMonth.y !== null) ? calViewMonth.y : todayDate.getFullYear();
+    const viewM = (calViewMonth.m !== null) ? calViewMonth.m : todayDate.getMonth();
+
+    const first = new Date(viewY, viewM, 1);
+    const total = new Date(viewY, viewM + 1, 0).getDate();
+    const dowStart = (first.getDay() + 6) % 7;
+
+    // 月份导航头
+    let html = `<div class="cal-nav">
+      <button data-cal-prev aria-label="上个月">‹</button>
+      <div class="cal-nav-label">${viewY}年${viewM + 1}月</div>
+      <button data-cal-next aria-label="下个月">›</button>
+    </div>`;
+
+    html += `<div class="ck-month-head">
+      <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+    </div><div class="ck-month">`;
+
+    for (let i = 0; i < dowStart; i++) html += `<div class="cal-cell empty"></div>`;
+    for (let d = 1; d <= total; d++) {
+      const key = `${viewY}-${pad(viewM + 1)}-${pad(d)}`;
+      const s = getDayStats(key);
+      const cls = ['cal-cell'];
+      if (s.score !== 0) cls.push('has-score');
+      if (key === todayKeyStr) cls.push('today');
+      if (key === selKey) cls.push('selected');
+      const scCls = s.score > 0 ? 'pos' : (s.score < 0 ? 'neg' : '');
+      html += `<div class="${cls.join(' ')}" data-cal-key="${key}">
+        <div class="d">${d}</div>
+        ${s.score !== 0 ? `<div class="sc ${scCls}">${s.score > 0 ? '+' : ''}${s.score}</div>` : ''}
+      </div>`;
+    }
+    html += `</div>`;
+    box.innerHTML = html;
+    return;
+  }
+
+  // 年视图
+  const y = (calViewMonth.y !== null) ? calViewMonth.y : todayDate.getFullYear();
+  const curM = todayDate.getMonth();
+  const viewM = calViewMonth.m;
+  let html = `<div class="ck-year">`;
+  for (let m = 0; m < 12; m++) {
+    const total = new Date(y, m + 1, 0).getDate();
+    let wk = 0, sc = 0;
+    for (let d = 1; d <= total; d++) {
+      const key = `${y}-${pad(m + 1)}-${pad(d)}`;
+      const s = getDayStats(key);
+      wk += s.workMs;
+      sc += s.score;
+    }
+    const isCurrentMonth = (m === curM);
+    const isViewing = (viewM !== null && m === viewM);
+    const cls = ['ck-month-card'];
+    if (isViewing) cls.push('active');
+    html += `<button class="${cls.join(' ')}" data-cal-month="${m}" data-cal-year="${y}">
+      <div class="m">${m + 1}月${isCurrentMonth ? ' · 今' : ''}</div>
+      <div class="cnt">${wk > 0 ? fmtDurationShort(wk) : '—'}</div>
+      <div class="sc" style="color:${sc > 0 ? '#10b981' : sc < 0 ? '#ef4444' : '#9ca3af'}">${sc !== 0 ? (sc > 0 ? '+' : '') + sc : '·'}</div>
+    </button>`;
+  }
+  html += `</div>`;
+  box.innerHTML = html;
+}
+
+/* ---------- 当日工作日报 ---------- */
+function renderDayReport() {
+  const box = $('#dayReport');
+  const titleEl = $('#reportTitle');
+  if (!box) return;
+
+  const key = selectedDateKey || todayKey();
+  const isToday = key === todayKey();
+  if (titleEl) titleEl.textContent = isToday
+    ? `📋 今日工作日报`
+    : `📋 ${fmtDateFull(key)} 工作日报`;
+
+  const rpt = getDayWorkReport(key);
+
+  if (rpt.workMs === 0 && !rpt.startTime && !rpt.endTime) {
+    box.innerHTML = `<div class="dim center" style="padding:20px 0;font-size:13px">这一天没有工作记录</div>`;
+    return;
+  }
+
+  const startStr = rpt.startTime ? fmtClock(rpt.startTime) : '—';
+  let endStr = rpt.endTime ? fmtClock(rpt.endTime) : '—';
+  const endLbl = rpt.hasActive ? '结束（进行中）' : '结束时间';
+
+  let note = '';
+  if (rpt.truncated) {
+    note = `<div class="report-note">ℹ️ 该天工作跨过了凌晨 5 点，结束时间已按规则截断到 05:00</div>`;
+  }
+
+  box.innerHTML = `
+    <div class="report-grid">
+      <div class="report-stat">
+        <div class="lbl">工作时长</div>
+        <div class="val">${fmtDurationCompact(rpt.workMs)}</div>
+      </div>
+      <div class="report-stat">
+        <div class="lbl">开始时间</div>
+        <div class="val">${startStr}</div>
+      </div>
+      <div class="report-stat">
+        <div class="lbl">${endLbl}</div>
+        <div class="val">${endStr}</div>
+      </div>
+    </div>
+    ${note}
+  `;
 }
 
 /* ---------- 历史流水 ---------- */
 function renderHistory() {
-  const daysBox = $('#historyDays');
   const listBox = $('#historyList');
-  if (!daysBox || !listBox) return;
+  const titleEl = $('#historyTitle');
+  if (!listBox) return;
 
-  const todayKeyStr = todayKey();
-  if (!historySelectedKey) historySelectedKey = todayKeyStr;
+  const key = selectedDateKey || todayKey();
+  const isToday = key === todayKey();
+  if (titleEl) titleEl.textContent = isToday
+    ? `📜 今日流水`
+    : `📜 ${fmtDateFull(key)} 流水`;
 
-  const todayDate = new Date(todayKeyStr + 'T00:00:00');
-  const days = [];
-  for (let i = 0; i < 14; i++) {
-    const d = new Date(todayDate);
-    d.setDate(d.getDate() - i);
-    days.push(dateKey(d));
-  }
-
-  const wkNames = ['日', '一', '二', '三', '四', '五', '六'];
-  const yKey = yesterdayKey();
-
-  daysBox.innerHTML = days.map(key => {
-    const d = new Date(key + 'T00:00:00');
-    const dd = state.days[key];
-    const hasRecords = dd && Array.isArray(dd.rolls) && dd.rolls.length > 0;
-    const isActive = key === historySelectedKey;
-    let dowLabel;
-    if (key === todayKeyStr) dowLabel = '今天';
-    else if (key === yKey) dowLabel = '昨天';
-    else dowLabel = '周' + wkNames[d.getDay()];
-    return `<button class="history-day ${isActive ? 'active' : ''}" data-history-key="${key}">
-      <span class="dow">${dowLabel}</span>
-      <span class="dnum">${d.getDate()}</span>
-      <span class="dot ${hasRecords ? '' : 'empty'}"></span>
-    </button>`;
-  }).join('');
-
-  const dd = state.days[historySelectedKey];
+  const dd = state.days[key];
   if (!dd || !Array.isArray(dd.rolls) || !dd.rolls.length) {
     listBox.innerHTML = `<div class="dim center" style="padding:20px 0;font-size:13px">这一天没有记录</div>`;
     return;
@@ -1289,15 +1463,12 @@ function renderHistory() {
 
   const rolls = [...dd.rolls].reverse();
   const score = calcScore(dd);
-  let workMs = 0;
-  (dd.blocks || []).forEach(b => {
-    if (b.status === 'done') workMs += getElapsedMs(b);
-  });
+  const rpt = getDayWorkReport(key);
 
   let html = `<div class="ck-summary" style="margin-bottom:12px">
     <div class="ck-stat"><div class="n" style="color:${score >= 0 ? '#10b981' : '#ef4444'}">${score >= 0 ? '+' : ''}${score}</div><div class="l">当日总分</div></div>
     <div class="ck-stat"><div class="n">${rolls.length}</div><div class="l">记录条数</div></div>
-    <div class="ck-stat"><div class="n">${workMs > 0 ? fmtDurationShort(workMs) : '—'}</div><div class="l">工作时长</div></div>
+    <div class="ck-stat"><div class="n">${rpt.workMs > 0 ? fmtDurationShort(rpt.workMs) : '—'}</div><div class="l">工作时长</div></div>
   </div>`;
 
   html += rolls.map(r => `<div class="roll-item">
@@ -1460,96 +1631,13 @@ function renderCheckinStats() {
 
   html += `<div class="ck-year">`;
   monthStats.forEach(m => {
-    html += `<div class="ck-month-card">
+    html += `<div class="ck-month-card" style="cursor:default">
       <div class="m">${m.m}月</div>
       <div class="cnt">${m.ck}天</div>
-      <div class="sc">${m.sc >= 0 ? '+' : ''}${m.sc}</div>
+      <div class="sc" style="color:${m.sc > 0 ? '#10b981' : m.sc < 0 ? '#ef4444' : '#9ca3af'}">${m.sc !== 0 ? (m.sc > 0 ? '+' : '') + m.sc : '·'}</div>
       <div class="tm">${fmtDurationShort(m.wk)}</div>
     </div>`;
   });
-  html += `</div>`;
-  box.innerHTML = html;
-}
-
-function renderScoreCalendar() {
-  const box = $('#scoreCalendar');
-  if (!box) return;
-  const todayDate = new Date(todayKey() + 'T00:00:00');
-  const todayKeyStr = todayKey();
-
-  if (calRange === 'week') {
-    const dow = (todayDate.getDay() + 6) % 7;
-    const start = new Date(todayDate);
-    start.setDate(start.getDate() - dow);
-
-    const wkNames = ['一', '二', '三', '四', '五', '六', '日'];
-    let html = `<div class="cal-week">`;
-    for (let i = 0; i < 7; i++) {
-      const d = new Date(start);
-      d.setDate(d.getDate() + i);
-      const key = dateKey(d);
-      const s = getDayStats(key);
-      const cls = ['cal-day'];
-      if (key === todayKeyStr) cls.push('today');
-      const scoreCls = s.score >= 0 ? 'pos' : 'neg';
-      html += `<div class="${cls.join(' ')}">
-        <div class="wd">${wkNames[i]}</div>
-        <div class="dt">${d.getDate()}</div>
-        <div class="sc ${scoreCls}">${s.score !== 0 ? (s.score > 0 ? '+' : '') + s.score : '·'}</div>
-        <div class="tm">${s.workMs > 0 ? fmtDurationShort(s.workMs) : '—'}</div>
-      </div>`;
-    }
-    html += `</div>`;
-    box.innerHTML = html;
-    return;
-  }
-
-  if (calRange === 'month') {
-    const y = todayDate.getFullYear(), m = todayDate.getMonth();
-    const first = new Date(y, m, 1);
-    const total = new Date(y, m + 1, 0).getDate();
-    const dowStart = (first.getDay() + 6) % 7;
-
-    let html = `<div class="ck-month-head">
-      <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
-    </div><div class="ck-month">`;
-
-    for (let i = 0; i < dowStart; i++) html += `<div class="cal-cell empty"></div>`;
-    for (let d = 1; d <= total; d++) {
-      const key = `${y}-${pad(m + 1)}-${pad(d)}`;
-      const s = getDayStats(key);
-      const cls = ['cal-cell'];
-      if (s.score !== 0) cls.push('has-score');
-      if (key === todayKeyStr) cls.push('today');
-      const scCls = s.score > 0 ? 'pos' : (s.score < 0 ? 'neg' : '');
-      html += `<div class="${cls.join(' ')}">
-        <div class="d">${d}</div>
-        ${s.score !== 0 ? `<div class="sc ${scCls}">${s.score > 0 ? '+' : ''}${s.score}</div>` : ''}
-      </div>`;
-    }
-    html += `</div>`;
-    box.innerHTML = html;
-    return;
-  }
-
-  const y = todayDate.getFullYear();
-  let html = `<div class="ck-year">`;
-  for (let m = 0; m < 12; m++) {
-    const total = new Date(y, m + 1, 0).getDate();
-    let wk = 0, sc = 0;
-    for (let d = 1; d <= total; d++) {
-      const key = `${y}-${pad(m + 1)}-${pad(d)}`;
-      const s = getDayStats(key);
-      wk += s.workMs;
-      sc += s.score;
-    }
-    const isCurrentMonth = (m === todayDate.getMonth());
-    html += `<div class="ck-month-card" style="${isCurrentMonth ? 'box-shadow:0 0 0 2px rgba(91,124,250,.3)' : ''}">
-      <div class="m">${m + 1}月</div>
-      <div class="cnt">${wk > 0 ? fmtDurationShort(wk) : '—'}</div>
-      <div class="sc" style="color:${sc > 0 ? '#10b981' : sc < 0 ? '#ef4444' : '#9ca3af'}">${sc !== 0 ? (sc > 0 ? '+' : '') + sc : '·'}</div>
-    </div>`;
-  }
   html += `</div>`;
   box.innerHTML = html;
 }
@@ -2396,7 +2484,7 @@ async function findExistingGist() {
 async function createGist() {
   const body = {
     description: GIST_DESC, public: false,
-    files: { 'rollday.json': { content: JSON.stringify({ version: 9, updatedAt: Date.now(), state }, null, 2) } },
+    files: { 'rollday.json': { content: JSON.stringify({ version: 11, updatedAt: Date.now(), state }, null, 2) } },
   };
   const data = await ghFetch('/gists', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -2410,7 +2498,7 @@ async function syncPush() {
   syncing = true;
   try {
     setSyncStatus('上传中…', 'busy');
-    const content = JSON.stringify({ version: 9, updatedAt: Date.now(), state }, null, 2);
+    const content = JSON.stringify({ version: 11, updatedAt: Date.now(), state }, null, 2);
     const body = { files: { 'rollday.json': { content } } };
     if (syncState.gistId) {
       await ghFetch(`/gists/${syncState.gistId}`, {
@@ -2589,6 +2677,55 @@ $('#view-shop').addEventListener('click', e => {
   if (e.target.closest('#btnRedeem')) { redeem(); return; }
 });
 
+/* 分数日历交互 */
+$('#scoreCalendar').addEventListener('click', e => {
+  // 上个月
+  const prev = e.target.closest('[data-cal-prev]');
+  if (prev) {
+    const todayDate = new Date(todayKey() + 'T00:00:00');
+    let y = (calViewMonth.y !== null) ? calViewMonth.y : todayDate.getFullYear();
+    let m = (calViewMonth.m !== null) ? calViewMonth.m : todayDate.getMonth();
+    m -= 1;
+    if (m < 0) { m = 11; y -= 1; }
+    calViewMonth = { y, m };
+    renderScoreCalendar();
+    return;
+  }
+  // 下个月
+  const next = e.target.closest('[data-cal-next]');
+  if (next) {
+    const todayDate = new Date(todayKey() + 'T00:00:00');
+    let y = (calViewMonth.y !== null) ? calViewMonth.y : todayDate.getFullYear();
+    let m = (calViewMonth.m !== null) ? calViewMonth.m : todayDate.getMonth();
+    m += 1;
+    if (m > 11) { m = 0; y += 1; }
+    calViewMonth = { y, m };
+    renderScoreCalendar();
+    return;
+  }
+  // 年视图：点击某个月
+  const monthCard = e.target.closest('[data-cal-month]');
+  if (monthCard) {
+    const y = Number(monthCard.dataset.calYear);
+    const m = Number(monthCard.dataset.calMonth);
+    calViewMonth = { y, m };
+    calRange = 'month';
+    // 更新 tabs 高亮
+    $$('#calTabs button').forEach(b => b.classList.toggle('active', b.dataset.cal === 'month'));
+    renderScoreCalendar();
+    return;
+  }
+  // 点击具体日期
+  const cell = e.target.closest('[data-cal-key]');
+  if (cell) {
+    selectedDateKey = cell.dataset.calKey;
+    renderScoreCalendar();
+    renderDayReport();
+    renderHistory();
+    return;
+  }
+});
+
 $('#ckTabs').addEventListener('click', e => {
   const btn = e.target.closest('[data-ck]');
   if (!btn) return;
@@ -2602,15 +2739,16 @@ $('#calTabs').addEventListener('click', e => {
   if (!btn) return;
   calRange = btn.dataset.cal;
   $$('#calTabs button').forEach(b => b.classList.toggle('active', b === btn));
+  // 切到月视图时，若没有指定月份，默认为今天所在月份
+  if (calRange === 'month' && calViewMonth.y === null) {
+    const todayDate = new Date(todayKey() + 'T00:00:00');
+    calViewMonth = { y: todayDate.getFullYear(), m: todayDate.getMonth() };
+  }
+  // 切到年视图时，把 viewMonth 重置，回到"当前月高亮"的状态
+  if (calRange === 'year') {
+    calViewMonth = { y: null, m: null };
+  }
   renderScoreCalendar();
-});
-
-/* 历史流水日期切换 */
-$('#historyDays').addEventListener('click', e => {
-  const btn = e.target.closest('[data-history-key]');
-  if (!btn) return;
-  historySelectedKey = btn.dataset.historyKey;
-  renderHistory();
 });
 
 $('#btnAddTask').addEventListener('click', addTask);
@@ -2764,6 +2902,10 @@ function init() {
     }
     const el = document.getElementById('scoreSub');
     if (el) renderHeader();
+    if (selectedDateKey === todayKey()) {
+      const active = getDay().blocks.find(b => b.status === 'active');
+      if (active) { renderDayReport(); renderHistory(); }
+    }
   }, 60000);
 
   if (syncState.enabled && syncState.token) {
