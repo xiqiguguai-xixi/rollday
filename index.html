@@ -56,6 +56,13 @@ body{
 .cd.fresh{color:#10b981}.cd.soon{color:#f59e0b}.cd.urgent{color:#ef4444}
 .cd.expired{color:#b91c1c;background:#fef2f2;padding:1px 6px;border-radius:99px}
 .cd::before{content:'⏱';font-size:10px;opacity:.8}
+.repeat-tag{
+  display:inline-flex;align-items:center;gap:2px;
+  font-size:10px;font-weight:700;
+  color:#5b7cfa;background:#eef2ff;
+  padding:1px 6px;border-radius:99px;
+  line-height:1.4;
+}
 .current{text-align:center;padding:22px 16px}
 .current-tag{font-size:11px;color:#5b7cfa;letter-spacing:3px;font-weight:800}
 .current-tag.grey{color:#9ca3af}
@@ -160,6 +167,12 @@ select.input:focus{background-color:#fff}
 .setting-row input[type=time]{width:104px}
 .setting-row input:focus{outline:none;border-color:#5b7cfa;background:#fff}
 .setting-row input[type=checkbox]{width:20px;height:20px;accent-color:#5b7cfa}
+.checkbox-row{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:10px 0;font-size:14px;color:#374151;cursor:pointer;
+}
+.checkbox-row input[type=checkbox]{width:20px;height:20px;accent-color:#5b7cfa;flex:none;}
+.checkbox-row .cl{display:flex;align-items:center;gap:6px;}
 .tabbar{
   position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;
   display:flex;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);
@@ -351,6 +364,34 @@ a:hover{text-decoration:underline}
 .wk-stat .lbl{font-size:11px;color:#6b7280;font-weight:600;margin-bottom:6px}
 .wk-stat .val{font-size:18px;font-weight:900;color:#1a1d23;font-variant-numeric:tabular-nums;line-height:1.1}
 .wk-stat .sub{font-size:10px;color:#9ca3af;margin-top:3px}
+
+/* 历史流水日期选择条 */
+.history-days{
+  display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.history-days::-webkit-scrollbar{display:none}
+.history-day{
+  flex:none;padding:8px 10px;border-radius:10px;
+  background:#f9fafb;border:1.5px solid #e5e7eb;
+  font-size:12px;font-weight:700;color:#6b7280;
+  cursor:pointer;transition:.15s;font-family:inherit;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  min-width:52px;
+}
+.history-day:active{transform:scale(.96)}
+.history-day.active{
+  background:linear-gradient(135deg,#5b7cfa,#7c5bfa);color:#fff;border-color:transparent;
+  box-shadow:0 4px 12px -4px rgba(92,124,250,.6);
+}
+.history-day .dow{font-size:10px;opacity:.85}
+.history-day .dnum{font-size:14px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1}
+.history-day .dot{
+  width:5px;height:5px;border-radius:50%;background:#10b981;
+  margin-top:2px;
+}
+.history-day.active .dot{background:#fff}
+.history-day .dot.empty{background:#e5e7eb}
 </style>
 </head>
 <body>
@@ -397,7 +438,14 @@ a:hover{text-decoration:underline}
           <input id="taskCountdown" class="input" type="number" value="72" min="1" max="9999" style="flex:1;margin:0">
           <span class="mini-label">小时</span>
         </div>
-        <button id="btnAddTask" class="btn primary" style="width:100%;margin-top:12px">添加任务</button>
+        <label class="checkbox-row" style="margin-top:4px">
+          <span class="cl">
+            <span>🔁</span>
+            <span>每天自动重复</span>
+          </span>
+          <input type="checkbox" id="taskRepeat">
+        </label>
+        <button id="btnAddTask" class="btn primary" style="width:100%;margin-top:6px">添加任务</button>
         <div class="sub dim" style="margin-top:8px;text-align:center">高优先级固定 72 小时；中/低优先级可自定义</div>
       </div>
 
@@ -446,6 +494,12 @@ a:hover{text-decoration:underline}
       <div class="card">
         <div class="card-title">今日流水</div>
         <div id="rollList"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📜 历史流水</div>
+        <div class="history-days" id="historyDays"></div>
+        <div id="historyList"></div>
       </div>
     </section>
 
@@ -605,7 +659,6 @@ const randInt = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-/* ---------- 每日数据凌晨 5 点刷新 ---------- */
 const SHIFT_HOURS = 5;
 const SHIFT_MS = SHIFT_HOURS * 3600 * 1000;
 const dateKey = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
@@ -702,6 +755,8 @@ function normalizeState(s) {
     if (!t.createdAt) t.createdAt = now;
     if (t.expiredPenalized === undefined) t.expiredPenalized = false;
     if (!t.countdownHours) t.countdownHours = DEFAULT_COUNTDOWN_HOURS;
+    if (typeof t.repeatDaily !== 'boolean') t.repeatDaily = false;
+    if (typeof t.repeatGenDate !== 'string') t.repeatGenDate = '';
   });
   Object.values(s.days).forEach(day => {
     if (Array.isArray(day.blocks)) {
@@ -799,6 +854,7 @@ function pushRoll(type, value, label) {
 }
 
 function formatCountdown(task) {
+  if (task.done) return null;
   if (!task.createdAt) return null;
   const hours = task.countdownHours || DEFAULT_COUNTDOWN_HOURS;
   const countdownMs = hours * 3600 * 1000;
@@ -846,7 +902,54 @@ function getDayStats(key) {
   return { score: calcScore(dd), workMs, checked, doneBlocks };
 }
 
-/* ---------- 签到 ---------- */
+function autoGenerateDailyTasks(opts = {}) {
+  const today = todayKey();
+  const day = getDay(today);
+  let added = 0;
+
+  state.tasks.forEach(t => {
+    if (!t.repeatDaily) return;
+    if (t.done) return;
+    if (t.repeatGenDate === today) return;
+
+    const existing = day.blocks.some(b => b.taskId === t.id);
+    if (existing) {
+      t.repeatGenDate = today;
+      return;
+    }
+
+    const dur = randInt(t.minDur || 5, t.maxDur || 60);
+    day.blocks.push({
+      id: uid(),
+      taskId: t.id,
+      title: t.title,
+      category: t.category,
+      priority: t.priority || 2,
+      plannedMin: dur,
+      status: 'pending',
+      actualStart: null,
+      actualEnd: null,
+      startRoll: null,
+      endRoll: null,
+      pausedAt: null,
+      totalPaused: 0,
+      isRepeat: true,
+    });
+
+    t.repeatGenDate = today;
+    t.createdAt = Date.now();
+    t.expiredPenalized = false;
+    added++;
+  });
+
+  if (added > 0) {
+    save();
+    render();
+    if (!opts.silent) toast(`🔁 已自动加入 ${added} 个重复任务`);
+  }
+  return added;
+}
+
 function tryCheckin() {
   const today = todayKey();
   const checkin = state.checkin;
@@ -910,6 +1013,7 @@ function checkExpiredTasks() {
   state.tasks.forEach(t => {
     if (t.done || t.expiredPenalized) return;
     if (!t.createdAt) return;
+    if (t.repeatDaily) return;
     const hours = t.countdownHours || DEFAULT_COUNTDOWN_HOURS;
     const countdownMs = hours * 3600 * 1000;
     if (now <= t.createdAt + countdownMs) return;
@@ -933,6 +1037,7 @@ function checkExpiredTasks() {
    ========================================================= */
 let ckRange = 'week';
 let calRange = 'week';
+let historySelectedKey = null;
 
 function render() {
   renderHeader();
@@ -1018,7 +1123,7 @@ function renderToday() {
       const pri = b.priority || 2;
       html += `<div class="queue-item pri-${pri} ${isDone ? 'done' : ''}">
         <button class="check ${isDone ? 'checked' : ''}" data-toggle-block="${b.id}"></button>
-        <span class="q-title">${esc(b.title)}</span>
+        <span class="q-title">${esc(b.title)}${b.isRepeat ? ' <span class="repeat-tag">🔁</span>' : ''}</span>
         <span class="q-meta">${b.plannedMin}min</span>
         <button class="icon-btn del" data-act="del" data-id="${b.id}">×</button>
       </div>`;
@@ -1098,15 +1203,21 @@ function renderTasks() {
 function taskItemHTML(t, showDrag) {
   const pri = t.priority || 2;
   const cd = formatCountdown(t);
-  const cdHTML = cd ? `<span class="cd ${cd.cls}" data-countdown="${t.id}">${cd.text}</span>` : '';
+  const cdHTML = (cd && !t.repeatDaily && !t.done)
+    ? `<span class="cd ${cd.cls}" data-countdown="${t.id}">${cd.text}</span>`
+    : '';
   const drag = (!t.done && showDrag)
     ? `<button class="drag-handle" data-drag-handle><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><circle cx="4" cy="3" r="1.1"/><circle cx="10" cy="3" r="1.1"/><circle cx="4" cy="7" r="1.1"/><circle cx="10" cy="7" r="1.1"/><circle cx="4" cy="11" r="1.1"/><circle cx="10" cy="11" r="1.1"/></svg></button>` : '';
-  const cdHoursTag = (pri !== 3) ? ` · ⏳${t.countdownHours || DEFAULT_COUNTDOWN_HOURS}h` : '';
+  const cdHoursTag = (!t.done && !t.repeatDaily && pri !== 3)
+    ? ` · ⏳${t.countdownHours || DEFAULT_COUNTDOWN_HOURS}h`
+    : '';
+  const repeatTag = t.repeatDaily ? ` <span class="repeat-tag">🔁 每天</span>` : '';
+  const doneTag = t.done ? ` <span class="repeat-tag" style="color:#10b981;background:#ecfdf5">✓ 已完成</span>` : '';
   return `<div class="task-item pri-${pri} ${t.done ? 'done' : ''}" data-task-id="${t.id}">
     <button class="check ${t.done ? 'checked' : ''}" data-toggle-task="${t.id}"></button>
     ${drag}
     <div class="task-main">
-      <div class="task-title">${esc(t.title)}</div>
+      <div class="task-title">${esc(t.title)}${repeatTag}${doneTag}</div>
       <div class="task-meta"><span class="pri-${pri}">${PRIORITY_NAME[pri]}优先</span> · ${esc(t.category)} · ${t.minDur}~${t.maxDur} 分${cdHoursTag}${cdHTML ? ' · ' + cdHTML : ''}</div>
     </div>
     <div class="task-actions">
@@ -1131,6 +1242,71 @@ function renderLog() {
   renderCheckinStats();
   renderScoreCalendar();
   renderWeeklyReport();
+  renderHistory();
+}
+
+/* ---------- 历史流水 ---------- */
+function renderHistory() {
+  const daysBox = $('#historyDays');
+  const listBox = $('#historyList');
+  if (!daysBox || !listBox) return;
+
+  const todayKeyStr = todayKey();
+  if (!historySelectedKey) historySelectedKey = todayKeyStr;
+
+  const todayDate = new Date(todayKeyStr + 'T00:00:00');
+  const days = [];
+  for (let i = 0; i < 14; i++) {
+    const d = new Date(todayDate);
+    d.setDate(d.getDate() - i);
+    days.push(dateKey(d));
+  }
+
+  const wkNames = ['日', '一', '二', '三', '四', '五', '六'];
+  const yKey = yesterdayKey();
+
+  daysBox.innerHTML = days.map(key => {
+    const d = new Date(key + 'T00:00:00');
+    const dd = state.days[key];
+    const hasRecords = dd && Array.isArray(dd.rolls) && dd.rolls.length > 0;
+    const isActive = key === historySelectedKey;
+    let dowLabel;
+    if (key === todayKeyStr) dowLabel = '今天';
+    else if (key === yKey) dowLabel = '昨天';
+    else dowLabel = '周' + wkNames[d.getDay()];
+    return `<button class="history-day ${isActive ? 'active' : ''}" data-history-key="${key}">
+      <span class="dow">${dowLabel}</span>
+      <span class="dnum">${d.getDate()}</span>
+      <span class="dot ${hasRecords ? '' : 'empty'}"></span>
+    </button>`;
+  }).join('');
+
+  const dd = state.days[historySelectedKey];
+  if (!dd || !Array.isArray(dd.rolls) || !dd.rolls.length) {
+    listBox.innerHTML = `<div class="dim center" style="padding:20px 0;font-size:13px">这一天没有记录</div>`;
+    return;
+  }
+
+  const rolls = [...dd.rolls].reverse();
+  const score = calcScore(dd);
+  let workMs = 0;
+  (dd.blocks || []).forEach(b => {
+    if (b.status === 'done') workMs += getElapsedMs(b);
+  });
+
+  let html = `<div class="ck-summary" style="margin-bottom:12px">
+    <div class="ck-stat"><div class="n" style="color:${score >= 0 ? '#10b981' : '#ef4444'}">${score >= 0 ? '+' : ''}${score}</div><div class="l">当日总分</div></div>
+    <div class="ck-stat"><div class="n">${rolls.length}</div><div class="l">记录条数</div></div>
+    <div class="ck-stat"><div class="n">${workMs > 0 ? fmtDurationShort(workMs) : '—'}</div><div class="l">工作时长</div></div>
+  </div>`;
+
+  html += rolls.map(r => `<div class="roll-item">
+    <span class="roll-time dim">${fmtClock(r.at)}</span>
+    <span class="roll-label">${esc(r.label)}</span>
+    <span class="roll-val ${r.value >= 0 ? 'pos' : 'neg'}">${signed(r.value)}</span>
+  </div>`).join('');
+
+  listBox.innerHTML = html;
 }
 
 function renderWeekChart() {
@@ -1458,7 +1634,7 @@ function renderWeeklyReport() {
 }
 
 /* =========================================================
-   商店（5 分 = 1 分钟）
+   商店
    ========================================================= */
 let shopPicked = { key: 'tv', customName: '', minutes: 30 };
 
@@ -1631,20 +1807,28 @@ function addTask() {
     countdownHours = Number.isFinite(v) && v >= 1 ? Math.min(9999, Math.round(v)) : DEFAULT_COUNTDOWN_HOURS;
   }
 
+  const repeatDaily = $('#taskRepeat').checked === true;
+
   state.tasks.push({
     id: uid(), title, category: $('#taskCat').value,
     priority: pri, minDur, maxDur,
     countdownHours,
+    repeatDaily,
+    repeatGenDate: '',
     done: false, doneAt: null, createdAt: Date.now(),
     expiredPenalized: false,
   });
+
+  if (repeatDaily) autoGenerateDailyTasks({ silent: true });
+
   save();
   $('#taskTitle').value = '';
   $('#taskMin').value = 5;
   $('#taskMax').value = 60;
   $('#taskCountdown').value = 72;
-  renderTasks();
-  toast('任务已添加 · 倒计时开始');
+  $('#taskRepeat').checked = false;
+  render();
+  toast(repeatDaily ? '任务已添加 · 每天自动加入日程' : '任务已添加 · 倒计时开始');
 }
 
 function deleteTask(id) {
@@ -1660,8 +1844,15 @@ function toggleTaskDone(id) {
   if (!t) return;
   t.done = !t.done;
   t.doneAt = t.done ? Date.now() : null;
+  if (!t.done && t.createdAt) {
+    const hours = t.countdownHours || DEFAULT_COUNTDOWN_HOURS;
+    if (Date.now() > t.createdAt + hours * 3600 * 1000) {
+      t.createdAt = Date.now();
+      t.expiredPenalized = false;
+    }
+  }
   save(); render();
-  toast(t.done ? '任务已完成 ✓' : '已恢复为进行中');
+  toast(t.done ? '任务已完成 ✓ · 倒计时已停止' : '已恢复为进行中');
 }
 
 function openEditTask(id) {
@@ -1702,7 +1893,14 @@ function openEditTask(id) {
              value="${cdHours}" min="1" max="9999" style="margin:0">
       <div class="sub dim" style="font-size:10px;margin-top:4px">高优先级固定 72 小时</div>
     </div>
-    <div class="row gap" style="margin-top:18px">
+    <label class="checkbox-row" style="margin-top:6px">
+      <span class="cl">
+        <span>🔁</span>
+        <span>每天自动重复</span>
+      </span>
+      <input type="checkbox" id="editRepeat" ${task.repeatDaily ? 'checked' : ''}>
+    </label>
+    <div class="row gap" style="margin-top:14px">
       <button class="btn ghost" data-m="cancel">取消</button>
       <button class="btn primary" data-m="save">保存</button>
     </div>
@@ -1714,7 +1912,6 @@ function openEditTask(id) {
     if (el) { el.focus(); el.select(); }
   }, 50);
 
-  // 优先级切换时显示/隐藏倒计时
   modal.querySelector('#editPri').addEventListener('change', e => {
     const isHigh = Number(e.target.value) === 3;
     const row = modal.querySelector('#editCountdownRow');
@@ -1738,7 +1935,6 @@ function openEditTask(id) {
       task.priority = Number(modal.querySelector('#editPri').value) || 2;
       task.minDur = minDur; task.maxDur = maxDur;
 
-      // 倒计时：高优先级固定 72，中/低从输入框读
       if (task.priority === 3) {
         task.countdownHours = DEFAULT_COUNTDOWN_HOURS;
       } else {
@@ -1749,13 +1945,24 @@ function openEditTask(id) {
         task.countdownHours = Math.round(v);
       }
 
+      const prevRepeat = task.repeatDaily;
+      task.repeatDaily = modal.querySelector('#editRepeat').checked === true;
+      if (task.repeatDaily && !prevRepeat) task.repeatGenDate = '';
+
       const day = getDay();
       day.blocks.forEach(b => {
         if (b.taskId === id && b.status === 'pending') {
           b.title = title; b.category = task.category; b.priority = task.priority;
         }
       });
-      save(); modal.remove(); render(); toast('已保存');
+
+      save();
+      modal.remove();
+
+      if (task.repeatDaily) autoGenerateDailyTasks({ silent: true });
+
+      render();
+      toast('已保存');
     }
   });
 }
@@ -2189,7 +2396,7 @@ async function findExistingGist() {
 async function createGist() {
   const body = {
     description: GIST_DESC, public: false,
-    files: { 'rollday.json': { content: JSON.stringify({ version: 6, updatedAt: Date.now(), state }, null, 2) } },
+    files: { 'rollday.json': { content: JSON.stringify({ version: 9, updatedAt: Date.now(), state }, null, 2) } },
   };
   const data = await ghFetch('/gists', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -2203,7 +2410,7 @@ async function syncPush() {
   syncing = true;
   try {
     setSyncStatus('上传中…', 'busy');
-    const content = JSON.stringify({ version: 6, updatedAt: Date.now(), state }, null, 2);
+    const content = JSON.stringify({ version: 9, updatedAt: Date.now(), state }, null, 2);
     const body = { files: { 'rollday.json': { content } } };
     if (syncState.gistId) {
       await ghFetch(`/gists/${syncState.gistId}`, {
@@ -2398,10 +2605,17 @@ $('#calTabs').addEventListener('click', e => {
   renderScoreCalendar();
 });
 
+/* 历史流水日期切换 */
+$('#historyDays').addEventListener('click', e => {
+  const btn = e.target.closest('[data-history-key]');
+  if (!btn) return;
+  historySelectedKey = btn.dataset.historyKey;
+  renderHistory();
+});
+
 $('#btnAddTask').addEventListener('click', addTask);
 $('#taskTitle').addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
 
-// 添加任务时：高优先级隐藏倒计时输入框
 $('#taskPri').addEventListener('change', e => {
   const isHigh = Number(e.target.value) === 3;
   $('#taskCountdownRow').style.display = isHigh ? 'none' : '';
@@ -2501,7 +2715,7 @@ function tickCountdowns() {
     const t = state.tasks.find(x => x.id === el.dataset.countdown);
     if (!t) return;
     const cd = formatCountdown(t);
-    if (!cd) return;
+    if (!cd) { el.remove(); return; }
     el.textContent = cd.text;
     el.className = 'cd ' + cd.cls;
   });
@@ -2525,6 +2739,7 @@ function init() {
   checkBrokenStreak();
   checkExpiredTasks();
   tryCheckin();
+  autoGenerateDailyTasks({ silent: false });
   render();
 
   document.addEventListener('visibilitychange', () => {
@@ -2532,6 +2747,7 @@ function init() {
       checkBrokenStreak();
       checkExpiredTasks();
       tryCheckin();
+      autoGenerateDailyTasks({ silent: true });
       render();
       tickCountdowns();
       if (syncState.enabled) syncPull().catch(() => {});
@@ -2541,6 +2757,11 @@ function init() {
   setInterval(() => {
     tickCountdowns();
     checkExpiredTasks();
+    const now = Date.now();
+    if (!init._lastRepeatCheck || now - init._lastRepeatCheck > 30 * 60 * 1000) {
+      init._lastRepeatCheck = now;
+      autoGenerateDailyTasks({ silent: true });
+    }
     const el = document.getElementById('scoreSub');
     if (el) renderHeader();
   }, 60000);
